@@ -1,0 +1,400 @@
+This section will cover descriptive statsitics on the Danish population by first showing summary statistics from the data and thereafter delve into descriptives with a more limited focus. The section will contain information on both singles and couples though the model is concerned with couples. This is in order to shed light on whether there actually seems to be differences between single and couple households in terms of location decisions.
+
+\autoref{tab:sumstat} shows summary statistics for the population consisting of almost 48 million observations of households\footnote{Not all variables exist for all households why the total is sometimes lower}. 51.3 pct. of the individuals live in a couple. The oldest person within a household is on average 51.5 years old and the average age difference between two spouses is 3.8 years. 
+
+Looking at the singles, 47 pct. have a primary or secondary education as their highest completed education while 33 pct. have a vocational (VET), 15 pct. a short or medium cycle education and 5 pct. a long one. Considering the couple households, the combination of their education attainment shows that most couples have a combination of primary/secondary and VET as their educations. In the households where one has more education than that, it is likely that the other spouse has the same level of education or one category below. Focusing on couples where the highest education is long cycle for instance, the other spouse has has a long education as well in 31 pct. of the cases and a short/medium cycle in 52 pct. of the cases.
+
+From these numbers it does seem that many couples consist of fairly similar individuals in terms of age and length of education. However, for the those couples where one has a long education there is a tendency that the other spouse has a shorter education. If length of education is a good indicator for the type of job the individual would like, this might indicate that especially for couples where one has a long education, the two spouses might look for rather different types of jobs. If the types of jobs available depend on the geographical location, these couples might have to make a compromise in terms of location to gain access to both types of jobs. This is something the structural model can shed light on.
+\input{Summary_stats/sumstat_couplessingles.tex}
+
+Moving on to income of the households, the average total household income is about 455,000 DKK (1 DKK $\approx$ 6.5 USD), though with a quite high standard deviation. Section~\ref{sec:inc} goes more into details with the incomes. The average number of children per family is 0.55 and 30 pct. of individuals live in an urban municipality. Urban municipalities in Denmark are Copenhagen, Frederiksberg, Broendby, Gentofte, Gladsaxe, Glostrup, Herlev, Albertslund, Lyngby-Taarbaek, Roedovre, Vallensbaek, Greve and Aarhus municipality according to Eurostat's definition of densely populated areas that make up an urbanized area, cf. \autoref{apfig:mun} for a map of Denmark and its municipalities, \autoref{aptab:geo} for an overview of geographical definitions in a Danish context, \autoref{apfig:islands} for a map of the main islands of Denmark and \autoref{apfig:provinces} for a map of the provinces of Denmark. This way of dividing Denmark into geographical regions will be used in the coming sections.
+
+When it comes to moving propensity, 9.6 pct. of individuals move out of their home each year. This means there is plenty of variation in terms of the decision to move or not which is crucial when estimating the structural model. 91.4 pct. of people who are registered as a family stay in that family each year. Those families who do not exist the year after can be either due to divorce if married, splitting up if only living together as a couple or death of one of the two adults.
+
+\section{Residential locations}
+% % inroduce population density/urban areas
+% \begin{figure}[!htb]
+% \centering
+% \label{fig:popdens}
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=20 230 110 250,clip]{Population/popdens2016_bymun.png} 
+% \end{minipage}
+% \caption{Population density 2016 by home municipality}
+% \end{figure}
+Focusing on residential locations of couples and singles, \autoref{fig:coupleshare} shows that the share of households in each municipality that are couple households range from 50 pct. to 86 pct. The lowest couple shares are in the Copenhagen and Frederiksberg municipalities, while the very highest shares are in municipalities rather close to the biggest cities of Denmark. In general, most municipalities in West, South and North Jutland\footnote{See \autoref{apfig:prov} for provinces of Denmark} are characterized by a high couple share of 74-80 pct. Overall, the most urbanized areas have a lower couple share than the average municipality. The figures therefore indicate that couples for one reason or the other prefer living outside these locations. Whether it is due to differences in local amenities, job opportunities or cost of living between these areas is not clear, but can be answered by the structural model. 
+\begin{figure}[!htb]
+\centering
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=20 230 110 250,clip]{demography/coupleshare_bymun.png} 
+{\tiny \emph{Note:} Couple share intervals defined by Jenks natural breaks. \par}
+\end{minipage}
+\caption{Share 2-adult households out of all households by home municipality}
+\label{fig:coupleshare}
+\end{figure}
+
+One reason that couples locate more rurally than singles do may be because couples have a higher probability of having kids and for that reason prefer other locations. \autoref{fig:avgchild} does indeed show that overall those municipalities with a higher share of couples, i.e. non-big city municipalities, are also those where there tends to be a higher average number of kids per household. So the big cities like Copenhagen, Frederiksberg, Aarhus, Aalborg and Odense have a very low average number of kids in the households, while especially the households in the most rural areas in Jutland (western part) have more children on average. The most southern part of Zealand have a very low number of kids despite the fact that it is a rural area. This and the very small islands are the main exception from the general picture though.
+\begin{figure}[!htb]
+\centering
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=20 250 110 250,clip]{demography/avgchildren_bymun.png} 
+{\tiny \emph{Note:} Children intervals defined by Jenks natural breaks. \par}
+\end{minipage}
+\caption{Avg. number of children per household 1992-2012 by municipality}
+\label{fig:avgchild}
+\end{figure}
+
+When looking at the average real household income by municipalities there are also huge differences, cf. \autoref{fig:avginc} which shows average real household income grouped into quintiles and by municipality. The lowest averages are in Copenhagen, Odense, Aarhus, Lolland and the minor islands. Here, the average real household income over the period 1992-2012 was DKK 340,000-391,000. These municipalities also have the lowest number of children per household and a somewhat low share of couples. This is in contrast to especially North Zealand, much of East Zealand and East Jutland where the average is much higher between DKK 471,000-618,000. The rest of East Jutland and West Jutland is among the 40 pct. richest municipalities in terms of this measure. Though there seems to be a tendency for high income municipalities to also have a higher share of couples, the picture is not completely clear. The northern part of Jutland has an average household income in the 3rd quintile but has one of the higher share of couples. Mechanically, couples should have a higher probability of having a higher household income, all else equal, since they potentially have two labor incomes. 
+\begin{figure}[!htb]
+\centering
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=20 230 110 250,clip]{Wages/avginc_bymun.png} 
+{\tiny \emph{Note:} Income intervals defined by quintiles. \par}
+\end{minipage}
+\caption{Avg. real household income 1992-2012 by municipality}
+\label{fig:avginc}
+\end{figure}
+
+So are those municipalities with a low average income also those places where the prices are generally low? \autoref{fig:houseprice} depicts the average price per sq m from 1992-2015 by municipalities. The answer to the question is no. We see that the price per sq m is very high in the Copenhagen area and its surroundings as well as in North Zealand and Aarhus. North Zealand and Copenhagen surroundings did have many high-income households but this was not the case for Copenhagen municipality and Aarhus. Outside these areas, and especially in West and South Jutland and southern part of Zealand, the prices are 70 pct. lower than in the most expensive locations. 
+\begin{figure}[!htb]
+\centering
+\label{fig:popdens}
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=20 230 110 250,clip]{Houseprices/housepricemap.png}
+{\tiny \emph{Note:} Price intervals defined by Jenks natural breaks. \par}
+\end{minipage}
+\caption{Avg. real sales prices DKK pr sq m home in 1992-2012 by municipality}
+\label{fig:houseprice}
+\end{figure}
+
+The fact that locations with rather low real household incomes can still be those with some of the highest prices per sq m may be explained by the fact that living space also varies a lot by municipalities, cf. \autoref{fig:livingarea}. For the Copenhagen area the average living space per person is no more than 53 sq m while it is up to 62 sq m in most other parts of Zealand, excl Lolland, where the prices per sq m are lower and average household income higher. Jutland is generally characterized by more living space than on Zealand, where the average within municipalities often is up to 74 sq m. The most obvious exception is Aarhus where the average is the same as in Copenhagen and its nearest surroundings. On the contrary, North Zealand generally has both high household income, high house prices but also rathter low sq m per person.  
+%insert figures with avg. living space
+\begin{figure}[!htb]
+\centering
+\label{fig:popdens}
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=20 230 110 250,clip]{demography/livingarea_perpers_bymun.png}
+{\tiny \emph{Note:} Living area intervals defined by Jenks natural breaks. \par}
+\end{minipage}
+\caption{Avg. sq m living area per pers. in household 1992-2012 by municipality}
+\label{fig:livingarea}
+\end{figure}
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=20 250 110 250,clip]{demography/pop_2012_bymun.png} 
+% \end{minipage}
+% \caption{Number of inhabitants by home municipality}
+% \end{figure}
+
+
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=20 230 110 250,clip]{Population/avgpopdens93_16_index_base93_bymun.png} 
+% \end{minipage}
+% \caption{Avg. population density index 1993-2016 by home municipality (base = 1993)}
+% \end{figure}
+
+
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=20 250 110 250,clip]{Population/popdens16_index_base12_bymun.png} 
+% \end{minipage}
+% \caption{Population density index 2016 by home municipality (base = 2012)}
+% \end{figure}
+
+
+
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=20 250 110 250,clip]{demography/workpop_bymun_2012.png} 
+% \end{minipage}
+% \caption{Number of workers by work municipality ('000)}
+% \end{figure}
+
+\section{Commute distance}
+The choice of commuting is essential for the research questions of this paper. \autoref{fig:cdfcom} shows the cumulative density of commute distance in km by partnership status. For couple households, there are two CDFs: one for the maximum work distance within the couple and one for the shortest. Note that the data has been restricted to cover only households where all adults in the couple work or where the single works. The graph shows that 60 pct. of singles commute about 8 km or less. 60 pct. of the spouses in the couples with the longest work distance commute approx 20 km or less while 60 pct. of the spouses with the shortest work distance commute about 6 km. 75 pct. of the couples have a maximum work distance of 28 km or less. 
+
+% From these numbers and the figure itself it is evident that there is quite a difference in how long singles commute compared to the person with longest commute distance in the couple. While only approx 11 pct. of singles commute more than 30 km this is the case for 20 pct. of the spouses with longest work distance. From the graph it seems couples do indeed compromise when it comes to commute distance or at least choose differently that households with only one individual. Several anecdotes can explain the pattern seen in this graph, but the model will be able to tell what drives the decisions by the couples.
+
+\begin{figure}[!htb]
+\centering
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,,clip]{Commute/cdf_maxmincouples_singles.png} 
+%{\tiny \emph{Note:} Work distance difference intervals defined by Jenks natural breaks. \par}
+\end{minipage}
+\caption{CDFs of commute distance (km) by marital status}
+\label{fig:cdfcom}
+\end{figure}
+
+One thing is how the maximum, minimum and single person work distances look in the population. But how is the relationship between maxmimum and minimum work distance \textit{within} the household? 
+% \autoref{fig:box} shows a box plot of the minimum work distance by maximum work distance in the couple. It shows that the average minimum work distance is increasing in maximum work distance, though not linearly. The couples with a very low maximum work distance less than 5 km have a minimum work distance of just above zero on average. When the maximum work distance is $]45;50]$ km, the average minimum work distance has increased to just above 20 km, while for those with maximum work distance in the interval $]70;75]$ km have an average minimum work distance of 25 km. 
+
+% The dispersion in minimum work distance is though, rather naturally, increasing in maximum work distance. For those with maximum work distance  $]45;50]$ km, 50 pct. of the households have a minimum work distance below 14 km, while the other 50 pct. have a minimum between 14 and approx 45 km. This level of the median is rather stable for couples with maximum work distance of 20 km or more. The same holds for the 40th percentile which is around 8 km and the 25th percentile which is around 4 km. Thus, it seems that a big fraction of the couples do try to find a way to ensure that not both spouses commute really long, but that at least one of the spouses has a work distance of less than 20 km. However, the difference between the median and 90st percentile is increasing in maximum work distance which means it is more likely that the other spouse commutes rather long when the maximum work distance is increasing. The incresaing difference between the percentiles, however, is mainly due to increases in the 75th and 90st percentiles. So the increasing average minimum work distance is mainly due to an increasing fraction of the most extreme couples, where extreme refers to the situation where both spouses commute the maximum work distance in the household or close to it.
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,,clip]{Commute/boxplot_wdmin_bywdmax.png} 
+% %{\tiny \emph{Note:} \par}
+% \end{minipage}
+% \caption{Boxplot of work dist. difference by work dist. max in couple}
+% \label{fig:box}
+% \end{figure}
+% % \begin{figure}[!htb]
+% % \centering
+% % \begin{minipage}{0.8\textwidth}
+% % \includegraphics[width=\linewidth,,clip]{Commute/wdmax_wdmin_by_ageyongestkid.png} 
+% % {\tiny \emph{Note:} Sample:\\
+% % \emph{Source:}  \par}
+% % \end{minipage}
+% % \caption{Avg. max. and min. work dist. (km) within couple by age of youngest kid}
+% % \end{figure}
+% % should control for home location. 
+\autoref{fig:wddifmun} shows the average difference in work distance in km between spouses in a household by their home municipality. What is very clear is that there is a huge difference in this measure across the country, ranging from 6.5 to 24 km. The urbanized areas around Copenhagen, Aarhus, Aalborg and Odense are characterized by relatively small differences. This is not the case when looking at the rest of Zealand where both the northern, eastern, western and southern part have avereage differences of 16-24 km. In Jutland the work distance differences are not as pronounced as is the case on Zealand, but it is obvious that the difference in commute has a spatial pattern related to the degree of urbanization of the area, especially on Zealand. This could indicate a trade-off between house prices that are high in urban areas where the labor market is also thicker and the commute distance by letting one spouse commute further to a (potentially) better job than available elsewhere and then exploiting the lower housing costs outside the big cities.
+\begin{figure}[!htb]
+\centering
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=20 225 110 250,clip]{Commute/wddif_byhomemunnew_mean.png} 
+{\tiny \emph{Note:} Work distance difference intervals defined by Jenks natural breaks. \par}
+\end{minipage}
+\caption{Avg. difference in work distance between spouses in km by home municipality}
+\label{fig:wddifmun}
+\end{figure}
+
+Maximum work distance also differs across the country, cf. \autoref{fig:wdmaxmun}. While the most urban areas are generally described by a maximum work distance of less than 17.5 km, the more rural locations on Zealand have one of 21-36 km. Again, couples living in Jutland do not commute as far as those living on certain parts of Zealand. This may be because it is possible to commute to Copenhagen by train from these rural areas on Zealand and thus get one of the jobs in a big city that are worth the commute, while in Jutland the incentive to commute rather far is not as pronounced and the public transportation system not as well-developed. \autoref{tab:wddifinccat} does indeed show that for those people living in West, South and East Zealand, the ones who commute quite long have a higher tendency to work in Copenhagen or Copenhagen surroundings. For instance, when commuting 30 to 35 km, 51 pct. commute to these two provinces and this number has increased to 67.8 pct. when considering people who commute 60 to 65 km.
+\begin{figure}[!htb]
+\centering
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=20 225 110 250,clip]{Commute/wdmax_byhomemunnew_mean.png} 
+{\tiny \emph{Note:} Work distance intervals defined by Jenks natural breaks. \par}
+\end{minipage}
+\caption{Avg. max work distance among spouses in km by home municipality}
+\label{fig:wdmaxmun}
+\end{figure}
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=20 225 110 250,clip]{Commute/wdmin_byhomemunnew_mean.png} 
+% {\tiny \emph{Note:} Sample: only 2-person households where both are working and aged 25-65 years. Work distance min intervals defined by deciles.\\
+% \emph{Source:} own computations based on actual work distance measures provided by DTU for 2000-2008. \par}
+% \end{minipage}
+% \caption{Avg. min work distance among spouses in km by home municipality}
+% \label{fig:wdminmun}
+% \end{figure}
+\begin{table}[!htb]
+\caption{Distribution of work provinces for individuals living in West, South and East Zealand by distance commuted ( avg. over 2000-2008)}
+\label{tab:wddifinccat}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{@{} l r r r r  r r  r r r  r r r r  @{}}
+\toprule
+\input{Commute/tab_workprov1_byworkdist_forWestEastSouthZealand.tex}
+\bottomrule
+\end{tabular}
+}
+\end{table}
+\autoref{fig:incwork} does indeed show that the average wages for people working in the Copenhagen and Copenhagen surroundings areas are among the highest in the country together with parts of North Zealand. It therefore does seem to make sense from an economic perspective to commute this far in order to get access to the higher-paid jobs for those people who otherwise would have access to up to DKK 110,000 lower annual average wages if only considering jobs in West, South and East Zealand.
+\begin{figure}[!htb]
+\centering
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=20 225 110 250,clip]{Wages/avginc_byworkmun_alleduc.png} 
+{\tiny \emph{Note:} Income groups defined by quintiles.\par}
+\end{minipage}
+\caption{Avg. real wage income (DKK) 1992-2012 by work municipality}
+\label{fig:incwork}
+\end{figure}
+
+%insert maps with income by work mun
+
+Considering the singles, the spatial pattern is quite similar to that of the couples, i.e. that those of the singles who commute the longest distance live outside the Copenhagen area on Zealand and they commute at least 18 km on average. This is longer than the spouses with shortest commute distance living in these locations but shorter than the spouses with the longest. Overall, these figures thus provide descriptive evidence that singles tend to locate closer to their jobs than do couples on average.
+\begin{figure}[!htb]
+\centering
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=20 225 110 250,clip]{Commute/wdsingle_byhomemunnew_mean.png} 
+{\tiny \emph{Note:} Work distance intervals defined by Jenks natural breaks. \par}
+\end{minipage}
+\caption{Avg. work distance among 1-person households in km by home municipality}
+\end{figure}
+% When looking at the couples and seeing that one spouse tends to commute longer than the other, it is interesting to see if this is also reflected in the income differences between the two. \autoref{tab:wddifinccat} sheds light on this. Categories of difference in work distance in km are in the rows and in the columns groups for income differences are shown. The cells show the percentage of couples that fall in each group. For those with a rather low commute distance difference, one would expect that the income differences would not be as high as for those couples with a high commute difference if the incentive to commute further should be explained by the potential of getting a higher wage. Most couples have a commute difference less than 15 km and an annual income difference less than 150,000 DKK before tax. Only approx 8 pct. have an income difference between 200,000-250,000 DKK, but for those couples who do the main part actually have less than 5 km difference in commute. Likewise, for those who have a large difference in commute, e.g. 55 km, most households have less than 150,000 DKK in income difference, and 27.5 pct. have less than 50,000 DKK annual income difference before taxes. Income differences are thus not obviously explained by differences in work distance - for instance, the educational attainment within the couples might be an explanation.
+
+\section{Moving patterns}
+To get a sense of the moving patterns, this section shows descriptives of the moving propensity for couples and singles by various variables. \autoref{tab:sumstat} showed that on average, 9.6 pct. of households in Denmark move each year. However, the figures in this section will show that the moving propensity varies across different household types. 
+
+First, \autoref{fig:movecouplestat} illustrates that the probability of moving is higher for singles than for couple households for all ages between 25 and 65. Nearly 35 pct. of singles move when they are 25 years old, decreasing to approx 20 pct. when they are 39 and to 8 pct. when they are 60 years old. For couples, on the other hand, 20 pct. move when they are 25 years old, about 16 pct. at age 39 and 3 pct. when reaching age 60. The gap between the singles' and couples' moving propensity is rather constant of about 15 pct. points until the beginning of the 40s. Hereafter, the gap starts to narrow because the couples' moving probability begins to stagnate.  
+\begin{figure}[!htb]
+\centering
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=10 2 10 2,clip]{Move_byage/binscatter_moveprob_byage_bycouplestatus.png} 
+{\tiny \emph{Note:} No controls. A binned scatter plot groups the x-axis variable into equal-sized bins, computes the mean of the x-axis and y-axis variables within each bin, then creates a scatterplot of these data points. \\ \par}
+\end{minipage}
+\caption{Avg. share of households moving by couple status}
+\label{fig:movecouplestat}
+\end{figure}
+
+But how do the moving probabilities look if conditioning on other covariates? \autoref{fig:movekidscouples} and \autoref{fig:movekidssingles} condition on the number of kids. As seen from these figures, there is a 4.5 pct. points higher probability of moving for couples in each age group without children than for those with children until the end of the 40s where many households do not have young children who live at home in any case. For singles, essentially there is no such disctinction. 
+\begin{figure}
+\centering
+\begin{minipage}{\textwidth}
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=10 2 10 2,clip]{Move_byage/binscatter_moveprob_byage_children_couples.png}
+  \caption{\footnotesize{Couples}}
+  \label{fig:movekidscouples}
+\end{subfigure}
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=10 2 10 2,clip]{Move_byage/binscatter_moveprob_byage_children_singles.png}
+  \caption{\footnotesize{Singles}}
+  \label{fig:movekidssingles}
+\end{subfigure}
+{\tiny \emph{Note: No controls. A binned scatter plot groups the x-axis variable into equal-sized bins, computes the mean of the x-axis and y-axis variables within each bin, then creates a scatterplot of these data points.} .\par}
+\end{minipage}
+\caption{Avg. share of households moving by number of kids}
+\label{fig:movekids}
+\end{figure}
+%
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=10 2 10 2,clip]{Move_byage/binscatter_moveprob_byage_children_couples.png} 
+% {\tiny \emph{Note:} Sample: only 2-person where mean age is 25-65 years.\\ \par}
+% \end{minipage}
+% \caption{Avg. share of couple households moving by number of kids}
+% \label{fig:movekidscouples}
+% \end{figure}
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=10 2 10 2,clip]{Move_byage/binscatter_moveprob_byage_children_singles.png} 
+% {\tiny \emph{Note:} Sample: only 1-person households aged 25-65 years.\\ \par}
+% \end{minipage}
+% \caption{Avg. share of couple households moving by number of kids}
+% \label{fig:movekidssingles}
+% \end{figure}
+
+Another important factor to allow for in regard to the research quesitons of this paper is whether households' decisions to move are affected by or affect the employment status of the members of the household. \autoref{fig:moveunempcouple} shows that for couples overall, the probability of moving at a given age is higher if one of the persons is unemployed in the year where they move. Whether this means that the individual was unemployed before or after moving has yet to be explored in more detail with data Statistics Denmark will deliver. Compared to those couples where both are employed, the probability of moving is about 7.5 pct. points higher for those with one unemployed when the difference is at its highest by the end of the 30s and beginning of 40s. Also, couples where both are unemployed have a higher average moving propensity than couples with no unemployed persons, but it is lower than if only one spouse is unemployed. This could indicate that either these households move in order for that unemployed person to get a job or the person gets unemployed due to the move and may or may not find a job in the years to come. For singles, the moving propensity is also lower when one has a job, and the difference between that for singles without a job is of about the same size as for couples, namely 5-7.5 pct. points, but the level of the moving probability is considerably higher than for couples.
+\begin{figure}
+\centering
+\begin{minipage}{\textwidth}
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=10 2 10 2,clip]{Move_byage/binscatter_moveprob_byage_unempfamidcat_couples.png}
+  \caption{\footnotesize{Couples}}
+  \label{fig:moveunempcouple}
+\end{subfigure}
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=10 2 10 2,clip]{Move_byage/binscatter_moveprob_byage_unempfamidcat_singles.png}
+  \caption{\footnotesize{Singles}}
+  \label{fig:sub2}
+\end{subfigure}
+{\tiny \emph{Note:} No controls. A binned scatter plot groups the x-axis variable into equal-sized bins, computes the mean of the x-axis and y-axis variables within each bin, then creates a scatterplot of these data points.\par}
+\end{minipage}
+\caption{Avg. share of households moving by employment status}
+\label{fig:moveunempsingle}
+\end{figure}
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=10 2 10 2,clip]{Move_byage/binscatter_moveprob_byage_unempfamidcat_couples.png} 
+% {\tiny \emph{Note:} Sample: only 2-person households with mean age 25-65 years and both in the labor force.\\ \par}
+% \end{minipage}
+% \caption{Avg. share of couple households moving by employment status of spouses}
+% \label{fig:moveunempcouple}
+% \end{figure}
+%
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=10 2 10 2,clip]{Move_byage/binscatter_moveprob_byage_unempfamidcat_singles.png} 
+% {\tiny \emph{Note:} Sample: only 1-person households with aged 25-65 years who are in the labor force.\\ \par}
+% \end{minipage}
+% \caption{Avg. share of single households moving by employment status of spouses}
+% \label{fig:moveunempsingle}
+% \end{figure}
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=10 2 10 2,clip]{Move_byage/binscatter_moveprob_byoldestagekid.png} 
+% {\tiny \emph{Note:} No controls. A binned scatter plot groups the x-axis variable into equal-sized bins, computes the mean of the x-axis and y-axis variables within each bin, then creates a scatterplot of these data points. \par}
+% \end{minipage}
+% \caption{Avg. share of households moving by age of oldest kid}
+% \label{fig:moveageold}
+% \end{figure}
+
+\section{Income}\label{sec:inc}
+While having studied the commute and moving decisions, the purpose of this section is to look into income earned by people living by themselves and those living in a couple. In particular, it is relevant for the questions of this paper to see how the income is related to commute decisions. \autoref{fig:incwd} sheds light on these questions. The figure shows the average income by commute distance while controlling for differences in education and age across the individuals. Differences among the different curves and along a given curve are thus not due to differences in ages and educational attainment across the individuals falling into each work distance group. What can be seen from the figure is that men in couples earn way more than any other person for any work distance: single men, single women and women in couples. Compared to single men, they earn almost DKK 50,000 more on an annual basis before taxes. The same distinction is not in place between couple and single women. The maximum average difference is that couple women earn about 25,000 more annually, but for most work distances the difference is smaller. For very high work distances the pattern seems to shift for the women, but one should bear in mind that there are not very many observations with such a long commute, so the measures are more imprecise. Genereally, though, commuting does pay off: by commuting further, people do on average also earn a higher wage which could be an indication that these people commute exactly because it means they can earn this better income.
+\begin{figure}[!htb]
+\centering
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=10 20 10 2,clip]{Wages/binscatter_inc_bycouplestatsu_sex_ctrleducage.png} 
+{\tiny \emph{Note:} Controls: educational level and age. The binned scatter plot first regresses the y- and x-axis variables on the set of control variables and generates the residuals from those regressions. Then the residualized x-variable are grouped into equal-sized bins, whereafter the mean of the x-variable and y-variable residuals are computed within each bin. Then a scatterplot of these data points are made.\par}
+\end{minipage}
+\caption{Binned scatter plot of income by work distance, gender and couple status (ctrls: education, age)}
+\label{fig:incwd}
+\end{figure}
+
+Next, \autoref{fig:incdifwddif} shows the relationship between work distance difference and income differences within the couple while controlling for differences in educational attainment. The income difference is calculated as the income earned by the spouse with the highest commute distance minus the income earned by the spouse with the shortest commute distance. The picture is a bit unclear when work differences are rather short below 10 km, but otherwise the relationship is positive overall. This indicates that the spouse who commutes longer is also the spouse who earns the most. In particular, when the work distance difference is between 10 and 15 km, the annual earnings difference is approx DKK 25,000 on average and this difference cannot be explained by different educational levels. When the work distance difference grows to 35-40 km, the annual income difference is DKK 70,000 on average. Hence, the figure indicates that the spouse who commutes longer is compensated for this by earning a higher income. There is therefore a quite clear economic rationale behind this decision in the household.
+\begin{figure}[!htb]
+\centering
+\begin{minipage}{0.8\textwidth}
+\includegraphics[width=\linewidth,trim=10 10 10 2,clip]{Wages/binscatter_incdif_bywddifround5_ctroleducdif_nodisc.png} 
+{\tiny \emph{Note:} Controls: difference in educational level between spouses.The binned scatter plot first regresses the y- and x-axis variables on the set of control variables and generates the residuals from those regressions. Then the residualized x-variable are grouped into equal-sized bins, whereafter the mean of the x-variable and y-variable residuals are computed within each bin. Then a scatterplot of these data points are made.\par}
+\end{minipage}
+\caption{Binned scatter plot of income difference by work dist. difference within couples (ctrls: education diffence)}
+\label{fig:incdifwddif}
+\end{figure}
+% \begin{table}[!htb]
+% \caption{Distribution of households in (workdist dif. km,real income dif. 10,000 DKK)}
+% \label{tab:wddifinccat}
+% \resizebox{\textwidth}{!}{
+% \begin{tabular}{@{} l r r r r  r r  r r r  r r r r  @{}}
+% \input{Commute/tab_workdistdif_byincdif.tex}
+% \end{tabular}
+% }
+% \footnotesize{Note:}
+% \end{table}
+
+\section{Summary}
+To sum up the descriptives, they showed that there seems to be sorting going on in terms of where couples vs singles locate. Part of the explanation may be that couples have a higher propensity to have kids and hence like to have a more spacious home. Since prices per square m are higher in the urban areas, this may be an explanation that these households do not locate there to the same extent. However, for many of the couple households living in the more rural locations on Zealand, at least one the spouses commute relatively far and this does, on average, pay off in terms of a higher wage income to this spouse. As depicted in the summary statistics, a large share of the couple households are quite similar in terms of age and education though and therefore might be suited for same types of jobs. A hypothesis to test by the structural model is therefore whether easier access from the rural locations to the areas with higher-paying jobs means the other spouse would also choose to commute hereto and thereby increase the welfare of the household, and whether it would incentivize more people to move outside the big cities. Just like testing if faster public transportation to the most rural locations, from where it is still not convenient to commute to the big cities with the better-paying jobs, would incentivize couples to move there as the Danish government aims at. 
+
+
+
+% In \autoref{fig:incmen} the average income by age is shown for men living in a couple and for single men. There is a huge difference. Hence, men living in a couple earn at least 50,000 DKK (approx 7,500 USD) more annually on average. Between the beginning of the 30s and end of 50s this difference is much higher of up to 100,000 DKK before taxes. Is this because there are structural differences, like higher skills, between male singles and couples or is it because living in a parnership allows men to take up more advantageous opportunities on the job market that they otherwise would not be able to exploit? The latter is related to the work and home decisions and can thus be answered by the model of the current paper.
+% % insert figure that contorls for educ 
+% % make regression of inc on couple, educ, home, work
+% On the contrary, \autoref{fig:incwomen} illustrates that for the women the difference across couple status in average income by age is much less. Until the end of the 40s the single women earn 25,000-50,000 less on average than the women in a couple. However, this shifts by the end of work life where the singles earn this difference more. 
+
+% But what about the income differences within couples? Linking these and the difference in work distance, table bla bla gives information about this.
+% % insert bar graph
+
+
+% One hypothesis could be that living with a partner brings about increasing returns to scale in household production. This could imply that these men are able to work in better jobs which they could not take had they been single and responsible for household tasks themselves. The current paper does not model the division of labor in household production within the household, but does 
+
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=10 2 10 2,clip]{Wages/meanincome_men_bymaritalstatus.png} 
+% {\tiny \emph{Note:}  \par}
+% \end{minipage}
+% \caption{Mean income over the life cycle for men by couple}
+% \label{fig:incmen}
+% \end{figure}
+
+% \begin{figure}[!htb]
+% \centering
+% \begin{minipage}{0.8\textwidth}
+% \includegraphics[width=\linewidth,trim=10 2 10 2,clip]{Wages/meanincome_women_bymaritalstatus.png} 
+% {\tiny \emph{Note:}  \par}
+% \end{minipage}
+% \caption{Mean income over the life cycle for women by couple status}
+% \label{fig:incwomen}
+% \end{figure}
+
+
+% ... some floats here ...
+
+%\FloatBarrier
+
+%\subsection{My new subsection} 

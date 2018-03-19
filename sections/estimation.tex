@@ -1,0 +1,175 @@
+Different methods exist for estimating dynamic discrete choice problems like the one presented in this paper. One of these is the Nested Fixed Point (NFXP) algorithm developed by \cite{Rust1987}. That one falls under the category of full solution methods meaning that for every guess of the parameter vector in the maximization algorithm, the entire dynamic programming problem must be solved by either backwards induction (finite horizon problems) or value function iterations until a fixed point is reached (infinite horizon problems). The drawback of this estimation routine is that for compliated programming problems there is a high computational burden associated with solving that several times until convergence is reached. 
+
+Starting with \cite{Hotzetal1993} another branch of estimation methods were introduced under the name Conditional Choice Probability (CCP) methods. The idea is to recognize that the expected future value terms can be expressed as a function of CCPs. Just like the policy functions in \eqref{eq:ccp_s} and \eqref{eq:ccp_m} are mappings from alternative-specific value functions (and thus expected future value functions) to CCPs, \cite{Hotzetal1993} prove that the inverse mapping also exists. While this methods avoids the full solution of the program for every trial value of the parameter vector, it does on the other hand imply other restrictions. Instead of exploiting the structural relationship between CCPs and alternative-specific value functions, one rather exploits that while the alternative-specific value functions cannot be observed by the econometrician, the CCPs can in principle. However, this comes with very high data requirements since one must be able to compute the CCP for every possible combination of states in the model. 
+
+cite{AguirregabiriaMira2002} add to this idea by suggesting that the NFXP can be swapped: instead of solving the entire dynamic programming problem for each parameter guess, one rather \textcolor{red}{get back to this...}.
+
+The methods above work well when there are no unobserved states. When that holds, the assumption of additive separability of the errors and conditional independence also hold \cite{Rust1987} noted that the parameters of the transition matrices and the preference parameters of the flow utilities, respectively, can be estimated separately starting with the estimation of transition matrix parameters in a first step. This can be seen below where $\theta^S\equiv[\theta_1^S,\theta_2^S]$ is the true parameter vector of the model of divorcees and $\theta^S_2$ governs the transition processes of the observed state variables (assuming all elements of $\tilde{x}_{k,t}$ are observed):
+\begin{align*}
+\hat{\theta^S}=\arg \max_{\theta}{\sum_{k=1}^{N}{\sum_{t=1}^{T}{\ln[CCP(d_{kt})|\tilde{x}_{kt},\theta^S]+\ln[g(\tilde{x}_{k,t+1}|\tilde{x}_{k,t},d_{k,t},\theta_2^S)]}}}.
+\end{align*}
+Here, the log likelihood function is additively seperable into two components; one part that is concerned with the choice and the other concerned with the transitions of the state variables. $\theta_2^S$ can be consistently estimated using data on the state variables and their transitions only. Thereafter $\hat{\theta}_2^S$ is known and $\theta_1^S$ can be estimated by use of the choice data. The method is inefficient because information from choices is not exploited in the estimation of $\theta_2^S$, but it saves on computational time rendering NFXP more feasible. \textcolor{red}{Is additive separability necessary in order to use CCP methods?}
+
+However, the separability of the likelihood function is not maintained when introducing unobserved heterogeneity, here denoted by discrete types $s\in\{1,2,...,S\}$. Instead, the estimator takes the form
+\begin{alignat*}{3}
+(\hat{\theta^S},\hat{\pi})=\arg \max_{\theta,\pi}{\sum_{s=1}^S{\pi(s|\tilde{x}_{k,0})\Bigg[\sum_{k=1}^{N}{\sum_{t=1}^{T}{\ln[CCP(d_{kt})|\tilde{x}_{kt},s,\theta^S]}}}} \\
++\ln[g(\tilde{x}_{k,t+1}|\tilde{x}_{k,t},s,d_{k,t},\theta_2^S)]\Bigg]. \numberthis
+\label{eq:max}
+\end{alignat*}
+This implies it is no longer feasible to apply the CCP methods since these require that the econometrician can plug in data-driven estimates of these in the second stage to form the likelihood. In the NFXP case one would have to integrate over the unobserved states during the maximization to form the likelihood, something that can be a tough computational burden if there are several unobserved state variables. 
+
+\subsection{The CCP-EM algorithm}
+To circumvent the problem of infeasible CCP methods in cases of unobserved states, \cite{ArcidiaconoMiller2011} developed a method that combines CCP estimation with the Expectation Maximization (EM) algorithm from \cite{Dempsteretal1977} and in particular its extension to sequential estimation from \cite{ArcidiaconoJones2003}. Starting with the joint likelihood contribution for individual $k$ of observing his data
+\begin{align}
+L_t(d_{k,t},\tilde{x}_{k,t+1}|\tilde{x}_{k,t},s,\theta)=CCP(d_{kt}|\tilde{x}_{kt},s,\theta^S)g(\tilde{x}_{k,t+1}|\tilde{x}_{k,t},m,d_{k,t},\theta_2^S)
+\end{align}
+and applying Bayes' rule, one can find the probability $q(s|d_{k},\tilde{x},\theta,\pi)$ that individual $k$ is in unobserved state $s$ given the data for this person and the parameters $(\theta,\pi)$ by\footnote{In this application I assume unobserved states are fixed over time, but \cite{ArcidiaconoMiller2011} allow for time-varying unobserved effects as well.}
+\begin{align}
+q(s|d_k,\tilde{x}_k;\theta,\pi)=\frac{\pi(s|\tilde{x}_{k1})\prod_{t=1}^T{L_t(d_{k,t},\tilde{x}_{k,t+1}|\tilde{x}_{k,t},s;\theta)} }{\sum_{s'}\pi(s'|\tilde{x}_{k,1})\prod_{t=1}^T{L_t(d_{k,t},\tilde{x}_{k,t+1}|\tilde{x}_{k,t},s';\theta)}}.
+\end{align}
+Averaging across all those individuals with $\tilde{x}_{k,1}=\tilde{x}_1$ gives the population probability of someone with $\tilde{x}_1$ being of type $s$:
+\begin{align}
+\hat{\pi}(s|x_1)=\frac{\sum_k{q(s|d_k,\tilde{x};\hat{\theta},\hat{\pi})\mathbb{I}{(\tilde{x}_{k,1}=\tilde{x}_1)}}}{\sum_{n}{\mathbb{I}{(\tilde{x}_{k,1}=x_1)}}}
+\end{align}
+It has been shown in \cite{Dempsteretal1977} that the first order conditions for $\theta$ are the same no matter if $q(s|d_k,\tilde{x},\hat{\theta},\hat{\pi})$ are taken as given and the optimization problem was rather
+\begin{align}
+\hat{\theta}=\arg\max_{\theta}{\sum_{n=1}^N{\sum_{t=1}^T{q(s|d_k,\tilde{x}_k;\hat{\theta},\hat{\pi})\ln[L_t(d_k,\tilde{x},s,\theta)]}}}.
+\end{align}
+However, to be able to observe $q$, one must know $(\hat{\theta},\hat{\pi})$ and this is not the case prior to estimation. This is where the EM algorithm comes into play. 
+
+Because additive separability has now been reintroduced into the optimization problem by treating the unobserved states as known, the EM algorithm can be adapted to CPP estimation. To see this, write up the formula for the CCPs as below where for notational brevity $d_{kjt}=1$ if individual $k$ chose alternative $j$ at time $t$:
+\begin{align}
+CCP(j|\tilde{x}_{t},s)=\frac{Pr(j,s|\tilde{x}_{t})}{Pr(s|\tilde{x}_{t})}=\frac{E[d_{kjt}\mathbb{I}({s_k=s})|\tilde{x}_{k,t}=\tilde{x}]}{E[\mathbb{I}({s_k=s})|\tilde{x}_{k,t}=\tilde{x}_t]}.
+\label{eq:ccp1}
+\end{align}
+Let $d_k$ and $\tilde{x}_k$ denote the sequence of decisions and states, resepctively, over time for individual $k$. \eqref{eq:ccp1} can then be rwritten into 
+\begin{align}
+CCP(j|\tilde{x}_t,s)=\frac{E[d_{kjt}E[\mathbb{I}{(s_k=s)}|d_k,\tilde{x}_k]|\tilde{x}_{k,t}=x]}{E[E[\mathbb{I}{(s_k=s)}|d_k,\tilde{x}_k]|\tilde{x}_{k,t}=\tilde{x}_t]}.
+\label{eq:ccp2}
+\end{align}
+The inner expectations of the numerator and denominator correspond to the conditional probabilities of $k$ being of unobserved type $s$ meaning \eqref{eq:ccp2} can be written as
+\begin{align}
+CCP(j|\tilde{x}_t,s)=\frac{E[d_{kjt}q(s|d_k,\tilde{x}_k)|\tilde{x}_{k,t}=\tilde{x}]}{E[q(s|d_k,\tilde{x})|\tilde{x}_{k,t}=\tilde{x}_t]}.
+\label{eq:ccp3}
+\end{align}
+Since a feasible formula for $q$ exists, it is possible to apply the sample analog of \eqref{eq:ccp3} to get an estimate of the CCPs and form the likelihood using these estimates. 
+With the above derivations in mind, the CCP-EM algorithm can be completed in two steps:
+
+\subsubsection{The CCP-EM algorithm step 1}
+Given initial values $\theta_2^{(1)}$, $\pi^{(1)}$ and $CCPs$ (e.g. from flexible Logit) the $(m+1)$-th iteration follows a two-step procedure: \\
+\textit{Expectation Step:}
+\begin{enumerate}
+\item Update the conditional probabilities of being in each of the unobserved states according to
+\begin{align}
+% q^{(m+1)}(s|d_k,\tilde{x}_k)=\frac{\pi^{(m)}(s|\tilde{x}_{k1})\prod_{t=1}^T{L_t(d_{k,t},\tilde{x}_{k,t+1}|\tilde{x}_{k,t},s;\theta^{(m)})} }{\sum_{s'}\pi^{(m)}(s'|\tilde{x}_{k,1})\prod_{t=1}^T{L_t(d_{k,t},\tilde{x}_{k,t+1}|\tilde{x}_{k,t},s';\theta^{(m)})}}.
+q^{(m+1)}(s|d_k,\tilde{x}_k)=\frac{\pi^{(m)}(s|\tilde{x}_{k1})\prod_{t=1}^T{g(\tilde{x}_{k,t+1}|d_{k,t},\tilde{x}_{k,t},s,\theta_2^{S,(m)})CCP^{(m)}(d_{k,t}|\tilde{x}_{k,t},s)} }{\sum_{s'}\pi^{(m)}(s'|\tilde{x}_{k,1})\prod_{t=1}^T{L_t(d_{k,t},\tilde{x}_{k,t+1}|\tilde{x}_{k,t},s';\theta^{(m)})}}.
+\label{eq:qest}
+\end{align}
+\item Update the population probabilities
+\begin{align}
+\hat{\pi}^{(m+1)}(s|x_1)=\frac{\sum_k{q^{(m+1)}(s|d_k,\tilde{x};\hat{\theta},\hat{\pi})\mathbb{I}{(\tilde{x}_{k,1}=\tilde{x}_1)}}}{\sum_{n}{\mathbb{I}{(\tilde{x}_{k,1}=x_1)}}}
+\label{eq:piest}
+\end{align}
+\item Update the CCPs according to
+\begin{align}
+CCP^{(m+1)}(j|\tilde{x}_t,s)=\frac{\sum_{n=1}^N{q^{(m+1)}(s|d_k,\tilde{x}_k)d_{kjt}\mathbb{I}{(\tilde{x}_{k,t}=\tilde{x}_t)}}}{\sum_{n=1}^N{q^{(m+1)}(s|d_k,\tilde{x})\mathbb{I}{(\tilde{x}_{k,t}=x)}}}
+\label{eq:ccpest}
+\end{align}
+\end{enumerate}
+\textit{Maximization Step:}
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item Update $\theta^S_2$ exploiting additive separability due to $s$ being treated as observed and estimate first $\theta_2^{S,(m+1)}$ and then $\theta_1^{S,(m+1)}$ in the second step of the CCP-EM algorithm
+% \begin{alignat*}{3}
+% &\hat{\theta}^{S,(m+1)}_2=&&\arg\max_{\theta_2^S}{ \{\sum_{n=1}^N{\sum_{t=1}^T\sum_{s=1}^{S}{{q^{(m+1)}(s|d_k,\tilde{x};\hat{\theta},\hat{\pi})\ln[CCP(d_{kt}|\tilde{x}_{kt},s,\theta^S)] }}}}\\ 
+% & &&+\ln[g(\tilde{x}_{k,t+1}|\tilde{x}_{k,t},m,d_{k,t},\theta_2^S)] \}.
+% \end{alignat*}
+\begin{align}
+\hat{\theta}^{S,(m+1)}_2=&&\arg\max_{\theta_2^S}{ \{\sum_{n=1}^N{\sum_{t=1}^T\sum_{s=1}^{S}{{q^{(m+1)}(s|d_k,\tilde{x};\hat{\theta},\hat{\pi})\ln[g(\tilde{x}_{k,t+1}|\tilde{x}_{k,t},m,d_{k,t},\theta_2^S)] }}}\}}
+\label{eq:theta2est}
+\end{align}
+\end{enumerate}
+Repeat steps $1)$ through $4)$ until a convergence criterion has been met for \eqref{eq:qest}, \eqref{eq:piest}, \eqref{eq:ccpest} and \eqref{eq:theta2est} and we have estimates $\hat{q}(s|d_k,\tilde{x}_k),\hat{\pi}(s|\tilde{x}_1),\hat{\theta}_2^{S}$ and $\hat{CCP}{j|\tilde{x}_{t},s})$.
+
+\subsubsection{The CCP-EM algorithm step 2}
+\textit{Maximization step}
+\begin{enumerate}
+\item Write up the likelihood function for $d_k$ and maximize to estimate $\theta_1^{S}$ using the likelihood contributions for individual $k$
+\begin{align}
+\hat{\theta}_1^{S}=\arg\max_{\theta_1^S}{ \{ \sum_{k=1}^N{\sum_{t=1}^T{\sum_{s=1}^S}} }{\hat{q}(s|d_k,\tilde{x}_k)\ln[l_{jkt}(\tilde{x}_{k,t},s_{k},\theta_1^S,\hat{\theta}_2^S,\hat{\pi},\hat{CCP})]\}}
+\label{eq:theta1est}
+\end{align}
+\begin{align}
+l_{jkt}(\tilde{x}_{k,t},s_{k},\theta_1^S,\hat{\theta}_2^S,\hat{\pi},\hat{CCP})=\frac{\exp[v_{kt}^{d,S}(\boldsymbol{\tilde{x}_{kt}},\hat{CCP},\theta_1^S,\hat{\theta}_2^S,s_k)/ \sigma_{\epsilon}]}{\sum_{d_{kt} \in \textfrak{D}^S} { \exp[v_{kt}^{d_{kt},S}(\boldsymbol{\tilde{x}_{kt}},\hat{CCP},\theta_1^S,\hat{\theta}_2^S,s_k)/ \sigma_{\epsilon}].  }}
+\label{eq:likcont}
+\end{align}
+\end{enumerate}
+
+To be able to to compute the likelihood contributions in \eqref{eq:likcont}, one must exploit the estimates from the first step of the CCP-EM algorithm to form the alternative-specific value functions. The right-hand side of \eqref{eq:likcont} is not identical to the right-hand side of \eqref{eq:ccp_s} but both are correct. The difference is that in \eqref{eq:likcont}, the future value terms entereing $v_{kt^{d,S}}$ have been rewritten in order to exploit 1) the terminal choice that couples can take, namely divorce and 2) finite dependence of the state variables. When either of these two conditions hold, the methods of \cite{ArcidiaconoMiller2011} become particularly useful since they can help reducing the computational complexity a great deal. In the next two paragraphs, the adjustment of the value functions for households and divorcees, respectively, will be outlined. Papers that have used these methods include \cite{Bishop2012} and \cite{JoensenMattana2017}, among others. It is this coupling of CCP methods and the EM algorithm which causes large computational savings. 
+
+\subsection{Estimation equation for households}
+As noted above I apply the CCP-EM algorithm developed in \cite{ArcidiaconoMiller2011} when estimating the model parameters. The idea is that the future value function can be expressed as a function of flow utilities and CCPs. By imposing some (not necessarily optimal) choice $\tilde{d}_{h,t+1}=(rh_t,rw_{i,t},rw_{j,t},1)$ for period $t+1$, i.e. here that the household decides it wants to divorce (effective from period $t+2$) and hence stays in the home and work locations chosen in period $t$, the future value component of the alternative-specific value function can be written with respect to this choice, cf. \cite{Hotzetal1994}:
+\begin{alignat*}{3}
+&v_{h,t}^{d,M}=&&(1-D_{h,t})\big[u_{ht+1} +\beta \int\displaylimits_{\boldsymbol{\tilde{x}_{ht+1}}}{v_{h,t+1}^{\tilde{d}_{h,t+1},M}(\tilde{x}_{h,t+1})-\ln[CCP(\tilde{d}_{h,t+1}|\tilde{x}_{h,t+1})])} \\
+& && g(d\boldsymbol{\tilde{x}_{h,t+1}}|\boldsymbol{\tilde{x}_{h,t}},d_{h,t})\big] +D_{ht}\big[u_{h,t+1,d_{ht}^*}+\beta(\bar{S}_{h,t+1}) -\Delta\big], \numberthis
+\label{eq:vh_adj}
+\end{alignat*}
+where $\bar{S}_{h,t+1}\equiv \upsilon_{ht}EV_{it+1}^S(d_{it+1}^*)+(1-\upsilon_{ht}) EV_{jt+1}^S(d_{jt+1}^*)$. The fact that $E[V_{h,t+1}^M(\boldsymbol{z_{ht+1}}|\boldsymbol{\tilde{x}_{ht}},d_{ht})]$ can be replaced with $v_{h,t+1}^{\tilde{d}_{h,t+1},M}(\tilde{x}_{h,t+1})-\ln[CCP(\tilde{d}_{h,t+1}|\tilde{x}_{h,t+1})]$ has an intuitive explanation: the expected future value of being in state $\tilde{x}_t$ caen be expressed as the sum of the alternative-specific value of taking an arbitrary decision $\tilde{d}$ $(v_{h,t+1}^{\tilde{d}_{h,t+1},M}(\tilde{x}_{h,t+1}))$ and non-negative adjustment term $(\ln[CCP(\tilde{d}_{h,t+1}|\tilde{x}_{h,t+1})])$.\footnote{And in princple one should also add a constant representing the mean of the type I extreme value distribution, but since only differences in value functions are identified, this would cancel in estimation and is thus not relevant after all.} The latter adjust for the possibility that $\tilde{d}_t$ may be a disoptimal choice. If the probaility of choosing $\tilde{d}$ increases, the adjustment terms goes towards zero. In particular when imposing a choice for the household that involves divorce this approach simplies the estimation a great deal since
+\begin{align*}
+v_{h,t+1}^{\tilde{d}_{h,t+1},M}(\tilde{x}_{h,t+1})=u_{h,t+1_{|d_{ht}^*}}+\beta \bar{S}_{h,t+1}-\Delta,
+\end{align*}
+Divorce is an absorbing state for the household, hence no future decisions are made for the household as an agent from period $t+2$ onwards. This means there are no future value components involved when computing $v_{h,t+1}^{\tilde{d}_{h,t+1},M}(\tilde{x}_{h,t+1})$ so \eqref{eq:vh_adj} can be written as
+\begin{alignat*}{3}
+&v_{h,t}^{d,M}=&&(1-D_{h,t})\big[u_{ht+1} +\beta \int_{\boldsymbol{\tilde{x}_{ht+1}}}{u_{h,t+1_{|\tilde{d}_{h,t+1}}}+\beta \bar{S}_{h,t+1}-\Delta-\ln[CCP(\tilde{d}_{h,t+1}|\tilde{x}_{h,t+1})])} \\
+& && g(d\boldsymbol{\tilde{x}_{h,t+1}}|\boldsymbol{\tilde{x}_{h,t}},d_{h,t})\big] +D_{ht}\big[u_{h,t+1,d_{ht}^*}+\beta\bar{S}_{h,t+1} -\Delta\big] \numberthis
+\label{eq:vh_adj2}
+\end{alignat*}
+Since $\hat{CCP}{j|\tilde{x}_{t},s}$ has been estimated during the first step of the CCP-EM algorithm it is straightforward to plug them into $\eqref{eq:vh_adj2}$. \textcolor{red}{I think unobserved types are already part of $\tilde{x}$ so consider how I should refer to those x without the unobserved type and how to refer to unobserved types in a consistent way}. 
+
+\subsection{Estimation equation for divorcees}
+For divorcees, the solution is not as simple since there is no terminal action that brings the divorcees into an absorbing state. However, the divorcees' problem exhibit one period ahead finite dependence (like the household's problem does): when two choice sequences with different initial decisions lead to the same distribution of states after $\rho$ periods, the problem exhibits $\rho$-period finite dependence. In this particular model $\rho=1$ since conditional on $\tilde{x}_{t+1}$ only the choice at $t+1$, and not previous choices, affect the distribution of states at $t+2$. To be concrete, those state variables, that are affected by the choice in the last period are the previous home and work locations since these are completely endogenous outcomes. 
+
+Observing this helps simplifying the computation of the alternative-specific value functions when imposing some choice $d^'_{t+1}$: 
+\begin{alignat*}{3}
+&v_{k,t}^{d,S} \quad  &= \quad  &u_{k,t}^S \\
+& \quad &+ \quad &\beta \int_{\boldsymbol{\tilde{x}_{k,t+1}}}{(v_{k,t+1}^{d'_{t+1}}-\ln[CCP(d^'_{k,t+1}|\tilde{x}_{k,t+1})])}g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t})  \numberthis
+\label{eq:vk_adj1}
+\end{alignat*}
+%
+The second line of \eqref{eq:vk_adj1} can be furter expanded by imposing the choice $\hat{d}_{k,t+2}$ for the second period. Again, this choice does not have to be optimal but can be any, potentially convenient, choice:
+\begin{alignat*}{3}
+\iff & \quad & \quad & \\
+&v_{k,t}^{d,S} \quad  &= \quad  & u_{k,t}^S \\
+& \quad &+\quad & \beta \int_{\boldsymbol{\tilde{x}_{kt,+1}}}(u_{k,t+1|_{d'_{k,t+1}}}+\beta\int_{\boldsymbol{\tilde{x}_{k,t+2}}}{(v_{k,t+2}^{\hat{d}_{t+1}}-\ln[CCP(\hat{d}_{k,t+1}|\tilde{x}_{k,t+2})])} \\
+& \quad & \quad & g(\boldsymbol{\tilde{x}_{k,t+2}}|\boldsymbol{\tilde{x}_{k,t+1}},d'_{k,t+1})g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t}) \\
+& \quad & -\quad &\beta\int_{\tilde{x}_{t+1}}\ln[CCP(d^'_{k,t+1}|\tilde{x}_{k,t+1})])g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t}) \\
+& \quad & = \quad & u_{k,t}^S \\
+& \quad & + \quad & \beta \int_{\tilde{x}_{t+1}}(u_{k,t+1|_{d'_{k,t+1}}})g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t}) \\
+& \quad & + \quad &\beta^2\int_{\tilde{x}_{t+1}}\int_{\tilde{x_{t+2}}}v_{k,t+2}^{\hat{d}_{k,t+2}}+\beta \int_{\tilde{x}_{k,t+3}}v_{k,t+3}^{\tilde{d}_{k,t+3}} \\
+& \quad & -\quad & \ln[CCP(\tilde{d}_{k,t+3}|\tilde{x}_{k,t+3})]g(d\tilde{x}_{t+3},\hat{d}_{t+2})  g(d\tilde{x}_{t+1})g(d\tilde{x}_{t+2})  \\
+& \quad & - \quad & \beta^2\int_{\tilde{x}_{t+1}}\int_{\tilde{x}_{t+2}}\ln[CCP(\hat{d_{k,t+2}}|\tilde{x}_{k,t+2})] \\
+& \quad & \quad & g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t})g(\boldsymbol{\tilde{x}_{k,t+2}}|\boldsymbol{\tilde{x}_{k,t+1}},d'_{k,t+1}) \\
+& \quad & - \quad & \beta^2\int_{\tilde{x}_{t+1}}\ln[CCP(d'_{k,t+1}|\tilde{x}_{k,t+1})]g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t}) \numberthis
+\label{eq:vk_adj2}
+\end{alignat*}
+Again, the second line of \eqref{eq:vk_adj2} can be expanded by imposing the choice $\bar{d}_{k,t+3}$ for the third period:
+\begin{alignat*}{3}
+\iff & \quad & \quad & \\
+&v_{k,t}^{d,S} \quad  &= \quad  & u_{k,t}^S \\
+& \quad & + \quad & \beta \int_{\tilde{x}_{t+1}}(u_{k,t+1|_{d'_{k,t+1}}})g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t}) \\
+& \quad & + \quad & \beta^2\int_{\tilde{x}_{t+1}}\int_{\tilde{x_{t+2}}}u_{k,t+2}^{\hat{d}_{k,t+1}} \\
+& \quad & \quad & g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t})g(\boldsymbol{\tilde{x}_{k,t+2}}|\boldsymbol{\tilde{x}_{k,t+1}},d'_{k,t+1}) \\
+& \quad & + \quad &\beta^3\int_{\tilde{x}_{t+1}}\int_{\tilde{x}_{t+2}}\int_{\tilde{x}_{t+3}}v_{k,t+3}^{\bar{d_{k,t+3}}} \\
+& \quad & \quad & g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t})g(\boldsymbol{\tilde{x}_{k,t+2}}|\boldsymbol{\tilde{x}_{k,t+1}},d'_{k,t+1})g(\boldsymbol{\tilde{x}_{k,t+3}}|\boldsymbol{\tilde{x}_{k,t+2}},\hat{d}_{k,t+2}) \\
+& \quad & - \quad &\beta^3\int_{\tilde{x}_{t+1}}\int_{\tilde{x}_{t+2}}\int_{\tilde{x}_{t+1}}\ln[CCP(\bar(d)_{k,t+3}|\tilde{x}_{k,t+3})] \\
+& \quad & \quad & g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t})g(\boldsymbol{\tilde{x}_{k,t+2}}|\boldsymbol{\tilde{x}_{k,t+1}},d'_{k,t+1})g(\boldsymbol{\tilde{x}_{k,t+3}}|\boldsymbol{\tilde{x}_{k,t+2}},\hat{d}_{k,t+2}) \\
+& \quad & + \quad &\beta^3 \int_{\tilde{x}_{k,t+3}}[v_{k,t+3}^{\tilde{d}_{k,t+3}} \\
+& \quad & - \quad &\ln[CCP(\tilde{d}_{k,t+3}|\tilde{x}_{k,t+3})]g(d\tilde{x}_{t+3},\hat{d}_{t+2})  g(d\tilde{x}_{t+1})g(d\tilde{x}_{t+2})  \\
+& \quad & - \quad &\beta^2\int_{\tilde{x}_{t+1}}\int_{\tilde{x}_{t+2}}\ln[CCP(\hat{d_{k,t+2}}|\tilde{x}_{k,t+2})] \\
+& \quad &  \quad & g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t})g(\boldsymbol{\tilde{x}_{k,t+2}}|\boldsymbol{\tilde{x}_{k,t+1}},d'_{k,t+1}) \\
+& \quad & -\quad &\beta\int_{\tilde{x}_{t+1}}\ln[CCP(d'_{k,t+1}|\tilde{x}_{k,t+1})]g(\boldsymbol{\tilde{x}_{k,t+1}}|\boldsymbol{\tilde{x}_{k,t}},d_{k,t}) \numberthis
+\label{eq:vk_adj3}
+\end{alignat*}
+As will become clear below it is not necessary to expand further on \eqref{eq:vk_adj3}. To provide some intuition, $v_{k,t+3}^{\bar{d}_{k,t+3}}$ is the value of choosing $\bar{d}$ in period $t+3$ when the individual chose $\hat{d}$ in this period $t+2$ and his prior choice was $d'$ in $t+1$. The fact that the agetn chose $d$ in period $t$ does not affect the period $t+3$ choice since memory only extends back one period to the prior locations choices. In this case the dependence on the initial choice $d$ can be broken after 2 periods. In a model of no memory, the dependence could be broken after only one period. \textcolor{red}{Must be rewritten. This is almost identical to Bishop 2012}.
+
+Since only differences in value functions matter (the location parameter is not identified in a Logit model), $v_{k,t}^d$ can be differenced with respect to another value function $v_{k,t}^{d''}$ where the future component in $v_{k,t}^{d''}$ has been explanded just as above.  

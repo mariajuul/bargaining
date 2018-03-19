@@ -1,0 +1,155 @@
+\appendix
+
+%\renewcommand{\thepage}{A\arabic{page}}  
+\renewcommand{\thesection}{A\arabic{section}}   
+\renewcommand{\thetable}{A\arabic{table}}   
+\renewcommand{\thefigure}{A\arabic{figure}}
+\setcounter{figure}{0} 
+\setcounter{table}{0} 
+
+%\section{Descriptives}\label{sec:apdescmap}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth, trim=2 20 2 20,clip]{pop_mun_2016.jpg} 
+\caption{Population January 1st 2016 by municipality}
+\label{fig:appop}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth, trim=2 20 2 20,clip]{Movehomereg_byage.png} 
+\caption{\footnotesize{Unconditional moving probability by age}}
+\label{apfig:moveage}
+\end{figure}
+
+%\section{Regressions}\label{sec:apreg}
+
+\renewcommand{\arraystretch}{0.1}
+\begin{table}[h!]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Coefficients from Logit regression of moving home region \label{tab:apregcoef}}
+\begin{tabular}{p{5cm} p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}}
+%\begin{tabular}{l*{5}{D{.}{.}{-1}}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}\\
+                    &\multicolumn{1}{c}{Couples}&\multicolumn{1}{c}{Singles}&\multicolumn{1}{c}{Couples}&\multicolumn{1}{c}{Singles}&\multicolumn{1}{c}{Pooled}\\
+\midrule
+$\log(real hh inc.)$      &     -0.0107\sym{*}  &      -0.185\sym{***}&                     &                     &                     \\
+                    &     (0.004)         &     (0.012)         &                     &                     &                     \\
+
+\textit{Educ., ref.: unskilled} \\
+\MyIndent Vocational,hs&       0.111\sym{***}&       0.147\sym{***}&      0.0974\sym{***}&       0.110\sym{***}&       0.133\sym{***}\\
+                    &     (0.013)         &     (0.010)         &     (0.014)         &     (0.011)         &     (0.009)         \\
+
+\MyIndent Short-cycle &       0.252\sym{***}&       0.304\sym{***}&       0.229\sym{***}&       0.206\sym{***}&       0.278\sym{***}\\
+                    &     (0.022)         &     (0.021)         &     (0.023)         &     (0.023)         &     (0.017)         \\
+
+\MyIndent Medium-cycle &       0.386\sym{***}&       0.370\sym{***}&       0.381\sym{***}&       0.285\sym{***}&       0.397\sym{***}\\
+                    &     (0.016)         &     (0.015)         &     (0.017)         &     (0.017)         &     (0.012)         \\
+
+\MyIndent Long-cycle&       0.682\sym{***}&       0.708\sym{***}&       0.661\sym{***}&       0.519\sym{***}&       0.703\sym{***}\\
+                    &     (0.018)         &     (0.019)         &     (0.018)         &     (0.021)         &     (0.014)         \\
+
+\MyIndent Educ. in progress   &     -0.0566         &       0.426\sym{***}&     -0.0603         &       0.476\sym{***}&       0.233\sym{***}\\
+                    &     (0.030)         &     (0.028)         &     (0.033)         &     (0.032)         &     (0.023)         \\
+
+Age            &      -0.102\sym{***}&      -0.102\sym{***}&     -0.0848\sym{***}&      -0.147\sym{***}&      -0.107\sym{***}\\
+                    &     (0.004)         &     (0.003)         &     (0.004)         &     (0.003)         &     (0.002)         \\
+
+Age$^2$&    0.0004\sym{***}&    0.0006\sym{***}&    0.0002\sym{***}&     0.001\sym{***}&    0.0005\sym{***}\\
+                    &     (0.000)         &     (0.000)         &     (0.000)         &     (0.000)         &     (0.000)         \\
+
+$lag(\mathbb{I}{(downer)})$        &      -1.049\sym{***}&      -0.424\sym{***}&      -1.039\sym{***}&      -0.537\sym{***}&      -0.855\sym{***}\\
+                    &     (0.011)         &     (0.011)         &     (0.012)         &     (0.012)         &     (0.009)         \\
+
+\textit{\# kids, ref.: 0} \\
+\MyIndent 1                   &      -0.255\sym{***}&      -0.550\sym{***}&      -0.272\sym{***}&      -0.389\sym{***}&      -0.282\sym{***}\\
+                    &     (0.011)         &     (0.017)         &     (0.012)         &     (0.018)         &     (0.010)         \\
+
+\MyIndent 2                   &      -0.664\sym{***}&      -0.706\sym{***}&      -0.692\sym{***}&      -0.571\sym{***}&      -0.710\sym{***}\\
+                    &     (0.014)         &     (0.026)         &     (0.014)         &     (0.028)         &     (0.013)         \\
+
+\MyIndent 3+                  &      -0.732\sym{***}&      -0.675\sym{***}&      -0.746\sym{***}&      -0.501\sym{***}&      -0.790\sym{***}\\
+                    &     (0.023)         &     (0.054)         &     (0.024)         &     (0.058)         &     (0.022)         \\
+
+$lag(\mathbb{I}{(bigcity)})$      &       1.622\sym{***}&      -2.269\sym{***}&       2.005\sym{***}&      -2.019\sym{***}&      -0.178\sym{***}\\
+                    &     (0.043)         &     (0.030)         &     (0.043)         &     (0.040)         &     (0.044)         \\
+
+$\mathbb{I}{(bigcity)}$          &      -1.771\sym{***}&       2.008\sym{***}&      -2.166\sym{***}&       1.816\sym{***}&      0.0774         \\
+                    &     (0.046)         &     (0.028)         &     (0.046)         &     (0.037)         &     (0.044)         \\
+
+\textit{Travel time, ref.: 0-10 min.} \\
+\MyIndent 15-25               &       0.644\sym{***}&       0.456\sym{***}&       0.646\sym{***}&       0.454\sym{***}&       0.585\sym{***}\\
+                    &     (0.012)         &     (0.011)         &     (0.013)         &     (0.013)         &     (0.009)         \\
+
+\MyIndent 25-35               &       0.657\sym{***}&       0.440\sym{***}&       0.670\sym{***}&       0.459\sym{***}&       0.591\sym{***}\\
+                    &     (0.014)         &     (0.014)         &     (0.014)         &     (0.016)         &     (0.011)         \\
+
+\MyIndent 35-45               &       0.785\sym{***}&       0.538\sym{***}&       0.793\sym{***}&       0.572\sym{***}&       0.720\sym{***}\\
+                    &     (0.019)         &     (0.020)         &     (0.020)         &     (0.022)         &     (0.015)         \\
+
+\MyIndent 45-55               &       0.940\sym{***}&       0.618\sym{***}&       0.953\sym{***}&       0.634\sym{***}&       0.826\sym{***}\\
+                    &     (0.024)         &     (0.026)         &     (0.025)         &     (0.028)         &     (0.019)         \\
+
+\MyIndent 55-65               &       0.875\sym{***}&       0.631\sym{***}&       0.903\sym{***}&       0.670\sym{***}&       0.820\sym{***}\\
+                    &     (0.031)         &     (0.031)         &     (0.032)         &     (0.035)         &     (0.024)         \\
+
+\MyIndent 65-75               &       0.920\sym{***}&       0.645\sym{***}&       0.956\sym{***}&       0.683\sym{***}&       0.839\sym{***}\\
+                    &     (0.035)         &     (0.033)         &     (0.036)         &     (0.037)         &     (0.026)         \\
+
+\MyIndent 75-85               &       0.873\sym{***}&       0.636\sym{***}&       0.904\sym{***}&       0.745\sym{***}&       0.818\sym{***}\\
+                    &     (0.050)         &     (0.043)         &     (0.052)         &     (0.048)         &     (0.035)         \\
+
+\MyIndent 85-95               &       1.076\sym{***}&       0.687\sym{***}&       1.101\sym{***}&       0.812\sym{***}&       0.948\sym{***}\\
+                    &     (0.060)         &     (0.052)         &     (0.063)         &     (0.059)         &     (0.043)         \\
+
+\MyIndent 95+                 &       0.863\sym{***}&       0.558\sym{***}&       0.890\sym{***}&       0.667\sym{***}&       0.765\sym{***}\\
+                    &     (0.024)         &     (0.019)         &     (0.026)         &     (0.021)         &     (0.016)         \\
+
+Annual unemp. \%   &     0.00334\sym{***}&     0.00353\sym{***}&     0.00410\sym{***}&     0.00678\sym{***}&     0.00468\sym{***}\\
+                    &     (0.001)         &     (0.000)         &     (0.001)         &     (0.000)         &     (0.000)         \\
+
+$\log$(rolling avg. real hh inc.)&                     &                     &      0.0431\sym{***}&       0.461\sym{***}&       0.141\sym{***}\\
+                    &                     &                     &     (0.007)         &     (0.015)         &     (0.007)         \\
+
+$\mathbb{I}{(couple)}$             &                     &                     &                     &                     &       0.103\sym{***}\\
+                    &                     &                     &                     &                     &     (0.008)         \\
+
+Constant            &       0.344\sym{***}&       2.134\sym{***}&      -0.742\sym{***}&      -5.162\sym{***}&      -1.744\sym{***}\\
+                    &     (0.082)         &     (0.138)         &     (0.104)         &     (0.180)         &     (0.090)         \\
+
+Year FE             &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+\midrule
+N                   &     1,403,170         &     1,012,318         &     1,304,496         &      885,160         &     2,189,656         \\
+ll                  &   -195,059         &   -232,698         &   -174,559         &   -189,285         &   -376,615         \\
+\bottomrule
+\multicolumn{6}{l}{\footnotesize Robust standard errors in parentheses}\\
+\multicolumn{6}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+\end{table}
+
+%\section{Data for simulation}\label{sec:apsim}
+
+\renewcommand{\arraystretch}{1}
+\begin{table}[h!]\centering
+\footnotesize
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Transition matrix for kids dummy by age group \label{tab:apkids}}
+\begin{tabular}{c|cc|cc}
+%\begin{tabular}{l*{4}{D{.}{.}{-1}}}
+\toprule
+                    &\multicolumn{2}{c}{  \textbf{t=26-30}  }&\multicolumn{2}{c}{\textbf{t=31-35}}\\
+                    &\multicolumn{4}{c}{ kids $t$}\\
+\midrule
+ Kids $t-1$                   & 0 & 1 & 0 & 1 \\ \hdashline
+
+0                   &92.5 & 7.5 & 92.0 & 8.0 \\ 
+1                   & 7.11 & 92.9 & 6.0 &94.0 \\
+\bottomrule
+\multicolumn{5}{c}{\footnotesize \emph{Note:} Own calculations based on register data.}\\
+\end{tabular}
+\end{table}
+
+%\subsection{Calculation and use of weights for equilibrium}\label{sec:weights}
+%To calculate $w_t^s$, I first simulate data from the model. For each $rh^{prev}$, I then tabulate how many per cent each observed combination of state variables is seen in the data for those observed with the given $rh^{prev}$. This is used to compute the share who would like to stay in the region, i.e. the CCP of choosing $rh=rh^{prev}$, by multiplying the CCPs for staying by the state combination shares representing each element in the CCP vector. However, to get the expected share of the entire population (here 20,000) who would like to stay in the region, I must convert the stay probability to be denominated in population share instead of a share conditional on $rh^{prev}$. Therefore I count the number of people observed in the  $rh^{prev}$ group, use this number to compute the share of the total population being in this group and then multiply the stay probability by this population share. For instance, the CCP of staying among those with $rh^{prev}=1$ might be 50\%, but this is 50\% of those living in $rh^{prev}$ already, not 50\% of the population. If 35\% of the population lives in $rh^{prev}=1$ then the share denominated in population share is $50\%*35\% =17.5\%$. 1 minus this number is the expected share of homes supplied in the region in question.

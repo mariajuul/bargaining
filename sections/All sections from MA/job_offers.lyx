@@ -1,0 +1,297 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section*
+Implementation of job offers
+\end_layout
+
+\begin_layout Subsection*
+Notation
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $rh\in D^{rh}=\{1,2,...,\bar{rh}\}$
+\end_inset
+
+ denotes the home region and 
+\begin_inset Formula $rwD^{rw}=\{1,2,...,\bar{rw}\}$
+\end_inset
+
+ the work region.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ is the vector of state variables at time 
+\begin_inset Formula $t.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $d_{t}=(rh_{t},rw_{t})\in D=D^{rw}\times D^{rh}$
+\end_inset
+
+ is the choice of work region and home region made by the agent in period
+ 
+\begin_inset Formula $t.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Timing
+\end_layout
+
+\begin_layout Enumerate
+By the beginning of period 
+\begin_inset Formula $t$
+\end_inset
+
+, the agent observes 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+whether he got a job offer in region.
+\end_layout
+
+\begin_layout Enumerate
+the alternative-specific shock 
+\begin_inset Formula $\epsilon^{rh,rw}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+The agent decides where he wants to live and work for the rest of period
+ 
+\begin_inset Formula $t.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+The consequences of the agent's choice take place.
+\end_layout
+
+\begin_layout Enumerate
+Period 
+\begin_inset Formula $t+1$
+\end_inset
+
+ starts and agents is at 1) again.
+\end_layout
+
+\begin_layout Subsection*
+Value function
+\end_layout
+
+\begin_layout Standard
+If we and the agent ignored whether the agent had a job offer or not, the
+ expected value function would be:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\int_{\epsilon'}{V_{t+1}(x_{it+1},\epsilon_{it+1})g(\epsilon')}=\int_{\epsilon'}{\max_{\{d_{it+1}\}_{t+1}^{T}\in D}}\Big\{ v_{t+1}^{d_{it+1}}(x_{it+1})+\epsilon_{it+1}^{d_{it+1}}\}\Big\} g(\epsilon')=\sigma\log{\left(\sum_{d_{it+1}\in D}{\exp[v_{t+1}^{d_{it+1}}(x_{it+1})/\sigma]}\right)}\equiv\phi(x_{t+1}).$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However, the agent does know where he has job offers for period 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ We only observe the probability 
+\begin_inset Formula $\pi_{t}^{rw}$
+\end_inset
+
+with which the agent received an offer in region 
+\begin_inset Formula $rw.$
+\end_inset
+
+ The job offer probabilities are thus region-specific.
+ Therefore, we must integrate over job offers before taking max.
+ Since after taking max, there is no longer anything left that is region-specifi
+c:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\int_{\epsilon'}{V_{t+1}(x_{it+1},job_{it+1,}\epsilon_{it+1})g(\epsilon')}=
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\int_{\epsilon'}{\max_{\{d_{it+1}\}_{t+1}^{T}\in D}}\Big\{\pi^{rw}v_{t+1}^{d_{it+1}}(x_{it+1,}job_{it+1}=1)+(1-\pi^{rw})v_{t+1}^{d_{it+1}}(x_{it+1,}job_{it+1}=0)+\epsilon_{it+1}^{d_{it+1}}\}\Big\} g(\epsilon') & =
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+ & \sigma\log{\left(\sum_{d_{it+1}\in D}{\exp[(\pi^{rw}v_{t+1}^{d_{it+1}}(x_{it+1,}job_{it+1}=1)+(1-\pi^{rw})v_{t+1}^{d_{it+1}}(x_{it+1,}job_{it+1}=0))/\sigma]}\right)}\equiv\phi(x_{t+1})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This won't work.
+ When integrating out job offer probabilties this way, we don't let the
+ individual choose his optimal 
+\begin_inset Formula $(rh,rw)$
+\end_inset
+
+ based on exact knowledge about job offers.
+ Instead, he chooses the 
+\begin_inset Formula $(rh,rw)$
+\end_inset
+
+ that has the highest expected value.
+\end_layout
+
+\begin_layout Standard
+Can we just write
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\int_{\epsilon'}{V_{t+1}(x_{it+1},job_{it+1,}\epsilon_{it+1})g(\epsilon')}=
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\pi\int_{\epsilon'}{\max_{\{d_{it+1}\}_{t+1}^{T}\in D}}\Big\{ v_{t+1}^{d_{it+1}}(x_{it+1,}job_{it+1}=1)+\epsilon_{it+1}^{d_{it+1}}\}\Big\} g(\epsilon')+(1-\pi)\pi\int_{\epsilon'}{\max_{\{d_{it+1}\}_{t+1}^{T}\in D}}\Big\{ v_{t+1}^{d_{it+1}}(x_{it+1,}job_{it+1}=1)+\epsilon_{it+1}^{d_{it+1}}\}\Big\} g(\epsilon') & =
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+ & \equiv\phi(x_{t+1})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and using 
+\begin_inset Formula $\pi=\frac{1}{\pi^{rw}}\sum_{rw}\pi^{rw}$
+\end_inset
+
+? Does this amount to assuming that agents know whether they got an offer,
+ and we assume the effect on the value function of having a job is the same
+ regardless of which 
+\begin_inset Formula $rw$
+\end_inset
+
+ we're considering? 
+\end_layout
+
+\begin_layout Standard
+Or 2 structural errors? One if unemployed and one if employed?
+\end_layout
+
+\end_body
+\end_document

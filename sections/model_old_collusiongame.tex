@@ -1,0 +1,252 @@
+This section develops a structural dynamic model of home and job location decisions for couples, where couples refer to households with two adults, no matter if they just live togehter as a couple or are married. I use ``spouse'' to refer to one's partner even if the couple is not legally married. First, I introduce some general notation of the model. Thereafter, I show how the decisions are made by the couples according to the model. There is not much work on polychotomous discrete choice models on location choices that account for the bargaining within the households except \cite{Gemici2011}. My suggested modelling approach is therefore the first of its kind to the best of my knowledge and empirics will show how well it fits the data after all.
+
+\section{Setting up the model}\label{sec:setupmodel}
+Each household consists of a wife and a husband. For clarity I let $i$ denote the wife and $j$ the husband. The individuals are the decision makers and participate in a dynamic complete information collusion type of game: the wife and the husband separately considre their optimal decisions on home and job region if being divorcees, but if they decide to ``collude'', i.e. stay together, the household unit consisting of the wife and husband, optimally decide on joint home location and work locations of either spouse. To figure out the final decision on divorce for the existing couple, the value of being married for each person is computed and compared to thier outside option - the divorcee outcome. If one of the outside options is better than the value of staying married, the household divorces and each indiviual gets his or her divorcee outcome. 
+
+To formalize, each person $k\in\{i,j\}$ in household $h$ gets flow utility $u_{kt}^M$ in each period $t$ if married and $u_{kt}^S$ if single:
+\begin{alignat*}{3}
+&u_{kt}^M &&= u(d_{ht},\boldsymbol{\tilde{x}_{ht}}) &&\text{ if married}, \\
+&u_{kt}^S &&= u(d_{kt},\boldsymbol{\tilde{x}_{kt}}) &&\text{ if single},
+\end{alignat*}
+where $d_{ht}$ is the decision made by household $h$ conditional at time $t$ and holds the decisions on joint home location ($rh_{ht}\in \{1,2,...,\bar{rh}\}$), wife's work location ($rw_{it}\in \textfrak{D}^{rh}\equiv \{\emptyset,1,2,...,\bar{rw}\}$) and husband's work location ($rw_{jt}\in \textfrak{D}^{rw}\equiv \{\emptyset,1,2,...,\bar{rw}\}$), where $rw_{kt}=\emptyset$ denotes unemployment. $d_{kt}$ is the optimal decision made if being single and is given by home location $rh_{kt}\in\textfrak{D}^{rh}$ and $rw_{kt}\in\textfrak{D}^{rw}$. For now I do not take a stand on what the home and work locations are empirically, but they can be thought of as municipalities, parishes, provinces or commute zones for instance. Let the entire choice set for couples be $\textfrak{D}^M\equiv \textfrak{D}^D\times\textfrak{D}^{rh}\times\textfrak{D}^{rw}$ and for singles $\textfrak{D}^S\equiv\textfrak{D}^{rh}\times\textfrak{D}^rw$.
+
+$\boldsymbol{\tilde{x}_{ht}}=(\boldsymbol{x_{it}},\boldsymbol{x_{jt}},\boldsymbol{x_{ht}},\psi_{ht})$ is a subset of the state variables of the household consisting of observed state variables for either spouse ($\boldsymbol{x_{it}}$ and $\boldsymbol{x_{jt}}$), household-specific observed state variables ($\boldsymbol{x_{ht}}$) and a shock to gains from marriage, $\psi_{ht}$, which is specific to the household. This gain from marriage is assumed to follow a Gaussian distribution and is unobserved for the econometrician:
+\begin{align*}
+\psi_{ht} \sim \mathcal{N}(\mu_{\psi},\sigma_{\psi}).
+\end{align*}
+The specification implemented above allows for altruistic preferences, i.e. that person $k$ gets utility from choices that occur to the spouse. The exact content of $\boldsymbol{\tilde{x}_{ht}}$ and $x_{kt},k\in\{i,j\}$, will be spelled out in \autoref{subsec:utilcomp}. $t$ indexes the age of the household which is given by the age of the husband when living in a couple and age of the individual when being single. $t=T$ is the maximum age of an individual. In this context, $T=65$ since I focus on the trade-off that takes place when spouses are in their working age. To get the age of the wife in a couple, I simply carry the age difference between the spouses as a constant state variable. 
+
+In addition to the deterministic flow utility, the household and individuals get an alternative-specific taste shock each period. To make notation easier, I introduce index $a$ for agents, where agents can be either the houseoold $h$ or indvidual $k\in\{i,j\}$. The shocks are unique for agent $a$ and independently and identically distributed over $t$, $a$ and $d$ according to some distribution $f$ parametrized by $\boldsymbol{\theta_f}$:
+\begin{align}
+\epsilon_{at}^d \sim f(\boldsymbol{\theta_f}),\text{ }a\in\{h,k\}
+\label{eq:shock}
+\end{align}
+where the $d$ refers to the choices described just above. This captures everything unobserved and not accounted for by the model that affects the location decsions.
+
+I assume that $\boldsymbol{\epsilon_{at}}$ is multivariate iid Extreme Value Type I distributed and that $(\boldsymbol{\tilde{x}_{at}},\boldsymbol{\epsilon_{at}})$ obeys a conditionally independent controlled Markov process with probability density
+\begin{align}
+P(\boldsymbol{\tilde{x}_{at+1}},\boldsymbol{\epsilon_{at+1}}|d_{at},\boldsymbol{\tilde{x}_{at}},\boldsymbol{\epsilon_{at}},\boldsymbol{\theta_f},\boldsymbol{\theta_{g_a}}))=f(\boldsymbol{\epsilon_{at+1}}|\boldsymbol{\tilde{x}_{at+1}},\boldsymbol{\theta_f})g_a(\boldsymbol{\tilde{x}_{at+1}}|d_{ht},\boldsymbol{\tilde{x}_{at}},\boldsymbol{\theta_{g_a}}),
+\label{eq:condi}
+\end{align}
+where $f(\cdot)$ and $g_a(\cdot)$ are the p.d.fs of $\boldsymbol{\epsilon_{at}}$ and $\boldsymbol{\tilde{x}_{at}}$, respectively, parametrized by $\boldsymbol{\theta_f}$ and $\boldsymbol{\theta_{g_a}}$. To emphasize that the transition densities for $\boldsymbol{x_{ht}}$ and $\boldsymbol{x_{kt}}$ can differ, I have added the subscrip $a$ on $g_a$. 
+
+\section{1st stage: Optimal decisions of divorcee}
+Let the individual's state be $z_{kt}=(x_{kt},\boldsymbol{\epsilon_{kt}})$, where $\boldsymbol{\epsilon_{kt}}=(\epsilon_{kt}^1,\epsilon_{kt}^2,...,\epsilon_{kt}^{\bar{d}})$ and $\bar{d}$ is the choice with highest choice index in the choice set $\textfrak{D}^S$. A person entering period $t$ as single optimizes with respect to $(rh_{kt},rw_{kt})$ in each period $t=t_0$ until $t=T$ under the assumption that he or she does not expect to find a new partner, i.e. transitions into marriage is considered a completely random event and the model cannot shed light on whether singles tend to choose residential location with the thickness of the marriage market in mind. The Bellman equation for singles is
+\begin{align}
+V_{kt}^S(z_{kt})= \max_{d_{kt}\in \textfrak{^D}^S}\{u_{kt}^S+\epsilon_{kt}^d+\beta E[V_{kt+1}^S(z_{kt+1})|z_{kt},d_{kt}]\} \text{ }k\in\{i,j\}.
+\label{eq:Vk}
+\end{align}
+$\beta$ is the discount factor and $E[V_{k,t+1}^S(z_{kt+1})|z_{kt},d_{kt}]$ is the conditionally expected value for a single of being in state $z_{kt+1}$ with the expectation taken over $z_{kt+1}$ and $\epsilon_{kt+1}^d$. 
+
+The Bellman equation can be rewritten to make the recursive structure explicit: define the alternative-specific value function for the individual as
+\begin{align}
+v_{kt+1}^d=u_{kt+1}^S(\boldsymbol{\tilde{x}_{kt+1}})+\beta E[V_{kt+1}(\boldsymbol{z_{kt+1}}|\boldsymbol{z_{kt}},d_{kt})].
+\label{eq:vk}
+\end{align}
+
+Exploiting the distributional assumptions on the taste shocks and \eqref{eq:condi}, the ex ante expected future value function can be written as
+\begin{alignat*}{3}
+\int_{\boldsymbol{\epsilon_{kt+1}}}{ V_{kt+1}(\boldsymbol{z_{kt+1}}))f(d\boldsymbol{\epsilon_{kt+1}}|\boldsymbol{\tilde{x}_{kt+1}})} \\
+& &&= \int_{\boldsymbol{\epsilon_{kt+1}}}{ \max_{\{d_{kt+1}\}_{t+1}^{T}\in \textfrak{D^S}_{}} } \Big\{v_{kt+1}^{d_{}}(\boldsymbol{\tilde{x}_{kt+1}}) +\boldsymbol{\epsilon_{kt+1}}^{d_{}}\} \Big\}f(d\boldsymbol{\epsilon_{ht+1}|\tilde{x}_{kt+1}}) \\
+& &&=\sigma \log {\left( \sum_{d_{kt+1} \in \textfrak{D^S}} { \exp[v_{kt+1}^{d_{}}(\boldsymbol{\tilde{x}_{kt+1}})/ \sigma_{\epsilon}]  } \right)} \\
+& &&\equiv\phi(\boldsymbol{\tilde{x}_{kt+1}}). 
+\end{alignat*}
+The first line on the right hand side is the value function integrated with respect to future taste shocks. The second line exploits the distributional assumption on these which is very convenient since it gives a closed form for the expectation of the maximum. $\sigma_{\epsilon}\in\boldsymbol{\theta_f}$ is the standard deviation of $\epsilon^d.$ The last lines defines this expectation as $\phi(\boldsymbol{\tilde{x}_{kt+1}})$ for brevity.
+
+Using the above and the assumption that $\tilde{x}_{kt+1}$ follows the distribution $g_k$, \eqref{eq:vk} can be rewritten into
+\begin{align}
+v_{kt+1}^d(\boldsymbol{\tilde{x}_{kt+1}})&=u(\boldsymbol{\tilde{x}_{kt+1}}) +\beta \int_{\boldsymbol{\tilde{x}_{kt+1}}}{\phi(\boldsymbol{\tilde{x}_{kt+1}})\cdot g_k(d\boldsymbol{\tilde{x}_{kt+1}}|\boldsymbol{\tilde{x}_{kt}},d_{kt})}  
+\label{eq:vhphis}
+\end{align}
+and \eqref{eq:Vk} into
+\begin{align}
+V_{kt}(\boldsymbol{z_{kt}})=\max_{d_{kt}\in \textfrak{D^S}} \{v_{kt}^d(\boldsymbol{\tilde{x}_{kt}})+\epsilon_{kt}^d)]\},
+\label{eq:Vhphis}
+\end{align}
+which makes the recursive structure with respect to $v$ explicit via \eqref{eq:vhphis}. After starting at period $T=65$ and solving \eqref{eq:Vhphis} via backwards recursion for all combinations of $\boldsymbol{z_{kt}}$ to period $t$, the individual's current age, let $d_{kt}^*$ be the solution to this problem. $d_{kt}^*$ is considered the outside option for the individual in a couple and is an unobserved counterfactual outcome. It can be found independetly from the second stage presented in the next section. 
+
+The alternative-specific shocks $\boldsymbol{\epsilon_{kt}^d}$ are observed for the agents but unobserved for the econometrician. This means the econometrician uses the conditional choice probability (CCP) when assessing what the optimum choice $d_{kt}^*$ is using
+\begin{align*}
+CCP(d_{kt}|\boldsymbol{\tilde{x}_{kt}})=\frac{\exp[v_{kt}^{d}(\boldsymbol{\tilde{x}_{kt}})/ \sigma_{\epsilon}]}{\sum_{d_{kt} \in \textfrak{D}^S} { \exp[v_{kt}^{d_{kt}}(\boldsymbol{\tilde{x}_{kt}})/ \sigma_{\epsilon}].  }}
+\end{align*}
+by exploiting the distributional assumption of the taste shocks. 
+
+\section{2nd stage: The couple's planning problem}
+The household maximizes the weighted sum of both spouses' utilities from a given choice $d\in\textfrak{D}^M$ from period $t=t_0$ to $t=T$. $t$ indexes the husband's age and $t_0$ is thus different from household to household while the final period $T$ is the same for everyone. The weights of each of the spouses' utility functions are parametrized by the vector $\boldsymbol{\alpha}$ and given by $\upsilon(\boldsymbol{\tilde{x}_{ht}},d_{ht},\boldsymbol{\alpha})$ for the wife and $1-\upsilon(\boldsymbol{\tilde{x}_{ht}},d_{ht},\boldsymbol{\alpha})$ for the husband. 
+
+I assume couples can decide to divorce and that the household behaves efficienctly in this respect, i.e. always makes the divorce decision that is optimal for the household as a whole. This means, the individuals as such do not themselves decide whether to stay in the marriage or not, but rather consider the benefits accruing to the households. This is done to make the optimization problem feasible, something I will elaborate in \autoref{sec:modeldisc} below. However, the shock to gains from marriage, $\psi_{ht}$ introduced in \autoref{sec:setupmodel} will help explain why households that in terms of observables would seem to benefit from staying together suddenly decide to divorce for whatever reason. This reason could be that one of the spouses does not value the marriage very much and therefore would rather go with his or her outside option. In that case, the shock would be more negative, all else equal.
+
+Considering $d_{it}^*$ and $d_{jt}^*$ as given from the first stage, the household therefore solves for the value function given state $\boldsymbol{z_{ht}}=(\boldsymbol{\tilde{x}_{ht}},\boldsymbol{\epsilon_{ht}})$. The Bellman equation is given by
+\begin{alignat*}{3}
+&V_{ht}(\boldsymbol{z_{ht}})=&&\max_{d_{ht}\in \textfrak{D}^M} \{ (1-D_{ht})\big[\upsilon_{ht} u_{it}+(1-\upsilon_{ht})u_{jt} +\beta E[V_{h,t+1}(\boldsymbol{z_{ht+1}}|\boldsymbol{z_{ht}},d_{ht})] \big] \} \\
+& &&+D_{ht}\big[0.5V_{it}^S(d_{it}^*)+0.5V_{jt}^S(d_{jt}^*)\big]+\epsilon_{ht}^d \numberthis
+\label{eq:Vh}
+\end{alignat*}
+%\end{dmath}
+where I have suppressed $\upsilon$'s dependency on $(\boldsymbol{\tilde{x}_{ht}},d_{ht},\boldsymbol{\alpha})$ for brevity. As for the individuals, $\beta$ is the household's discount factor and $E[V_{ht+1}(\boldsymbol{z_{ht+1}}|\boldsymbol{z_{ht}},d_{ht})]$ is the conditional expectation of next period's value function, where the expectation is with respect to the future taste shocks $\boldsymbol{\epsilon_{ht+1}}^d$ and other state variables $\boldsymbol{\tilde{x}_{ht+1}}$.
+
+Following the logic from the first stage, the alternative-specific value function for the household is
+\begin{alignat*}{3}
+&v_{ht+1}^d&&=(1-D_{ht})\big[u_{ht+1}(\boldsymbol{\tilde{x}_{ht+1}})+\beta E[V_{h,t+1}(\boldsymbol{z_{ht+1}}|\boldsymbol{z_{ht}},d_{ht})]\big] \\
+& &&+D_{ht}\big[\frac{1}{2}V_{it}^S(d_{it}^*)+\frac{1}{2}V_{jt}^S(d_{jt}^*)\big] \numberthis
+\label{eq:vh}
+\end{alignat*}
+with $u_{ht+1}(\boldsymbol{\tilde{x}_{ht+1}})=\upsilon_{ht} u_{it}+(1-\upsilon_{ht})u_{jt}$. I have assumed that the household attaches equal weights to both spouses' utilities in the case where it chooses to dissolve. This is in order to avoid that the possibility than one spouse has a higher bargaining weight also means that this spouse has more to say when it comes to the choice of divorcing or not.
+
+Along the same lines as for the individuals the ex ante expected future value function can be written as
+\begin{alignat*}{3}
+\int_{\boldsymbol{\epsilon_{ht+1}}}{ V_{ht+1}(\boldsymbol{z_{ht+1}}))f(d\boldsymbol{\epsilon_{ht+1}}|\boldsymbol{\tilde{x}_{ht+1}})} \\
+& &&= \int_{\boldsymbol{\epsilon_{ht+1}}}{ \max_{\{d_{ht+1}\}\in \textfrak{D}^M_{}} } \Big\{v_{ht+1}^{d_{}}(\boldsymbol{\tilde{x}_{ht+1}}) +\boldsymbol{\epsilon_{ht+1}}^{d_{}}\} \Big\}f(d\boldsymbol{\epsilon_{ht+1}|\tilde{x}_{ht+1}}) \\
+& &&=\sigma \log {\left( \sum_{d_{ht+1} \in \textfrak{D}} { \exp[v_{ht+1}^{d_{}}(\boldsymbol{\tilde{x}_{ht+1}})/ \sigma_{\epsilon}]  } \right)} \\
+& &&\equiv\phi(\boldsymbol{\tilde{x}_{ht+1}}). 
+\end{alignat*}
+
+
+Using this and the assumption that $\tilde{x}_{ht+1}$ follows the distribution $g$, \eqref{eq:vh} can be rewritten into
+\begin{align}
+v_{ht+1}^d(\boldsymbol{\tilde{x}_{ht+1}})&=u(\boldsymbol{\tilde{x}_{ht+1}}) +\beta \int_{\boldsymbol{\tilde{x}_{ht+1}}}{\phi(\boldsymbol{\tilde{x}_{ht+1}})\cdot g(d\boldsymbol{\tilde{x}_{ht+1}}|\boldsymbol{\tilde{x}_{ht}},d_{ht})}  
+\label{eq:vhphi}
+\end{align}
+and \eqref{eq:Vh} into
+\begin{align}
+V_{ht}(\boldsymbol{z_{ht}})=\max_{d_{ht}\in \textfrak{D}} \{v_{ht}^d(\boldsymbol{\tilde{x}_{ht}})+\epsilon_{ht}^d)]\},
+\label{eq:Vhphi}
+\end{align}
+which makes the recursive structure with respect to $v$ explicit via \eqref{eq:vhphi}. After starting at period $T=65$ and solving backwards for all combinations of $\boldsymbol{z_{ht}}$ to period $t$, the husband's age (i.e. the backwards induction is defined with respect to the husband's age), let $d_{ht}^*$ be the solution to this problem. Hence, $d_{ht}^*$ is the optimal decision given state $\boldsymbol{z_{ht}}$, which in turn determines the bargaining power $\upsilon_{ht}$ together with $\boldsymbol{\alpha}$ which the household knows. This optimal solution takes into account how it will affect the future states of the household and how the optimal decisions may change as a consequence. 
+
+To get the CCP for the households the econometrician must exploit the knowledge of the CCPs of the indviudals' decisions from the first stage. Since I have conditioned on $(d_{it}^*,d_{jt}^*)$ while these single-person choices are essentially unobserved, I must integrate them out: 
+\begin{align*}
+CCP(d_{ht}|\boldsymbol{\tilde{x}_{ht}})=\sum_{d_{it}^*}{\Bigg[\sum_{d_{jt}^*}{\Bigg(\frac{\exp[v_{ht}^{d}(\boldsymbol{\tilde{x}_{ht}},d_{it}^*,d_{jt}^*)/ \sigma_{\epsilon}]}{\sum_{d_{ht} \in \textfrak{D}} { \exp[v_{ht}^{d_{ht}}(\boldsymbol{\tilde{x}_{ht}},d_{it}^*,d_{jt}^*)/ \sigma_{\epsilon}]  }} \cdot CCP(d_{jt}^*)\Bigg)  }\cdot CCP(d_{it}^*)\Bigg]}
+\end{align*}
+where I have made $v_{ht}$'s dependency of $(d_{it}^*,d_{jt}^*)$ explicit for clarity.
+
+\section{Discussion of modelling approach}\label{sec:modeldisc}
+Contrary to many other papers on household decisions (e.g. \cite{Voena2015}, \cite{DelbocaFlinn2012}, \cite{Gemici2011}, \cite{LundbergPollak1993}) I do not include a threat point in the model. A threat point is used to model the individual's best outside option. The before-mentioned papers, among others, use the threat point to affect the bargaining power of a person: if the outside value increases, the bargaining power should also increase if the indivdual is still supposed to stay in the couple or to work cooperatively, otherwise it will request a divorce or choose the non-cooperative outcome. However, the main difference between this and the above papers (except \cite{Gemici2011}) is that my model is one of polychotomous discrete choice. 
+
+Applying the threat point approach to define the distribution of power within the couple is more complicated in this case since to smooth out the discreteness of the value functions I introduced the alternative-specific taste shocks in \eqref{eq:shock}. There is such a shock for all possible alternatives $d \in \textfrak{D}$ and $\textfrak{D}$ grows fast in the number of locations to choose between. Had I used the threat point approach, I would have to add a participation constraint to \eqref{eq:Vhphi}; namely that both spouses should be at least as good off as the values of their outside options. This would imply that I should compare the value of being married for person $k$ to the value of being single. To do so I must know the optimal decision if single - hence, the problem should be solved for both household $h$, wife $i$ and husband $j$ in each period. This in itself increases the computational burden. 
+
+Nevertheless, a more subtle problem is that due to the taste shocks, I would assume that an individual $k$ would get his or her own taste shock $\epsilon_{kt}^d$ each period. However, with the distributional assumption on $\epsilon_{ht}^d$ it is not straightforward to allow for a correlation between $\epsilon_{ht}^d$ and $(\epsilon_{it}^d,\epsilon_{jt}^d)$, and this distributional assumption is crucial for exploting the closed form of the expectation of the maximum which simplifies estimation to a significant degree. It seems unnatural that the two individuals' shocks are uncorrelated to the household's shock within a period. 
+
+Also, I as an econometrician am not able to observe the taste shocks of the household and individuals. Therefore, when checking the participation constraints, I would have to use expected value functions of being single vs married where the current-period shocks are integrated out and compare these two. I therefore can only get a probability that the participation constraints are fulfilled in the given state and for the proposed optimal decision. If they are not, I should adjust the bargaining power. \cite{Gemici2011} circumvents these problems by assuming only Gaussian shocks, allowing for a maxminum of 9 US census divisions and only the choice of home location. It is thereby feasible for her to simulate the shocks and integrate them out.
+
+Even though it is helpful to exploit the variation that comes from singles' location decisions, they are not the main focus of this paper. Moreover, I avoid assuming that households divorce because they cannot find an optimal compromise in terms of locations. In reality, these issues are likely not to be the main driver of divorces. What I do miss from assuming that couples never expect to divorce is that spouses might hesitate to agree on a move to certain locations because they would consider how that might hurt them if they got divorced. For instance, one might have to take a lower-quality job in that location than what could have been achieved somewhere else and that this will affect future job opportunities. Having had a low-quality job for some years and then getting divorced implying that the individual no longer has access to the spouse's ressources could mean that one would have to live off of a lower income than if he or she had not agreed to move there and be content with the poorer job.
+
+Instead, I assume this effect works through the idea that individuals do get utility also from owning one's own money and not just living off of the spouse's ressources. Thereby, the individual would still be hesitant to move to an area where only poor jobs are available within a managable commute distance. This assumption might be more relevant for certain groups of the population than for others.  
+
+\section{Individual utility specification}
+This section makes explicit what exactly the state variables are and how the utility function looks like for the individuals. To give a brief overview, the individual gets utility from income, local amenities in the home region, and disutility from housing costs, moving costs and commute costs. 
+
+Since people living in couples likely do exhibit some altruism, I also let each person get (dis)utility from the partner's income and commute. From a consumption-perspective and under the assumption that living together as a couple means sharing income to some extent at least, an individual would be expected to get utility from the spouse's income because it would imply a higher household income. Given that households also consume public goods (e.g. the quality of their home), higher household income would imply more ressources also for the public goods from which the individual gets utility. In this model, however, the way each person gets utility from income is not detailed in terms of how the income is spent. The above is just an illustrating example why household income and not just own income might matter for the individual. 
+
+The reason commute time of the spouse may affect the utility of the individual can be for both egoistic and altruistic reasons. First, the individual might dislike that his or her spouse spends time on commuting instead of spending that time with the family. Secondly, it might also be that the person would like the spouse to have a shorter commute because he or she knows that the spouse would like that. Since the model is not concerned with the allocation of time within the household the distinction between these two arguments cannot be clarified in the current model, but do serve as arguments why commute of the spouse should be included.
+
+Formally, the utility function for wife $i$ is given by
+\begin{alignat*}{3}
+&u^{d_{ht}}(\boldsymbol{\tilde{x}_{ht}})=&&\kappa(inc_{it},m_t)\cdot inc_{it}^{rw_i}(\boldsymbol{x_{it}})+amen_{it}^{rh}-hcost_{it}^{rh}-movcost_{it}^{rh,rh_{it-1}}(\boldsymbol{x_{ht}}) \\
+& &&-comcost_{it}^{rh,rw_i}+\delta \cdot comcost_{jt}(rh,rw_j)+\psi\cdot \kappa(inc_{it},m_t) inc_{jt}^{rw}(\boldsymbol{x_{jt}}),\numberthis \label{eq:u}
+\end{alignat*}
+and likewise for husband $j$. Except adding the spouse-specific components, this resembles the specification of utility in \citet{Buchinsky2014}. $m_t\in\{0,1\}$ is an indicator of a boom year. $inc_{it}^{rw_i}$ is total earnings of the wife when she works in region $rw_i$ (including unemployment $rw_i=\emptyset$) and $amen_{it}^{rh}$ controls for amenities of residential location $rh$. $hcost_{it}^{rh}$ is the cost of living in region $rh$ and $movcost_{it}^{rh,rh_{t-1}}$ the switching cost when moving from region $rh_{t-1}$ to $rh$. Lastly, $comcost_{it}^{rh,rw_i}$ is commuting costs between residence $rh$ and work $rw_i$ and $comcost_{jt}^{rh,rw_j}$ and $inc_{jt}^{rw}(\boldsymbol{x_{jt}})$ $j's$ commute costs and income. The separate components of \eqref{eq:u} will be elaborated below, but $\delta$ and $\psi$ measure how much (dis)utility the wife gets from husband's commute and income relative to her own commute and income. 
+
+\subsection{Specification of utility components}\label{subsec:utilcomp}
+In the following I describe the separate components of \eqref{eq:u} starting with an elaboration of the state variables: $\boldsymbol{x_{it}}=(rh_{it-1},rw_{it-1},c_i,educ_i,m_t,educ_i,inc_{it-1},\nu_{it}^{rw})$ which are previous home location, previous work location, commute cost type $c_i\in\{0,1\}$, a dummy for being in a good macro state $m_t\in\{0,1\}$, level of education $educ_{i}\in\{0,1,2,3\}$ corresponding to primary or secondary, VET, short or medicum cycle and long cycle education, the realized wage income from last period and then a work location-specific wage shock for the wife at time $t$, respectively. $\boldsymbol{x_{jt}}$ is the same as $\boldsymbol{x_{it}}$ except it also includes the husband's age $t$. ${\boldsymbol{x_{ht}}}=(\mathbb{I}{(kids_{ht}>0)},youngestkid_{ht},agedif_h,incdif_{ht-1},q_h)$ which are a dummy for kids in the household, the age of the youngest kid, the age difference between the husband and the wife, the income difference between spouses at $t-1$ and a moving cost type $q_h\in\{0,1\}$ where $q_h=1$ means a high cost type. 
+
+Moving on to the components of the utility function, I specify these for individual $k\in\{i,j\}$. $\kappa_{inc}(inc_{kt},m_t)$ is the marginal utility of money and $inc_{kt}$ the realized income. It is assumed to depend on both the income level and the macro state to allow high-income people to have a lower marginal utility of money and to let macro state proxy for the individual's optimism, which may affect its willingness to pay for certain products, incl. the costs associated with moving. This is done to implicitly account for budget constraints in the model, which are not imposed explicitly. An individual with a high marginal utility of money will be less inclined to pay the costs of moving, all else equal, just like a person who is close to not satisfying his borrowing constraint is. This follows \citet{GillinghamEtAl2015}. I let
+\begin{align*}
+\kappa^{inc}(inc_{kt},m_t)=\kappa_0^{inc}+\kappa_1^{inc}\cdot inc_{kt}+\kappa_2^{inc}\cdot inc_{kt}^2+\kappa_3^{inc}\cdot m_t.
+\end{align*}
+The highest obtainable marginal utility of money, is attained by individuals who have an income of zero in a bust year. 
+
+The wage offer itself is 
+\begin{align}
+\ln(inc_{kt}^{rw}) = 
+\begin{cases} 
+    \!\begin{aligned}%[b]
+       & \beta_{0t}^{rw} + \beta_1 m_t + \beta_2 (age_{kt}) + \beta_3(age_{kt})^2 \\
+       & + \sum_{e=1}^{4}{\beta_4^{rw,e} \mathbb{I}{(educ_{kt}=e)}} + \beta_5\mathbb{I}{(rw_{kt-1}=\emptyset)} \\
+       & +\beta_6 \ln(inc_{kt-1})+\nu_{kt}^{rw}
+    \end{aligned}           &  \text{if } rw\neq\emptyset \\%[1ex]
+    b & \text{if } rw=\emptyset. 
+\end{cases}
+\label{eq:inc}
+\end{align}
+$b$ is the exogenous level of unemployment benefits. $\beta_{0t}^{rw}$ is a constant controlling for differences in the average wage level across labor markets $rw$ at time $t$, while $m_t$ controls for the effect that the macro state has on all labor markets. $age_{kt}$ is the age of the individual and equals $t+agedif_{ht}$ for the wife and $t$ for the husband. $\mathbb{I}{(educ_{kt}=e)}$ controls for the return to her education in work locaton $rw$. Including a dummy for whether one was unemployed in the previous period allows the wage offers to differ between unemployed and employed job applicants. In order to capture that the quality of the previous jobs (quality of the acquired human capital), here measured as the realized wage, affects the individual's future earnings, the previously realized wage $inc_{kt-1}$ is included. This means the model allows individuals to hesitate to move to a certain area that can only provide relatively low-quality jobs for the person because that means that also in the future it becomes harder to get a high-paid job even if applying for jobs in a generally high-paid area. The wage shock $\nu_{kt}^{rw}$ captures random shocks to the wage that depend on the labor market considered such that it can account for a e.g. a good job offer arriving in some specific location. It is known to the household before it makes its decision and is considered distributed iid across locations and time as 
+\begin{align*}
+\nu_{kt}^{rw} \sim \mathcal{N}(0,\sigma_{\nu}).
+\end{align*}
+
+
+The remaining components of (\ref{eq:u}) are specified as follows
+\begin{alignat*}{3}
+& amen_{kt}^{rh} &&= \tau_0^{rh}+\tau_1 airqual^{rh}+\tau_2 airqual^{rh}\mathbb{I}{(kids_{ht}>0)}+\tau_3 crime^{rh} \\
+& &&+\tau_4 \mathbb{I}{(kids_{ht}>0)}+\tau_5 schoolqual^{rh}\mathbb{I}{(kids_{ht}>0)}  \label{eq:amen} \numberthis \\
+& hcost_{kt}^{rh} &&= p_t P^{rh}_t \label{eq:hcost} \numberthis \\
+& movcost_{kt}^{rh_t,rh_{t-1}} &&= \mathbb{I}{(rh_{t-1} \neq rh_t)}  (\gamma_{0}+\gamma_1\mathbb{I}{(q_h=1)}+ \gamma_2 \mathbb{I}{(kids_{ht}>0))} \label{eq:movcost} \numberthis \\
+% + \\& &&(P^{rh_t}-P^{rh_{it-1}} ) )  
+& comcost_{kt}^{rh,rw} &&=(\psi_0+\psi_1 c_i+\psi_2 \mathbb{I}{(kids_{ht}>0)} ) time(rh_t,rw_{kt}). \label{eq:trans} \numberthis
+\end{alignat*}
+\eqref{eq:amen} controls for differences in air quality, crime level and school quality across regions and the function is specific to the household. These amenities are considered constant over time. Since having kids may imply that the individual cares more about these characteristics, each local amenity has also been interacted with a dummy for having kids. 
+
+Moving on to \eqref{eq:hcost}, this function controls for the costs of living in the region and is household-specific as well. These are specified as a given share, $p_t$, of the house prices in the region. Everyone is considered renters in the model such that capital gains from differences in house prices over time do not drive location decisions.
+
+Housing costs can be changed by moving to another region, but moving involves moving costs as specified in \eqref{eq:movcost}. These are essentially household- and not individual-specific also. Particularly, I allow for two moving costs types: high ($q_h=1$) and low $q_h=0$ to acknowledge that there is unboserved heterogeneity in moving costs across households. Furthermore, I let the existence of kids in the household affect the moving costs. One can imagine that having kids, especially kids in school age, increases the moving costs since moving might mean changing school and friends for the kids. 
+
+For both the wife $i$ and the husband $j$, the specification for commuting costs are similar in structure. There is a base level of disutility $\psi_0$ which is higher for high moving cost types, $c_k=1$, compared to those with $c_k=0$. As with the moving costs, I allow for an effect of having kids, since being a parent might change your value of time at home. All these variables are multiplied with the commuting time between home and workplace. I therefore allow for commuting costs both if the person does not work in the same region as where he lives and if he does, but it is 0 per definition if the person is unemployed. 
+
+% how to introduce stochasticity in wages?
+% dynamics in amenities?
+% wages a function of last period's wages?
+% budget constraint?
+% utility from size of housing vs children?
+% previous home location of each individual
+
+\section{Specification of bargaining power}
+% commitment to bargaining power function
+The bargaining power function $\upsilon(\boldsymbol{\tilde{x}_{ht}},d_{ht},\boldsymbol{\alpha})$ is essential for this model since this is what distinguishes it from a standard unitary model or a model of the individual's decision. In the family economics literature on household decisions, bargaining power or Pareto weights have been widely used since the introduction in \cite{ManserBrown1980} and \cite{McElroyetal1981}. With the expansion to dynamic household decision models a discussion of the bargaining power has been in particular focus. 
+
+An important distinction when introducing dynamics into collective models is namely whether the household is able to commit to promises about future decisions within the household. If this is the case only the bargaining power established at the beginning of the marriage matters for the decision process. This would require that the household at the time of marriage is able to perfectly predict the evolution of those factors that influence the bargaining power. On the other hand, if there are unpredictable changes to these determinants the household will reoptimize at the time of the realization of these changes and stick to the resulting sequence of decisions only as long as there are no more unpredicted changes that influence the bargaining power, see \cite{LundbergPollak2003,Ligon2011,Theloudis2016} and \cite{Mazzocco2007} for discussion and empirical implementations. 
+
+This latter setup seems most likely in my case where I model households at the beginning of their marriage (or cohabitation) which typically is at a relatively young age. There are several sources through which one could imagine bargaining power changing: one spouse gets a really good job offer in some location, one is fired from the job or one gets a seriuos chronic disease, among others. These events are not perfectly predictable. However, I am putting some structure on how to bargaining power can change over time and not modelling it completely non-parametrically as in e.g. \cite{Voena2015} since this requires the inclusion of participation constraints, cf. \autoref{sec:modeldisc}, which is not feasible in this setup. The implication is that I do not assume that the bargaining power stays constant and thus that spouses are able to commit completely to not changing their bargaining position, but that I do make the weaker assumption that they commit to the bargaining power \textit{function} $\upsilon(\boldsymbol{\tilde{x}_{ht}},d_{ht},\boldsymbol{\alpha})$. 
+
+More formally, to impose that $\upsilon_{ht}$ lies in the unit interval, I assume it is given by 
+\begin{align}
+\upsilon(\boldsymbol{\tilde{x}_{ht}},d_{ht},\boldsymbol{\alpha})= \frac{\exp{(\eta_{ht})}}{1+\exp{\eta_{(ht})}}
+\label{eq:barg}
+\end{align}
+with
+\begin{alignat*}{3}
+&\eta_{ht}&&=\boldsymbol{\alpha}_1 agedif_h + \boldsymbol{\alpha}_2\mathbb{I}{(educ_i > educ_j)}+\boldsymbol{\alpha}_3\mathbb{I}{(educ_i < educ_j)} \\
+& &&+ \boldsymbol{\alpha}_4 \mathbb{I}{(youngestkid_{ht}\leq 12)}\mathbb{I}{(kids_{ht}>0)} + \boldsymbol{\alpha}_5 incdif_{ht-1}.
+\end{alignat*}
+$agedif_h$ is the age difference between the wife and the husband, $\mathbb{I}{(educ_i > educ_j)}$ and $ \mathbb{I}{(educ_i < educ_j)}$
+are dummy variables for the wife having a higher education than the husband and vice versa, respectively. The reference group is the case where they have the same length of education. $\mathbb{I}{(youngestkid_{ht} \leq 12)}$ is a dummy for whether the youngest child in the household is at most 12 years old interacted with the dummy for having kids at all. That is allowed for because it might be that there are social norms dictating that one spouse compromises in order to take more care of children and the household when the children are rather young. $incdif_{ht-1}$ is the difference in earnings between the spouses at time $t-1$. Since the household as a decision maker in the model knows the function~\ref{eq:barg}, it is able to take into account how bargaining power will change in response to changes in location decisions if these imply changes in the earnings difference within the family. 
+% add something about unexpected job opportunities/income shocks that are unpredictable and therefore not perfectly accounted for at the start of marriage.
+If all the parameters in $\boldsymbol{\alpha}$ or the variables in \eqref{eq:barg} are zero, the barganing weight is $1/2$ for each spouse, but in any other case it will deviate more or less from $1/2$.
+
+\section{Transition matrices}
+\subsection{Household-specific state variables}
+In order for the household to optimize its locations it must have expectations about how the state variables evolve over time. Age of each spouse increases by one each year, i.e. mortality risk is disregarded. Naturally, the age difference is constant. Previous work and home location are just given by previous period's choices, while moving and commute cost types are considered household- and individual-specific fixed effects that hence do not vary with time. The same holds for educational level, since I focus on individuals who are working and thus not studying. The macro state, on the other hand, is assumed to follow a Markov proces with transition probability 
+\begin{align}
+\pi_{n,l}\equiv Pr(m_t=n|m_{t-1}=l)\text{ }n,l\in\{0,1\}. \label{eq:macrodens}
+\end{align}.
+
+The number of kids in the family can change over time, but since I do not model fertility decisions I let the arrival of kids be random shocks. Since it is only in rare events that more than 1 childbirth occurs within the same year I consider having an extra child as a 0/1 outcome. The number of kids in the previous period thus affects the number of kids in the current period. Furthermore, because children move out of home at some point, it is possible to go from having a positive number of children in the household to having less. I let the age of the wife $t+agedif$ affect the number of children as well to account for fertility and to predict when the last kid is likely to move out. The distribution is given by
+\begin{align}
+kids_{ht+1} \sim h(kids_{ht},t+agedif_h,\boldsymbol{\theta_h}), \label{eq:kidsdens}
+\end{align}
+where $\boldsymbol{\theta_h}$ parametrizes the distribution. The age of the youngest kid follows from the time at which the kids arrive. 
+
+\subsection{Location specific variables}
+Observed amenities of the regions are school quality, crime level, air quality and prices of housing. They are all considered constant across time except for the prices. These are generally assumed to be distributed according to the distribution $j(.)$:
+\begin{align*}
+P^{rh}_t \sim j(\boldsymbol{P_{t}},\boldsymbol{\theta_j}),
+\end{align*}
+where $\boldsymbol{P_{t}}$ is a $\bar{rh}\times 1$ vector of prices for all home regions at time $t$. This allows for spatial spillovers in the prices, where the spatial weight matrix is included in the parameter $\boldsymbol{\theta_j}$. A more specific functional form will be assumed in the empirical analysis.
+
+\section{Solution method}
+The purpose of this paper is to provide recommendations to policticians about how to avoid the depopulation of rural areas. To do so, I will carry out counterfactual policy experiments that asses how households relocate after a new policy has been implemented. Simulating counterfactuals requires me to be able to fully solve the model, while for estimation this is not a necessity since I can apply the CCP-EM algorithm from \cite{ArcidiaconoMiller2011}. The model is solved by backwards induction starting at $T=65$ and back to $t_0=25$. For each possible $\boldsymbol{x_{ht}}$, simulated $\bar{rw}\times 1$ vector of wage shocks $\boldsymbol{\upnu_{ht}}$\footnote{The draws are chosen as Gaussian quadrature nodes. This is feasible for not ``too many'' labor markets while I can still allow for very disaggregated home locations (e.g. the 2,201 parishes). It is realistic to consider Denmark divided into max 20 labor markets. The state variables $inc_{it-1}$, $inc_{jt-1}$ and $incdif_{ht}$ are discretized into a grid.} the optimal solution is found after also computing the bargaining weights according to \eqref{eq:barg}. The same procedure is carried out for period $T-1$ with the solution for $T$ in mind. Since future taste shocks and remaining states are unobserved to the household it computes the \textit{expected} value function for $T$. It then considers how the decision at $T-1$ will affect the evolution of states and bargaining power and hence the expected value in the next period and makes its decision. This procedure continues until $t_0$.
+
+In addition, I as the econometrician, must integrate over current taste shocks, wage shocks as well as the probability that each household and spouse, respectively, is a high or low moving and commute cost type. The two latter are assumed to follow discrete distributions and the probabilities of each type will be estimated along with the other structural parameters. I will then get the CCP of each decision being made and use this to assess the consequences of a counterfactual policy.
+
+
+
+

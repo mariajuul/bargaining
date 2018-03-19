@@ -1,0 +1,136 @@
+
+
+I set the parameters at values as shown in \textcolor{red}{insert reference to table}. I have chosen parameter values such that initially when solving the model without running any counterfactuals that not only a very few choices have a fair probability of being chosen. 
+\textit{NB: this section is primarily used to develop intuition for how a very simplified version of the model makes people behave. It illustrates a few features of the model.}
+In this section, I will illustrate some implications of the model and give intuitive explanations for these. I will set the parameters to certain values when solving the model and alter some of these along the way. The model I use in this section is simplified compared to the one presented above, i.e.
+
+\begin{itemize}
+\item 2 regions and no unemployment outcome, i.e. $D^{rw}=D^{rh}=\{1,2\} \forall t\in\{1,2,...,T\}$ and for all individuals.
+\item $T=25$. Think of $t$ as reset to 0 at beginning of one's career.
+\item $\delta=0.95$.
+\item Only state variables are $x=(rh_{t-1},t)$.
+\item Use $\sqrt{(inc^{rw})}$ rather than $\kappa^{mu}(inc,m)\cdot inc_{it}^{rw}$.
+\end{itemize}
+
+I let the prices be endogenous and therefore impose the equilibrium conditions in Equation \ref{eq:eqcond} when solving for the CCPs. I use the following parameter values 
+\begin{itemize}
+\item $\beta_0^1=\beta_0^2=1,000$ is the constant base wage in each region denoted in some units. 
+\item Neglect impact of age on wages for now, so $\beta_2=\beta_3=0$
+\item $\beta_1$ and $\beta_4$ unidentified due to no variation in macro state and schooling.
+\item Disregard psychological switching costs and effect of age (and kids and civic status): $\gamma_j=\gamma_2=\gamma_3=0$.
+\item No commuting costs: $\psi_0^{rh,rw}=0$ $\forall (rh,rw)\in D$. 
+\item In taste function, $\tau_0^1=\tau_0^2$.
+\item $P^{dis}$ and $P^{job,rw}$ irrelevant.
+\item Use equal weights $w_t$ for all $T\cdot D^{rh}\cdot D^{rh}\cdot D^{rw}$ cells in the CCP matrix (i.e. equal distribution over all $(rh_{t-1},t)$ initially).
+\item Region 1 = urban, region 2 = rural.
+
+\end{itemize}
+
+ \autoref{fig:ccp_eq1} shows the result that there is an equal probability of residing and working in either region. There is no effect from age and the equilibrium price is correctly found to be 1. The latter can be seen from column 1 in \autoref{tab:eqprice}. 
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth, trim=3 3 3 3,clip]{ccp_eq1.png} 
+\caption{Model solution of CCPs (scenario 1)}
+\label{fig:ccp_eq1}
+\end{figure}
+
+\begin{table}[htbp]\centering
+\caption{Relative equilibrium prices \label{tab:eqprice}}
+\begin{tabular} {@{} l c c c c c @{}} \\ \hline
+\textbf{Scenario} & 1  & 2 & 3 & 4 & 5 \\
+\textbf{ $P^2/P^1$} & 1.00  & 1.00 & 1.00 & 0.442 & 0.454 \\
+\textbf{ $P^1/P^2$} & 1.00  & 1.00 & 1.00 & 2.26 & 2.20 \\
+\hline\hline
+%\multicolumn{2}{@{}l}{\footnotesize{\emph{Source:} }}
+\end{tabular}
+\end{table}
+
+In scenario 2 I impose different wages in the two regions, where the higher wage can be obtained in region 1. As an example, I use $\beta_0^1=1,200$ and $\beta_0^2=1,000$. The results appear in \autoref{fig:ccp_eq2}. The CCP of each home location is still identically distributed over regions 1 and 2 as seen from the first panel, even though there is a probability of 0.953 of choosing $rw=1$ due to the much higher per-period pay. This implication is also reflected in the third panel, where the CCPs of the choices that involve $rw=2$ are close to 0. People therefore choose to work where the wage is higher, but since they can just commute at no cost to region 2, it does not matter where they live. Also, there are no equilibrium constraints on the labor market. This means, everyone can always find a job at the exogenous wage rate, if he wants to. This is something that the actual model presente{}d in \autoref{sec:model} does better.
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth, trim=3 3 3 3,clip]{ccp_eq2.png} 
+\caption{Model solution of CCPs (scenario 2)}
+\label{fig:ccp_eq2}
+\end{figure}
+
+The same tendency is displayed in \autoref{fig:ccp_eq3} that represents scenario 3. In this scenario I set $\beta_1=350$ and $\beta_2=-5$, such that age now matters in the $inc$ equation. Apart from that, everything is as in scenario 2. The pattern in the first three panels is very similar to that of \autoref{fig:ccp_eq2}. However, the CCP of choosing to work in (the rural) region 2 is much higher than in scenario 2. This is because that even though the base wage $\beta_0^2$ is lower than in region 1, this difference is not as high for senior workers, which in the model solution have the same weight in the calculation of the unconditional CCP as the young workers. These senior people already earn a high wage solely because of their high age and since the marginal utility of income is positive, but decreasing, they do not have as high a marginal utility gain of choosing region 2 compared to the young workers whose salary is primarily the base wage. We do indeed see from panel four that as a person ages, the age gradient in CCPs is not as pronounced as it is for young people. Since there is a large literature  establishing that age (or experience) matters for wages, this is an important aspect to incorporate in the model since it clearly makes a difference for the solution. 
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth, trim=3 3 3 3,clip]{ccp_eq3.png} 
+\caption{Model solution of CCPs (scenario 3)}
+\label{fig:ccp_eq3}
+\end{figure}
+
+Moving on to scenario 4, I add commuting costs when a worker has to commute from the rural area to the city (region 1) for the purpose of work. This is done by changing to $\eta_0^{2,1}=0.8$ and keeping the other transport cost parameters at 0. This means I assume there is a cost, e.g. due to much congestion, when commuting to the urban region. On the other hand, there is no such cost when commuting out of the city and neither when travelling within a region. The implications are illustrated in \autoref{fig:ccp_eq4}. Compared to scenario 3, there is now a slightly lower probability of choosing $rw=1$ in favor of $rw=2$, but the majority of all people would choose to work in region 1 to get the higher wage. The small decrease in the CCP is due to the fact that the utility shocks for $rw=1$ that in scenario 3 were just above the threshold pro $rw=1$ now do not suffice to make this region favorable since one also has to pay the commuting costs every period. On the other hand, the two home locations are equally likely to be picked, cf. panel one. One might think that people would prefer to live in region 1 to avoid the commute costs in case one got a utility shock that favored $rw=1$ and that this might induce an increase in the CCP of $rh=1$. The reason this is not evident from the figure is that the role of the equilibrating house prices is exactly to offset this higher incentive for residing in region 1. As is clear from \autoref{tab:eqprice}, it is now 2.26 times more expensive to buy a house in the city. The higher $swcost$ and $hcost$ thereby neutralize the effect of avoiding the commute costs by choosing to live in the urban centre. It is worth noting that this is a huge increase in prices, driven only by the change in transportation costs. Even though one cannot conclude that this is the one and only reason why house prices are larger in Copenhagen City compared to other parts of the country, this simulated effect results in a relative price that is close to the one actually observed between e.g. Copenhagen City and the region Western and Southern Zealand in 2007, 2008 and 2009, cf. \autoref{fig:pricesdk}. The last panel of \autoref{fig:ccp_eq4} shows there is a discontinuous change in the CCPs at age 25 for living in region 1. Again, this is because one cannot exploit the potential profit from selling a house in region 1 and buying a cheaper one in region 2 in the future. This scenario illustrates an important point that must be dealt with in some way, namely that in this model where supply of housing is fixed and there is no outside option, housing prices will always equilibrate to ensure that the CCPs stay constant over time. The current version of the model from \autoref{sec:model} is thus not able to explain increasing urbanization, but rather explains the evolution of housing prices across the country. It is therefore important that the model is extended to allow for an outside option. One way to do this is to include the option of renting one's house and distinguish between owning and renting as in \citet{Oswald2015}. If assuming that renting is always an option at a given exogenous prices, this should allow people to move to e.g. the urban area without directly affecting the market price for houses, but only affect the number of people living in the urban centre.
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth, trim=3 3 3 3,clip]{ccp_eq4.png} 
+\caption{Model solution of CCPs (scenario 4)}
+\label{fig:ccp_eq4}
+\end{figure}
+
+\autoref{fig:ccp_eq5} and \autoref{fig:ccp_eqage5} show the results from the last scenario 5. In this I have added switching costs to the model, so now $\gamma_0=2$. According to the second panel of \autoref{fig:ccp_eq5}, the probability of either work location is unchanged relative to scenario 5. This is not surprising since the earnings potential and costs have not changed. The CCP of each home location has not changed either. This is again due to the equilibrium mechanism from the house prices. \autoref{tab:eqprice} reveals that the relative price of the urban region has decreased by $2.7\%$ to 2.20. The explanation is as follows: people who live in region 1 do not care where they work, since they incur no commuting costs. People living in region 2, on the other hand, prefer working in region 2 due to lower commuting costs, \text{all else equal}. There is a higher wage potential in region 1, so part of this effect is neutralized though, but not completely. In any case, it is more attractive to live in region 1, since if you happen to receive a utility shock \textit{almost} above the threshold for when to choose $rw=1$ if you ignored transport costs, then you would be inclined to pick $rh=1$ to avoid the risk of paying high commuting costs. Nevertheless, when you also consider the cost of moving, there are some people currently residing in region 2 who do not want to incur the switching cost to move to region 1. Their utility shock for $(1,rw)$ is simply not high enough to also bear the extra switching cost of 2. The expected demand for region 1 therefore falls and so does the equilibrium price, all else equal. On the other hand, fewer people would also tend to be willing to move from region 1 to region 2, since they now also pay the switching cost if doing so. This means that the expected supply of housing in region 1 falls, inducing prices to increase in this region, all else equal. The former turns out to be the dominating effect, since $P^1/P^2$ does decrease. The cause of that is the fact that there are relatively fewer people lowering their supply than those from region 2 increasing their demand for region 1, because inhabitants of region 1 also give up the commuting costs of 0, no matter where you work. This implies that region 1 residents have an effective switching cost of 2.8, the sum of $swcost$ and $comcost$, which logically means fewer people want to move from there. 
+\autoref{fig:ccp_eqage5} shows the CCP of each possible decision over the life cycle and conditional on each possible $rh^{prev}$. Probabilities therefore sum to 1 within $rh^{prev}$. We see from the figure that the CCPs of $(1,1)$ and $(2,1)$ are declining in age no matter $rh^{prev}$ up until age 23. On the contrary, the CCPs of $(1,2)$ and $(2,2)$ are increasing before that age. The explanation is that in this model people move in prospect of a better income. As the individual ages, the trade-off between working in region 1 vs 2 becomes less pronounced since there are fewer years left until death and therefore fewer periods where the person realizes the better income by working in region 1. As a young person, the incentive for $rw=1$ is more clear. Also, for any choice $(rh,rw)$, the CCP increases or decreases faster in absolute terms for the choice combination that is conditioned on $rh^{prev}=rh$. For example, the CCP of $(2,2)|rh^{prev}=2$ increases more rapidly in the beginning than that of $(2,2)|rh^{prev}=1$, simply because you do not have to pay the switching costs when already residing in the region in question, which makes the choice more attractive. Especially as the agent ages, he is becoming more unwilling to pay the switching costs as he has fewer years to realize the gain from that. Old people are therefore relatively more inclined to not move. However, they are still more likely to choose $(1,1)|rh^{prev}=2$ and $(2,1)|rh^{prev}=1$, which involves moving residence, than choosing $(1,2)|rh^{prev}=1, (2,2)|rh^{prev}=1$ and $(1,2)|rh^{prev}=2$. This is explained by the higher wage that they can earn in work region 1 after all and which a few old people prefer, even though they only get this higher wage for comparatively few periods. 
+After around age 6, there is a higher CCP of $(2,2)|rh^{prev}=2$ compared to $(2,1)|rh^{prev}=1$ and after age 8 the former is also more likely than $(1,1)|rh^{prev}=2$. Regarding the former, it is hence more probable to move to region 2 from region 1 and work in region 1 compared to continuing to stay living and working in region 2. After age 6, people tend to prefer staying in the home region 2, thus not having to pay switching costs, and then accept working in that same region with a lower base wage potential rather than incurring switching costs to move to region 2 and stay working in region 1. As you age, the base wage is not as large a share of your income, why you are less inclined to move just to get a higher base salary. On the other hand, when the agent is very young, the main part of his pay comes from the base wage. Consequently, he really wants to work in region 1. It may turn out, though, that he likes living in region 2 so much that it compensates for both the switching and moving costs. This is rather unlikely when you age, since there is not as high of a utility gain to get from moving to another work region, so $rw=2$ is fine for most people. When a person has decided to work in region 2, where he already lives, it does not seem as attractive for him to move to region 1. This should mainly be because he had an expectation that he at a later age would want to work in region 1 and therefore already today should incur the moving cost, but since the relative attractiveness of $rw=1$ compared to $rw=2$ decreases in age, this is not extremely likely. Returning to the fact that the CCP of $(1,1)|rh^{prev}=2$ becomes lower than that of $(2,2)|rh^{prev}=2$ after an age of 8, this can be explained along the same lines. Namely that it is less probable to pay switching costs to move to region 1 in order to avoid the commuting costs when you age, when you also have the choice of just staying in region 2 for both residence and work, when the higher base wage does not matter so much for your total income.
+
+The last point to mention regarding the figure is that the increase in CCPs of living in region 2  after age 23 is smooth, not discontinuous as in \autoref{fig:ccp_eq4}. The smooth transition in CCPs is hence explained by the switching costs. Introducing switching costs over and above the trade costs means agents take the future more into account when deciding on whether or not to move residence today. The reason simply being that if you should be willing to pay those extra switching costs, you should also have enough periods left where you can be compensated in terms of either earning a higher wage (if also moving to work region 1) or just lower expected commute costs (if only considering the potential change to work region 1). This also implies that it is already at age 23, not only age 25, that people start to lower the probability of living in region 1, the explanation again being that you need relatively more years to expect an income and/or lower commute cost gain from moving to region 1 in order to make that profitable compared to scenarios 2 and 5, where there were no extra switching costs.
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth, trim=3 3 3 3,clip]{ccp_eq5.png} 
+\caption{Model solution of CCPs (scenario 6, endogenous prices)}
+\label{fig:ccp_eq5}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth, trim=3 3 3 3,clip]{ccp_eqage5.png} 
+\caption{Model solution of CCPs (scenario 6, endogenous prices)}
+\label{fig:ccp_eqage5}
+\end{figure}
+
+
+
+% \begin{itemize}
+% \item Ilustrate CCPs in simple model with no heterogeneity across regions (different wage potential), with and without equilibrium prices but with $swcost=transcost=0$. For calendar year 1 only.
+% \item Non-equilibrating prices: show CCPs when
+%      \begin{itemize}
+%      \item + switching costs
+%      \item + transport costs different for different regions (urban vs rural)
+%      \item P(move)|age
+%      \item (rh,rw) vs age (2 age groups)
+%      \end{itemize}
+
+% \item Equilibrating prices:
+%      \begin{itemize} 
+%      \item Show prices vs calendar year
+%           \begin{itemize}
+%           \item With and without different transport costs
+%           \end{itemize}
+%      \item Show CCPs when
+%           \begin{itemize}
+%           \item + swcost
+%           \item + transport costs different for different regions
+%           \item P(move)|age
+%           \item (rh,rw) vs age (2 age groups)
+%           \end{itemize}
+% \end{itemize}
+% \end{itemize}
+
+
+
+
+%To relate this to Denmark I let the 5 regions represent the 5 provinces on Zealand: Copenhagen city (1), Copenhagen surroundings (2), Northern Zealand (3), Western and Southern Zealand (4) and Eastern Zealand (5). I therefore also try to start out the model simulations in a state that resembles the one observed in data as much as possible. To get values for income parameters I therefore run a fixed effect OLS regression on my dataset for total individual income on a constant, dummies for provinces, interactions between province and a dummy for being highly educated, an age polynomial and the before-mentioned dummy for unemployment. I use fixed effects to match the model income specification more closely where a fixed income type is included. Highly educated is defined as having a long-cycle education or more, while an individual in the dataset is unemployed is not completely clear from the variables in the data. I do see the annual unemployment rate measured in days of the year. The specification is given by 
+%\begin{align*}
+%&inc\_{it} = &&\beta_0 + \sum_{prov=2}^{prov=5}{(\beta^{rw}\mathbb{I}{(rw=prov)})}+\beta_2 age + \beta_3 age^2 + \\
+%& &&\sum_{prov=2}^{prov=5}{\sum_{educ=1}^{educ=1}{(\mathbb{I}{(rw=prov)}\beta_4^{rw}\mathbb{I}{(s=educ)})}}+\beta_5\mathbb{I}{(rw_{t-1}=\emptyset)}+\upsilon_{it},
+%\end{align*}
+%where $\eta_i$ is an individual-specific fixed effect and $\upsilon_{it}$. If interpreting with causality in mind, the assumption that $\upsilon_{it}$ has a 0 mean conditional on the covariates. I do not include the macro state in the specification though I had it in \autoref{eq:inc}. The reason is that it turns out to get a meaningful estimate of the sign of the macro dummy. Over a bunch of specifications the sign of the coefficient estimate for the macro indicator is thus significantly below 0. This does not make much intuitive sense and may be because there are certain delays in the wage response to changed macro conditions. However, I did not find a good solution to this issue and therefore decided to leave out the macro state. Consequently, given that macro states actually do have an important effect on wages, the reported coefficients are a function of this in the case where effects of the included controls are correlated with the macro conditions. 
+
+%To avoid overflow errors when computing the CCPs I had to rescale the parameters down by 10,000. The rescaled parameter are presented in \autoref{tab:simcoef}\footnote{The coefficient $\beta_0^1$, for instance, is found as the estimate of the constant term, $\beta_0^2$ as the sum of the constant term and the coefficient estimate in front of the dummy for province 2, etc.}. I decided to add a non-zero value for $\beta_{\eta}$ which is included in \autoref{eq:inc}. I set type 0 as the reference group with $\beta_{\eta_0}=0.1$ and $\beta_{\eta_1}=0.3$. I manually set $\beta_4^6=0$, i.e. I do not let education affect the effect of lagged unemployment on earnings. I am aware that these coefficient estimates presented should not be interpreted as causal estimates. I simply use them to get some indication of in what range it makes sense to set the parameter values now that I do not estimate the model. 
+%\begin{table}[htbp]\centering 
+
+
+\section{Simulation of data}
+
+To simulate data from the solution, I first estimate a transition matrix for kids. I restrict the kids variable to be a dummy for having 0 or more than 0 kids rather than the more detailed specification presented in \autoref{sec:model}. Since I considered only $T=10$, I decide to look only a people aged 26-35 in my simulations. For each of these ages I therefore have a transition matrix, which is estimated non-parametrically from the data. I do not let it depend on couple status though. The estimated transitions can be found in \autoref{tab:apkids}. To resemble the data from the 5 Danish provinces, I also find the distributions for age between 26 and 35, work province\footnote{I only look at work province across regions of employment thus disregarding unemployment as an initial work state. The reason is that it is not very clear from the variables available in the data when a person is unemployed.}, whether having kids and high and low education. These are all to be found in \autoref{sec:apsim}. I let the income and moving types both be uniformly distributed on the set $\{0,1\}$. I simulate 20,000 individuals and split them across $rh^{prev}$ according to how the population in the data is distributed over home regions on average in 1992-2011 corresponding to 42.57\%, 18.52\%, 13.11\%, 18.11\% and 7.69\% in region Copenhagen city, Copenhagen surroundings, Northern Zealand, Western and Southern Zealand and Eastern Zealand, respectively. When simulating data for a given $rh^{prev}$ I therefore draw the individual's state according to the distribution of state variables for this region. For each individual I also draw a uniform number between 0 and 1 representing his alternative-specific taste shock which I use to compare to the CCPs relevant for his state. I let each decision combo $d$ have an id from 1 to 30 (there are 30 different choices in the choice set) and sort the CCPs according to this id. Hereafter, I calculate the cumulative CCP along the ids. To determine the choice made, I compare the random number to these cumulative CCPs. E.g. if it is 0.36, the individual takes the choice that has a cumulative probability as close as possible to 0.36, but not above. If the cumulative probabilities were (0.1,0.15,0.27,0.40,0.08), he would make choice 5. Doing this for many individuals implies that in the limit, the distribution of decisions made will resemble the distribution of choices according to the CCPs. In this simulation I only simulate data for 1 calendar year, but if I had simulated for more years I would have updated the state according to the choices made in period $t$, either deterministically as for $rh^{prev}$, $rw^{prev}$, $t$ and $couple$ and $s$, where the two latter are assumed constant time, or by drawing a new indicator for having kids from the transition matrix relevant to the individual. I do this for all 5 regions. For each possible combination of state variables, I calculate the observed share of simulated individuals falling into each combination. This is used when at a later point I find the equilibrium on the housing market using \autoref{eq:eqcond}, where I use these observed weights for $w_t^d$ and $w_t^s$\footnote{See \textcolor{red}{\autoref{sec:weights} for details}}. 
+

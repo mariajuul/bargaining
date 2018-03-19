@@ -1,0 +1,303 @@
+\section{Thoughts on what to incorporate and what others have done}
+The model is one of bargaining.
+\begin{itemize}
+\item specify value function for a single person who expects to stay single (no modeling of marriage market)
+\item specify value function for a couple incl the utility transfer from spouses
+\begin{itemize}
+\item Look into the bargaining literature. How to model that? Family economics notes.
+\item What should threat point be? It doesn't make sense to argue that disagreement about where to live => divorce. It is probably something else that drives the divorce but still the divorce outcome might be useful as the threat point.
+\item Should threat point be endogenous as in Gemici (2007)? E.g. threat point depends on utility from being single-earner and wage potential depends on whether or not one has got a good job/built up his or her career until now.
+\end{itemize}
+\item Focus on the trade-off btw commuting, wages and amenities (fixed effect = vertical model?). May add more observed amenities later on but it also complicates the sorting.
+\item Model the job side pretty detailed since a big part of the bargaining is because spouses want to ensure they both have ok job prospects.
+\begin{itemize}
+\item Look into how job offer/layoff probabilities are modeled in labor literature.
+\item Maybe talk to Modibo about it since he has done work on job search
+\end{itemize}
+\item Let house prices be exogenous, i.e. I do not study how they are determined in equilibrium. 
+\begin{itemize}
+\item Could have a hedonic price function in the model - estimated in first step? See how Bayer et al. (2016) do. 
+\item If making only marginal changes in counterfactual => hedonic price function will capture the price changes. But probably won't have only marginal changes since I focus on infrastructure...
+\end{itemize}
+\item Consider wages exogenous. 
+\begin{itemize}
+\item Model them detailed with unobserved fixed effect, individual- and location-specific match component and idiosyncratic shock.
+\item Take account for Roy sorting/selection in estimation of wage \textit{offer} distributions across locations. May use Dahl (2002) correction, but problematic assumptions.
+\item For now, just add a selection component to the wage specification in the model description.
+\end{itemize}
+\item Housing supply? May need to model it explicitly if considering the long run. See meeting with Pat.
+\item BWC p. 176: there isn't a one-to-one correspondence between direct and indirect utility at the individual level as is the case in unitary models. The indirect utility depends not only on preferences but also on the whole decision process.
+\item Private vs public goods: house and home location amenities are public goods. Commute time of each agent is specific to that agent (but not really a private good since it could be done together)
+\begin{itemize}
+\item When a good is private, all agents face the same price and choose different quantities; with public goods, they all consume the same quantity but would be willing to pay different marginal prices for it.
+\end{itemize}
+\item Collective model allows spouses to have different preferences and for bargaining power to matter for decisions and behaviour.
+\item Maybe set up model to be a dynamic discrete and continous choice problem as in auto paper: choose home location and choose a work distance. 
+\item Are there any current papers in the literature using collective models for discrete (and continuous) choice problems in a dynamic setting?
+\item Introducing dynamics in collective models seems to mean that one looks more into the commitment part. But I'm not interested in whether or not people commit to their marriage. Do I have to model some expectation about being married vs single in order to form the value functions? Since to value some state I should have an expectation about what the value are in other states and that probably depends on whether single or in couple. Or would it be ok to assume that you expect to stay in the couple and that single-person outcomes only work to determine the bargaining power? Then assume that single-person outcome is invariant to the decisions made as a couple?
+\item Can assume perfect credit markets to avoid introducing budget constraint.
+\item The literature on collective models mainly seem to focus on continuous choices and no shocks?
+\item Can allow agents to have own discount factors as well as own utility functions. But how do $u^a$ and $u^b$ look like? What is included?
+\item Assume full commitment? Important for my question? If not => Pareto weights not constant. Mazzaocco (2007) finds that both unitary and collective models with commitment can be rejected but that collective model without commitment cannot. This means static efficiency seems to hold, but dynamic ex ante efficiency does not necessarily.
+\item Could start with a symmetric Nash bargaining problem - i.e. weights 0.5 to each spouse? As in Gemici.
+\item Models can be of the altruistic type where agents get utility from the spouse's consumption of a good or caring where you get utility from your spouse's total utility (i.e. A only gets utility from B's consumption if B does)
+\item Cooperative framework if assuming that only Pareto efficient outcomes can be reached. Non-cooperative if decision process is described as a game where efficiency most likely won't obtain.
+\begin{itemize}
+\item Cooperative: define reservation utility and then surplus from cooperation is shared between agents.
+\end{itemize}
+\item Nash bargaining solution (static?) has proved to be the one that maximizes $(u^a_1-u^a_0)^{beta}(u^b_1-u^b_0)^{1-beta}$ where 0 refers to the reservation utility.
+\item Outcomes are typically not PE if Pareto weights depend on choice variables (see Browning et al. 2006)
+\item Important to distinguish between distribution factors that affect Pareto weights but not preferences and variables that affect preferences only (exclusion restriction I guess)
+\item Not much has been done to introduce unobserved heterogeneity in collective models.
+\item Are couples less mobile than singles due to homogeneous preferences for being so or due to a process of balancing conflicting interests? Has consequences for whether politicians should consider doing something about it.
+\item Don't need asymmetric model unless there are more asymmetries than in preferences and threat points, since these two are already captured by the framework. There could asymmetries in e.g. expectations about environment that would require to not use a symmetric Nash bargaining framework (see Binmore et al. (1986)).
+\item According to bargaining theory, a policy that alters outside options/threat points may alter the behavior and welfare even
+for those agents who do not actually avail of the outside option
+\item Not focusing on consumption, savings and welfare so don't need to include budget constraint. Maybe problematic if it's important for locations to take into account house prices and that if you buy a house you're tied to that location. But since focus of the paper would not be on moving strategically to earn a capital gain but more on the trade-off between wages and commuting I could be fine without it.
+\item Becker 1974: unitary household model.
+\item Nash Bargaining divides the sum of utilities equally between the two spouses.
+\item Seminal paper by Mincer 1978: family migration decisions
+\item Lundberg and Pollak (2001) show that in dynamic frameworks household barganing may not lead to efficient outcomes, i.e. the spouses might choose to divorce in cases where they could as a household receive high enough utility to compensate the trailing spouse by at least enough to make her indifferent between staying in marriage and divorcing. This is because spouses cannot reliably promise to do this compensation in the second stage where resources are allocated. Or because (in cooperative models) one usually cannot transfer wealth ex ante conditional on location decisions to the trailing spouse 1) because the family might now have access to enough wealth to compensate her ex post or 2) because the trailing spouse then must commit to not just take the money in the first stage and divorce. In non-cooperative models one spouse could be in charge of maximizing utility while being altrusitic towards his spouse. This would be done under the constraint that his spouse should at least be indifferent between divorcing and staying in marriage. However, the threat of divorce from the altruistic spouse is not credible (unless he has suggested an allocation of resources that corresponds to his threshold for when he would rather be divorced?).
+\item If using non-cooperative models => consider the bargaining a game. If doing so => I could use RLS since divorce means the game ends. But I'm not really sure if I think it makes sense to consider household decisions a game as such since it's not that one is the buyer and another the seller. But it may be that they just have a ranking over outcomes and not have to assume that one proposes a solution, the other accepts or rejects, etc? But in general it seems weird to me that households shouldn't cooperate on obtaining what is best for them.
+\begin{itemize}
+\item My setting doesn't really fit here since you have to choose the \textit{same} house if staying the couple. The home location is thus the public good. Can the setting be changed into one of my type? Whenever they don't choose the same, they split, but that's not how home search actually takes place.
+\end{itemize}
+\item Nash Bargaining: given some assumptions on the properties of the solution function, we know which objective function the household maximizes. That is, the outcome of the bargaining must not be such that both spouses can be made better off (right? That's how I understand Bargaining lecture notes p. 8) and that outcome not being picked by the function. In a dynamic framework however, Ligon argues that the assumption that the solution function always picks out a Pareto Optimal outcome is not reasonable. So that should imply that the household might agree on a point where they could make each spouse better off in a static framework, but when considering dynamics they don't choose that point because that may deteriorate their future bargaining power? 
+\item Transferable utility in unitary model, Chiappori and Mazzaocco 2015: In words, for a well chosen cardinalization of preferences, the Pareto frontier is a straight line with slope equal to -1 for all values of prices and income. The practical translation is that whenever agents behave efficiently, then for a well-chosen cardinalization of preferences, they must maximize the sum of individual utilities, as opposed to a weighted sum. This is equivalent to saying that, for that particular cardinalization, the household members must have the same Pareto weights. An important  implication is that, if preferences are TU, any household model that assumes efficient outcomes - a primary example being the collective model that will be introduced below - must boil down to a unitary framework. \textit{So this means there is no gain in using a collective model with TU? Can just use unitary model?}.
+\begin{itemize}
+\item We can conclude that the unitary model is a good choice for modeling household behavior if one believes that the intra-household decision power is constant across households and over time.
+\end{itemize}
+\item In collective models one needs to define threat point. If divorce as threat point => need information on utility of divorcees.
+\item Nash bargaining models requires knowledge about cardinal representation of preferences.
+\begin{itemize}
+\item Could consider using data on only married people since they would usually be observed to expect to stay together ``forever''
+\end{itemize}
+\item Enodgenous threat points: Papers that structurally estimate collective models, such as for instance Bronson (2015), Gemici and
+Laufer (2012) Mazzocco, Ruiz, and Yamaguchi (2014b), and Voena (2015), deal with these issues by first solving the model by backward induction for each possible period and state of nature and then by simulating forward the path followed by a given individual. An alternative method for dealing with these issue is to use an equilibrium approach. Such approach, which can be based on frictionless matching or search, explicitly recognizes the simultaneous nature of the problem (see Browning et al (2014)).
+\item \textbf{Why are dynamics important for the question asked in this paper?}
+\begin{itemize}
+\item A partner may be willing to give up a good location today and move with her spouse because she expects that she will have good job opportunities there. This could also be done in a static framework where you know at the time of the decision whether you will have a good job match there today. If you have a good one today => probably also a good one tomorrow, so today might be adequate to control for future consequences of the move. 
+\item But due to moving costs the decision becomes dynamic because the household considers where the optimal location today is conditional on expectations about the future. Don't just make one moving decision for their entire life.
+\item The non-constant and endogenous bargaining power is what justifies a collective model. If it's not there, then I should rather just use a unitary model. But if moving to a new place today because my spouse has a got a good job there then I may give up either my current job, become unemployed for some time and then get another job closer to the new location or I may have to commute to my old job. If doing the latter then the decision to move to a new place because it fits my partner's choice doesn't harm my outside option and thus my bargaining. Or maybe it does because my partner knows that I will be less reluctant to quit my job in the old location now that I have to commute there, or it might improve my bargaining power because now I have a job in the old location and could pretty easily decide to just move there on my own. So how does bargaining power among the spouses change when allowing for commute such that home and work locations don't have to coincide?
+\item Policies that have an intertemporal dimension such as infrastructure investments that enlarge the ``feasible'' labor market from the home region need to be evaluated also taking into account that it improves welfare in terms of giving the individuals a better opportunity to find good job matches. How important is that effect? (could test it). Why necessary to have a bargaining model to evaluate that? Because it may also benefit the partner who is not expected to make use of the possibility of a larger labor market because now the situation where the wife gets a good job in a region that before wasn't accessible from the current home doesn't have to mean that they have to move or end up in divorce because he won't give up his job.
+\item Or could test the hypothesis that couples are over-represented in cities compared to what would be expected from a model that predicts just based on individual optimization because the big cities mean bigger labor markets nearby or better commute opportunities. I.e. again the idea that the risk of being unemployed or having to commute very long to make sure to have a job is lower when living in a big city and this effect increases when you care about your partners possibility of getting a good job too. \textbf{This could be used to say something about why it may be hard to attract people to rural areas when they first leave for studies and find a partner even though they might be willing to do so if they were just themselves hoping for a job. Can be used to evaluate infrastructure investments in rural areas or the placement of public sector jobs here.}. This is also a dynamic framework since \textit{if} you lose your job in a rural region then what? Can you get another one pretty easily like in the big cities? Especially how can we attract highly educated people (couples) to rural areas to increase their productivity when highly educated people typically are in an initial situation before going to the labor market where they live in big cities because that's where the universities are.
+\end{itemize}
+\item Cannot assume full commitment: We will relax however the assumption of commitment, which is clearly strong. It would imply that, after 10 years of marriage, spouses cannot change the plans they formulated at the time of household formation, irrespective of the events that might have occurred since then.
+\item LIC model: each spouse has bargaining power initially and this evolves, due to changes in outside options, over time. However, the model doesn't pin down the initial Pareto weights at the time of marriage since many are consistent with the decision to marry.
+\item The intertemporal unitary model is equivalent to the intertemporal collective model only if household decisions are unaffected by differences in decsion power across households and by changes in decision power over time.
+\item Non-cooperative models will usually predict a strong form of income pooling, something that talks against these models.
+\item Any collective model assumes efficiency and a testable implication of the model is the proportionality condition (see Chiappori and Mazzaocco 2015). It tests the intra-household stage. But cannot be used to choose among intertemporal models that assume within-period efficiency since all these models will be consistent with the proportionality condition.
+\item Another test for collective model is the symmetry plus rank 1 of the Slutsky matrix, see Chiappori and Mazzaocco 2015 p. 51. But doesn't evaluate ability of models to rationalize intertemporal allocations since it only tests the resource and intra-household allocation stages.
+\item LIC model: variation over time within households and variation across households to determine bargaining power. FIC model: only variation across households since households can commit to a plan at the start of marriage and no changes to bargaining power will take place even if some distribution factors change over time, e.g. education. It may seem plausible that if e.g. spouse 1 has already graduated at the time of marriage and 2 hasn't, but does a few years after and she also gets her first full-time job then, that she would now have a higher bargaining power because she would have a foregone wage if having to move.
+\item Gemici (2011) concldes in general that migration tends to hurt one spouse and benefit the other. But is this a result of the very aggregate measure of 9 US census divisions and that she doesn't allow people to work in different locations? I could explore that.
+\item Whether bargaining power changes in LIC models depends on whether the change is large enough to make one part willing to take his outside option. If the change is large and marriage surplus is not very small, the change probably doesn't have an effect on bargaining power change.
+\item Bargaining power endogenous as it depends on e.g. woman's earnings which again depend on the chosen home location since that affects the work locations the woman considers feasible. Basu (2006) writes $\theta=\theta(x,z)$ where z are distribution factors that don't influence preferences (e.g. laws etc.) and x do influence preferences.
+\begin{itemize}
+\item The collective approach as such is not clear about how the bargaining takes place, just assumes that bargaining power is determined by ``something'' aka reduced-form kind of stuff. This is in contrast to Nash Bargaining which models bargaining in terms of the threat point. 
+\item Basu (2006) collective model may be worth pursuing. He assumes a mapping for the bargaining power over time and then maximizes the weighted average of utility functions. Thereby it's not a standard unitary model since the Pareto weights are non-constant (also, they differ across households)
+\item So since in period 0 the man has the power his preferences are dominating in the hh utility function and then the household will follow his preferences and thus take into account that if the hh asks the wife to work he will be worse off and that matters a lot for the household \textit{given} the Pareto weights today. So the issue is whether the household as such should discriminate in this way towards the woman and not let the household reach a higher utiltiy frontier in the future even though this means the man is worse off.
+\item But if power can also change due to exogenous (to the model) variables then the household might move to another equilibrium in the future. 
+\item Drawback of Nash Bargaining models is that its predictions highly depend on the chosen threat point.
+\end{itemize}
+\item \item Could use just egoistic preferences, i.e. no altruism or caring, as a start in e.g. LIC model. This is what Blau and Goldstein (2014) do. But estimates only reduced form.
+\item Gustman et al. (2014) esimtate a model of retirement decisions in the household in continuous (I think?) time. Each partner has her or his own value function that depends one budget constraint and they get utility from enjoying leisure together. But there doesn't seem to be any coordination going on, i.e. partners solve their own value function having expectations about what the other will do? But where do these expectations come from? So how is household utility defined?
+\item Outside option in my model is probably endogenous if my wage in future depends on my wage (human capital) today. Otherwise think of another way by which it affects my utility that hh moves to another home over and above the extra commute. Theloudis (2016) assumes Pareto weights are exogenous, i.e. do not depend on the spouse's decisions.
+\begin{itemize}
+\item Pareto effciency The participation constraints prohibit the spouses from reaching the first-best or ex-ante effcient allocation of their resources. The solution to the above problem is, however, ex-post effcient as the household still maximizes U (Ct; St) in each period. Ex-post effciency implies that no alternative allocation of resources can take place once information at time t is revealed without violating the prevailing participation constraints.
+\item Do let Pareto weights depend on changes in wages though. 
+\item Uses BI.
+\item Discretize continuous state variables.
+\item Use approximation methods for finding the optimal choice.
+\item Has quie detailed wage process with transitory and permanent shocks. Estimated in first step.
+\item Has some useful thoughts of the identification on the bargaining power. He fixes it for the first years of marriage using a reduced form specification and afterwards allows updates in response to gender wage gap changes. He uses earnings on divorcees to say something about outside option. Predicts their earnings using reduced form estimation
+\end{itemize}
+\item Mazzaocco (2007) develops a test for full commitment and rejects. Only if full commitment can the household be represented by a unitary model to evaluate policies that affect intertemporal behaviour of households. He is the one who extends the static collective model from Chiappori (1988,1992) to a dynamic framework with and without commitment.
+\begin{itemize}
+\item Gives a good, short overview of the history leading to collective models.
+\item Explains very clearly the conditions for unitary, full-efficiency collective and the no-commitment collective model (p.5)
+\item No commitment => decision power changes over time and decisions are a function not only of initial bargaining power.
+\item Policy makers should be able to modify household behaviour by changing the individual outside options, provided that after the policy has been implemented the participation constraint of one of the two agents binds.
+\item Unitary model is a special case of the full-commitment collective model.
+\item Notes something about households must be ISHARA types in order for unitary model to explain household behaviour.
+\item Cannot distinguish between no commitment (a series of static interactions) and limited commitment (limited only by participation constraints) since he only has cross-sectional data.
+\end{itemize}
+\item Mok (2007) tests for income-pooling in dual-earner household location decisions using  multinomial Logit model. Residential locations are defined as rings of distance from the workplace. Doesn't model the dynamic aspects in terms of whether job or home is decided first. Condludes income pooling rejected for families without children, cannot reject for those with children. May have some interesting descriptives.
+\item Lich-Tyler studies three types of household models based on what they risk if they disagree: myopic agents, prescient agents who care about today and future and contractual agents who care about past, today and future. Myopic and prescient types of models generally give inefficient outcomes. Contractual are efficient since bargaining powers are determined from beginning of marriage and takes expected gains and losses from divorcing into account. This implies consumption smoothing which is efficient. He tests which types seem more likely. 
+\begin{itemize}
+\item Hoseholds maximizes in 2 steps. 1) allocate consumption intertemporally (problem not specified exactly, econometric alternative presented) => level of resources that in 2) are used to decide on optimal current consumption in a weighted sum of spouses' flow utilities.
+\end{itemize}
+\item Lise and Yamada (2014) set up dynamic collective model with limited commitment
+\begin{itemize}
+\item An important result, which is very useful for empirical analysis, is that by observing an \textbf{assignable good}
+(for example leisure or private consumption), it is possible to \textbf{identify how the share of total household resources allocated to the husband and wife differs by differences in individual bargain power}. In my case that could be commuting? It's is exactly what I would like to look into - how bargaining power affects the prioritization of each person's commute time.
+\item Looks into what determines the difference in bargaining power across households at the start of marriage and how does it respond to news over time?
+\item There are \textbf{two ways by which Pareto weights can be updated in the limited commitment case}: renogiating each period so household problem is characterized by a sequence of static problems or by only renogiating when one of the participation constraints are binding but both spouses would still benefit from being in the marriage.
+\item If Pareto weight is constant and does not depend on any z: unitary model. Constant but depends on $z_0$: collective model with full commitment and otherwise limited commitment if if depends on $z_{it}$.
+\item Browning, Chiappori, and Lechene (2006) for a discussion of whether possible to distinguish between static collective model and unitary model with arbitrary preference heterogeneity.
+\item Reduced-form specification of the Pareto weight as a function of time 0 known and forecasted variables and time t deviations from expectations, i.e. not modelleing the outside option explicitly? In the time 0 specification, it includes parents' income, experience, education, social status of father's occupation...
+\item Maximize a weighted sum of individuals' utilities.
+\item \textbf{Cannot identify mean of weight separately from preference heterogeneity since in all equations the weight appears either in log difference form or together with the preference heterogeneity parameter}. So any weight can be rationalized with for some preference heterogeneity parameter. To make a meaningful distinction between sharing/bargaining and preferences, we assume that the weight is equal to one at the mean of full income when the husband and wife have equal wages, education, and experience. In other
+words, if we observe a household in which the husband and wife have equal wages, education, and experience, but different private consumption and leisure, we will attribute this difference to preference heterogeneity, not bargaining power.
+\end{itemize} 
+\item DelBoca and Flinn (2012) estimate a collective model of time allocations using a non-cooperative outcome as the disagreement outcome in a dynamic setting.
+\begin{itemize}
+\item They do not consider actual threat points but more participation constraints that affect the bargaining power. May make it impossible to implement an efficient outcome.
+\item Considers 4 different models. The static Nash eq model, Pareto weight formulation where max over weighted sum of utilities, 	constrained Pareto weight where the constraint of satisfaction of receiving at least what getting in Nash equilibrium for each spouse must hold and endogenous interaction model where each spouse must receive at least what they would get by deviating from the efficient allocation if such an outcome exists. If such outcome impossible, they household allocation is determined under static Nash bargaining.
+\item Difference from Mazzaocco (2007): There are a number of differences between his approach and the one taken
+here, the most salient of which are the following. First, the dynamic setting he considers is not nearly as stylized as the one employed here. Second, participation constraints change over the life cycle, though they are modeled as exogenous
+random processes, whereas in our case the outside option is explicitly modeled. Third, in his model all households behave efficiently in every period, that is, the outside option is never chosen. In our case, the outside option of inefficient behavior
+is chosen in some states of the world. Ligon (2002) also constraint all household allocations to be efficient.
+\item Nash equilibrium outcome is not on the Pareto frontier of the weighted household utility function.
+\item In the fourth model spouses play a grim trigger strategy where punishment phase involves Nash bargaining. This is a non-cooperative game model. Households do not dissolve.
+\item \textbf{As is well known from the collective household model literature, estimation of the Pareto weight is not possible
+without auxiliary functional form assumptions and/or exclusion restrictions.} In general, has a whole section on identification.
+\end{itemize}
+\item Ligon et al. (2002) set up a model of limited commitment where each spouse has a utility function from marriage defined as a function of the surplus they get from marriage which is given by $U(income_i-tranfer_i-u(income_i))$. If divorcing => there is a utility loss/divorce cost P so if U is greater than or equal to P in each period there will be no incentive to break the contract that enforces the transfer. How is transfer determined?
+\begin{itemize}
+\item Lets agent 2 maximize his surplus from marriage under a given contract transfer subject to the constraint that 1 must get  at least some utility.
+\item Is outside option of 1 endogenous? Yes, since it depends on the state s which changes each period.
+\item This model is about testing risk sharing.
+\end{itemize}	
+\item Plaut (2006) makes a reduced-form analysis of dual-earner choice of commuting. Are commuting distances complements or substitutes among the two partners?
+\begin{itemize}
+\item Gives lit review of dual-earner commute.
+\item Men longer trips, homeowners longer trips.
+\item Result from SUR: spouses are increasing and decreasing their commuting distances together, once other explanatory
+variables are taken into account, rather than substituting longer commutes by one spouse for shorter commutes by the other.
+\end{itemize}	
+\item Voena (2015) sets up a model of consumption, leisure and divorce to study impacts of divorce laws. She specifies per period utility of each member when being in marriage and allows for a taste shock to being married. This is persistent over time.	
+\begin{itemize}
+\item Includes economics of scale from marriage in consumption.
+\item Incl permanent income shocks with correlation between spouses.
+\item But Pareto weight is exogenous...
+\item Participation constraint: if choosing to divorce then it must be that the utility of divorcing is higher for both spouses compared to marriage in a mutual consent regime. Each person has a value of being divorced and married. As long as couples remain married they locate on the Pareto frontier by making sure that if only one spouse's participation constraint for being divorced binds the asset division rule upon divorce is changed to make her indifferent between staying married (she preferred that) and divorcing.
+\item Unilateral regime: couple maximizes the weighted sum of spouses’ utilities in marriage under the constraint that both spouses must prefer the marriage allocation to the value of being divorced => solution may not be Pareto optimal => Pareto weights become state variables. \textbf{Now Pareto weights respond to changes in outside option} since now Pareto weights ensure that both spouses' utility of being in marriage is at least as high as divorcee utility.
+\begin{itemize}
+\item Couples remain married if and only if both spouses' participation constraints are satisfied. If one of the constraints binds the Pareto weight of that person is increased to make him/her indifferent between marriage and divorce. If any allocation that satisfies both partners' participation constraint is not feasible, i.e. it violates the intertemporal budget constraint, then they divorce.
+\item Estimates income process in first step and fix some other parameters as well.
+\item Uses indirect inference to estimate model.
+\item Specify value as divorcee, i.e. if entering period as singe. Then each person decides on his own consumption. Takes re-marrying option into account as well.
+\item Specify value of married. Then houseold decides if it wants to divorce. If so => it weighs each partners expected value of entering next period as divorcee by the Pareto weights. So it's the household that decides if divorce is better, not the person per se. And if the spouse with the highest Pareto weight has a very high value of being divorced, the household is more likely to divorce. At the same time, the person with high value of divorce also has the high Pareto weight.
+\item When household has decided on optimal decision and if decide to stay married => can find each spouse's individual value of staying married.
+\end{itemize}
+\item 
+\end{itemize}
+\item Bronson (2014) has a model very similar to that of Voena though with another focus. A model I should probably also consider using. He uses simulated method of moments estimation.
+\item Jacquemet and Robin (2013) make a model of matching and labor supply. They assume efficiency by assuming partners can transfer utility to each other. Transfers from each spouse solves a potentially asymmetric Nash bargaining problem where the product of both spouses weighted surplus from marriage is maximized. Assumes steady state so essentially a static problem.
+\item Gemici et al. (2011): In order to characterize the allocations chosen by married/cohabiting individuals, we employ the collective household model in a dynamic framework with no commitment so that couples cooperate but they are unable to commit to future allocations as in Mazzocco and Yamaguchi (2007). For the couple’s
+problem, we make the assumption that the outcomes to the household’s allocation problem are constrained efficient so that the solution to the couple’s problem is obtained by using a Pareto problem with participation constraints. Due to lack of commitment, the share of the total household resources that a partner receives is subject to change depending on his/her outside option each period. In addition, the partners are not able to commit to not separate in the future, and face uncertainty regarding future marital instability. This gives rise to inefficiencies within the relationship since (1) Household members cannot contract over transfers to be made in the
+future periods of the relationship, (2) Household members cannot make conditional transfers for future separation states.
+\begin{itemize}
+\item They write up the weighted sum of utilities with participation constraints since couples aren't equipped with a commitment device. Reformulate this problem in its recursive form using the approach of Marcet and Marimon (2000) and Mazzocco and Yamaguchi (2006) where they expand the set of state of variables by
+including a new state variable, Mia that denotes the Pareto weight plus the cumulative sum of the Lagrange multipliers on the participation constraints at all periods from 1 to t.
+\item Whenever spouse i’s participation constraint binds, the weight on this utility function is increased. Divorce is an efficient outcome in this problem and it occurs whenever there are no more gains to staying married.
+\item When the female works at home, she foregoes the opportunity to accumulate higher human capital that increases her future wages. In the model, this decreases the value of her future outside option and therefore her share of the future household surplus, putting her at a disadvantage relative to the male. Therefore, the Pareto optimal allocation can emerge as an equilibrium outcome only if she is compensated for her foregone labor market opportunities.
+\item Such compensations and promises for future transfers are not feasible under limited commitment. 
+\item The solution to the household allocation problem in the case of a married household is closer to the first-best outcome under full commitment. This is because participation constraints bind less frequently for a married household due to the higher separation costs.
+\item Allows for wage shocks. Discretizes a number of state variables, incl. the bargaining parameter.
+\end{itemize}
+\item Mazzaocco et al. (2014) use a similar model as above and gives a nice, short description of the commitment issue and how it can be modeled using participation constraints. Also states that since costs of divorce is generally low in the US, this is considered the disagreement outcome.
+\begin{itemize}
+\item \textbf{Has a nice description of how model is solved.}
+\item individuals face four sources of uncertainty: wage shocks, fertility shocks, match quality shocks, and marriage market shocks 
+\item Uses a Probit to estimate probabiltiy of having extra child
+\end{itemize}
+\item The thing about Nash bargaining is that its solution has been proven to satisfy certain desirable assumptions. 
+\item Aura (2002): Can a married couple commit to a given consumption path and sharing rule across time? One reason to think that the answer to this question might
+be negative is that the outside options (outcomes, should they divorce) of the spouses might evolve in time. This might make the agreement based on yesterday’s balance of power unsustainable today. If this is the case, then in today’s decision making the couple has to take into account the effect of today’s choices on future decisions
+\begin{itemize}
+\item Lists very clearly 3 assumptions for her modeling framework incl explanations.
+\item Uses repeated symmetric Nash bargaining to study effects of no commitment. 
+\item An increase of one partner’s (say wife’s) outside option in the future can be bad for both partners by making pre-existing dynamic distortions worse. So while in general redistribution towards wife should be good for her this efficiency effect of redistribution effect can dominate the positive future redistribution effect under some circumstances.
+\end{itemize}
+\item Should divorce be modelled as a choice or just through the participation constraint?
+\begin{itemize}
+\item If modelling divorce as a choice => can do as in Voena where the value function is different dependent on the choice and where there is a household EV. In this case each spouse's Pareto weight determine flow utility \textit{today} even if they divorce and then they enter next period as divorcees who get their outside option forever on. I think it's a little weird to single person utility enter directly into the household utility function conditional on divorcing. 
+\item If not modeling it as a choice variable => only individual-specific value functions enter in the household's value function and divorce is only used to define when the outside option is taken. In this case, taking outside option means that's the value you get today and you therefore decide on your own how you'll consume your income.
+\end{itemize}
+\end{itemize}
+
+\section{Setting up the model}
+
+I use the approach that Voena (2015) (and others also) use. Though it seems no one has done much on polychotomos discrete choice models yet in this framework except Gemici (2011) who uses a Nash bargaining framework with commitment to model home location choices. 
+
+Flow utilities if married and single: 
+\begin{align*}
+u_i^m = u(d_{ht},x_{it})+\psi^M_{it} \\
+u_i^s = u(d_{it},x_{it})
+\end{align*}
+where $d_{ht}$ ($d_{it}$) is the decision made by household $h$ (individual $i$) at time $t$ and holds the decisions on joint home location ($rh_h$), i's location ($rw_i$) and if married spouse j's work location ($rw_j$) and whether to divorce ($D_t=1$) or not $D_t=0$. Married refers to both cohabitation and legal marriage. If not married, the decision is only home location $rh_i$ and own work location $rw_i$. The timing is such that by the end of each period the household, or the individual if single, makes a decision, that is effective from the beginning of next period. $\psi^M{it}$ is the gain from marriage occurring to individual $i$ at time $t$. For now it's just a general term but could be thought of as either a random gain following some distribution or just a function of a dummy of marriage. $x$ are state variables characterizing the household. In addition to the deterministic flow utility, each period the household and the individuals get an alternative-specific taste shock that is unique for household $h$ and individual $i$, repsectively:
+\begin{align*}
+\epsilon_{it}^d \text{ if single} \\
+\epsilon_{ht}^d \text{ if married} 
+\end{align*}
+and where the $d$ refers to the choices described just above. This means that if individual $i$ lives in a couple with $j$ she gets an alternative-specific taste shock (specific to household $h$) that is also specified with repsect to $rw_j$. I assume these are iid (over time) Extreme Value Type I distributed. 
+
+\subsection{1st stage: the single's planning problem}
+Given state $z_{it}=(x_{it},\epsilon_{it})$ a person entering period $t$ as single optimizes with respect to $rh_i,rw_i$ in each period under the assumption that she does not expect to find a new partner, i.e. transitions into marriage is a random event:
+\begin{align*}
+V_{kt}^S(z_{kt})= \max_{d=\{rh_k,rw_k\}\in D}\{u_k^S+\epsilon_{kt}^d+\beta E[V_{k,t+1}^S(z_{k,t+1})|z_{kt},d_{kt}]\} \text{ }k\in\{i,j\},
+\label{eq:Vk}
+\end{align*}
+where superscript S refers to ``single''. $\beta$ is the discount factor and $E[V_{i,t+1}^S(z_{i,t+1})|z_{it},d_{it}]$ is the conditionally expected value for a single of being in state $z_{it+1}$. The fact that potential remarriage is not taken into account means that the model cannot control for the idea that singles might tend to choose residential location with the thickness of the marriage market in mind. \eqref{eq:Vk} can be solved independetly from the 2nd stage presented below and can therefore be taken as given in that stage.
+
+\subsection{2nd stage: the married household's planning problem}
+I follow the approach that \cite{Voena2015} takes for a unilateral divorce regime meaning that it only takes one spouse's wish to divorce to do so. Divorce is considered the disagreement outcome in the model, but it should be noted that the model doesn't aim at explaining why people divorce in general. It should just be thought of as describing the outside option of an individual. Others propose using the outcome from a non-cooperative game as the outside option (\cite{LundbergPollak1993}, \cite{DelbocaFlinn2012}) but since decision of home location must be cooperative if remaining married that framework is not useful here. In this unilateral regime the houseold maximizes the weighted sum of the partners' values of being married under the participation constraint that both must be at least as good off compared to their outside options. This implies that the solution to the household's optimization problem may not be \textit{ex ante} Pareto optimal and Pareto weights $\theta_{ht}$ will enter as state variables, cf. \textcolor{red}{cite and explain difference between ex ante and ex post PO}.
+
+\subsubsection{Value functions}
+I assume egoistic preferences to keep the model tractable\footnote{If assuming altruism or caring preferences I seemingly run into the problem of having a weighted combination of each spouse's single-person taste shocks in the household utility function. I don't know how they would be distributed under assumptions on the distribution of each error term as long as those are not assumed normal.} I let\footnote{By specifying the problem like this where the household also decides on divorce means the taste shock is not additively separable as it's written here. I could also assume that spouses always decide to stay married but that the participation constraints must be satisfied. But if doing that what should I do if there is no solution that ensures these are satisfied? Then let spouses divorce and receive outside option and only in that case? That means I assume spouses also assume they will stay married in future years such that there is no $D_t^*$ entering $V_{it+1}$? I think Mazzaocco et al. do not have divorce as a decision variable but it's unclear how they define the future value function since they only show the solution for period $T$.} 
+%\begin{dmath}
+\begin{alignat*}{3}
+&V_{ht}(z_{ht},\theta_{ht})=&&\max_{d_t=\{rh_{ht},rw_{it},rw_{jt},D_{ht}\}\in \textfrak{D}} \{(1-D_{ht})(\theta_{ht} u_{it}^M+(1-\theta_{ht})u_{jt}^M+\epsilon_{ht}^d \\
+& &&+\beta E[V_{h,t+1}(z_{h,t+1},\theta_{ht+1}|z_{ht},\theta_{ht},d_{ht})])+D_{ht}(\theta_{ht} V_{it}^S+(1-\theta_{ht})V_{jt}^S)\} \numberthis
+\label{eq:Vh}
+\end{alignat*}
+%\end{dmath}
+under the constraint that
+\begin{align*}
+\theta_{ht+1}=\theta_t+\mu_t \text{ and } \theta_1=\theta,
+\end{align*}
+where $\mu_t$ is the Lagrange multiplier on the participation constraints implying that the parameters $\theta_{ht+1}$ always ensure that the these are satisfied as long as the couple stays married. They are defined by
+\begin{align*}
+V_{it}^M \geq V_{it}^S \\
+V_{jt}^M \geq V_{it}^S, \numberthis
+\label{eq:pc}
+\end{align*}
+where $V_{it}^M$ and $V_{jt}^M$ denote the value of being married for each spouse and are given by
+\begin{align}
+V_{kt}^M=u_{it}^M(d_{ht}^*)+\epsilon_{it}^{d_{ht}^*}+\beta E[V_{i,t+1}^M] \text{ $k\in\{i,j\}$},
+\label{eq:VkM}
+\end{align}
+and correspondingly for spouse $j$. $d_{ht}^*$ is the optimal decision from \eqref{eq:Vh}. Individual value functions that enter the household problem in \eqref{eq:Vh} through $E[V_{h,t+1}(z_{h,t+1},\theta_{t+1}|z_{ht},\theta_{ht},d_{ht})])$ (see below) are then given by
+\begin{align}
+V_{kt}=(1-D_{ht}^*)V_{kt}^M+D_{ht}^*V_{kt}^S \text{ }k\in\{i,j\},
+\label{eq:Vi}
+\end{align}
+where $D_{ht}^*$ denotes the optimal divorce decision from \eqref{eq:Vh}.
+Based on \eqref{eq:Vh}, $V_{ht+1}$ entering \eqref{eq:Vh} is 
+\begin{align*}
+V_{h,t+1}=\theta_{ht} V_{it+1}+(1-\theta_{ht})V_{jt+1}.
+\end{align*}  
+In words, the household has a value function that depends on the household characteristics $x_{ht}$, an alternative-specific taste shock $\epsilon_{ht}^d$ and the Pareto weight that the household enters period $t$ with: $\theta_{ht}$. The household cares about both spouses and in the value function each spouse's individual utility is weighted by the Pareto weights. To get the expected future value function for the household, it must have expectations about how the values of each of its members will evolve. Each spouse's value depends on whether or not they stay married. If they do, both the home and job location choice for the individual is decided by the household. This means $i$ can in some sense be forced to work in $rw_i$ by the household even though $i$ might choose differently had he been single. When both $i$'s' and $j$'s value functions have been computed as a function of the household's divorce decision, the household future value function can be calculated as the Pareto weighted sum of these two individual future value functions. Note that in \eqref{eq:VkM}, indiviudal $k\in\{i,j\}$'s own alternative-specific shock that depends only on $rh_h$ and $rw_k$. It thus does not depend on the spouse's work location since as stated above individuals are assumed to have egoistic preferences. 
+
+The Bellman equation \eqref{eq:Vh} can be rewritten by specifying the alternative-specific value function for a married couple that stays married (i.e. choose $D_{ht}=0$) as 
+\begin{align*}
+v_{ht}^{M,d}(z_{ht},\theta_{ht})=u_{ht}^{M,d}(z_{ht},\theta_{ht})+\beta E[V_{h,t+1}(z_{h,t+1},\theta_{ht+1}|z_{ht},\theta_{ht},d_{ht})],
+\end{align*}
+where $u_{ht}^{M,d}(z_{ht},\theta_{ht})=\theta_{ht} u_{it}^M+(1-\theta_{ht})u_{jt}^M.$ Exploiting the fact that the single person values are given from stage 1 and by following \cite{Rust1987} I can rewrite \eqref{eq:Vh} into
+\begin{align*}
+V_{ht}(z_{ht},\theta_{ht})=\max_{d_{ht}\in \textfrak{D}} \{(1-D_{ht})(v_{ht}^{M,d}(z_{ht},\theta_{ht})+\epsilon_{ht}^d)+D_{ht}(\theta_{ht} V_{it}^S+(1-\theta_{ht})V_{jt}^S)\} 
+\end{align*}
+\textcolor{red}{\textit{QUESTION:}} how to exploit the logsum trick in this case where the shock $\epsilon_{ht}$ is multiplied by $(1-D_{ht})$ so I can get a closed form for $EV$ (integrating V with respect to $\epsilon$).
+
+\subsubsection{Solution procedure}
+To find the optimal decision rule I first solve the single's planning problem for all combinations of state variables using backwards induction\footnote{I may be able to use the methods described in \cite{ArcidiaconoMiller2008} and \cite{ArcidiaconoMiller2011} which mean I don't have to solve the full model in order to estimate it.}. Knowing the outside option for all combinations of state variables, I proceed by solving the married household's problem for all states, where in the state the Pareto weight $\theta_{ht}$ is now also included. The procedure is as follows: starting in period $T$, for a given $z_{hT}$ and $\theta_{hT}$ solve \eqref{eq:Vh} ignoring the participation constraints for now. Then check if \eqref{eq:pc} is satisfied to figure out if spouses should remain married in period $T$ for state $z_{hT}$. They do so only long as they both prefer that. If the participation constraints binds for one spouse, the Pareto weight of this spouse is increased until he or she is indifferent between the value of marriage and that of being single. If the other spouse still prefers marriage, they remain married. Otherwise they divorce. If the participation constraint binds for both spouses, they divorce without considering renogotiating the Pareto weights and if none of the constraints bind they stay married at the current Pareto weights.
+
+\subsection{Alternative specifications of married households planning problem }
+
+\subsubsection{Why Nested Logit won't work}
+
+\subsubsection{Not incl single person utilities}
+
+
+

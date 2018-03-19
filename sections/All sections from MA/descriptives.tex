@@ -1,0 +1,433 @@
+This sections begins by describing location choice patterns in Denmark by municipalities. Hereafter, I will describe how commuting and moving patterns look like and look into how moving behaviour is correlated with other individual characteristics.
+
+\section{Summary statistics}
+To begin with \autoref{tabl:sumstats} presents summary statistics for the data I use from the administrative registers. The data have been restricted to individuals between 18 and 65 years of age with a known family identifier and who are not self-employed or co-working spouses. For each family a household representative is defined among the two spouses. The spouse with the highest income is selected if being in a couple\footnote{Children living in their parents' home and who earn an income cannot be the household representative. I thus condition on family status to be non-child.}. In general I will not condition on being the household representative, so unless otherwise mentioned all individuals are included in the numbers presented. Moreover, income and wage variables have been set to missing for those who have either negative income or wages or have numbers below the 1st or above the 99th percentile after the negative incomes and wages have been removed. The years covered in the sample are 1992-2011\footnote{2012 and 2013 numbers are only available for a few of the registers.}. This gives me a dataset of almost 78 million people. However, not all variables are observed for everyone. These include education (73m observed), total income of the year (60m observed), wage income (52m observed and unemployed do not have a wage), work municipality and thus big city indicator for work (44m observed, not defined for the unemployed), work distance (22m observed, only observed in 2000-2008 and travel times (44m observed, not defined for the unemployed). The table shows that on average the persons in the data are just below 41 years old, have 1.7 kids and 61.4\% are married. 30.1\% are unskilled, i.e. have elementary school as their highest completed education, while 44.0\% have a vocational or high school degree. 3.5\%, 12.5\% and 5.4\% have a short-, medium and long-cycle education, respectively. Finally, 4.5\% have not completed any schooling yet but are currently studying. Total individual annual income is close to 309,000 DKK while the rolling average of total household income (the sum of both spouses' incomes) is 567,000 DKK. This average is calculated as the average of household income in year $t-1$, $t$ and $t+1$. Looking at individual wage income, it makes up the main part of individual income on average, as it is roughly 284,000 DKK. All income variables, however, have a very large standard deviation. The average unemployment rate is 5.2\%, but is also varying quite a lot across individuals and years. Looking more into where people are located, we see that 26.1\% and 16.0\% live and work in big cities, respectively. Big cities are defined as the municipalities Copenhagen, Odense, Aarhus and Aalborg. This is not a particular precise measure of urbanization though since this is static over time and does not take into account that urbanization also takes place when previously smaller cities become more dense and grow in size. Statistics Denmark define the degree of urbanization dividing each municipality into one of five groups according to population density and the number of people living in biggest city of the municipality\footnote{See \url{http://www.dst.dk/da/Statistik/dokumentation/Nomenklaturer/NUTS/degurba}.  Note that the cities included in this definition is not a super set of those contained in the $\mathbb{I}{(Big city home)}$  and $\mathbb{I}{(Big city work)}$ since Aalborg is not defined as a densely populated area, but is rather a level 2: intermediate density area. The municipalities in category 1 of densely populated areas are: Copenhagen, Frederiksberg, Brøndby, Gentofte, Gladsaxe, Glostrup, Herlev, Albertslund, Hvidovre, Lyngby-Taarbæk, Rødovre, Ishøj, Vallensbæk, Greve, Odense and Aarhus, i.e. the most of the major cities including cities surrounding Copenhagen.}. Defining the big city dummy to be 1 if a municipality belongs to category 1 of this definition (``densely populated area'') then 31.5\% live in big cities and 20\% work here, see $\mathbb{I}{(Big city home DST)}$ and $\mathbb{I}{(Big city work DST)}$. However, this measure is only defined for 2011. When updates become available, it will be a better measure since it can detect how urban areas evolve in areas that were previously not categorized as such, but it may be imprecise for earlier years why I stick to the original definition whenever I talk about cities in the remainder of the thesis. The distance between one's home and job is approx 17 km on average\footnote{These are distances based on knowledge on home and work address. Distance could also be computed using information on the commute tax deductions observed in the income registers since these are a function of distance between home and job. This has not been done in this paper.}, while the travel time on average is around 20 minutes one way. As can be seen in the table, there is not a huge difference between the 2002 and 2010 definitions, at least not on average. Therefore, I use the 2002 definitions in the rest of the paper since this should be representative for more years in the data. Next a few statistics about moving patterns; 6.9\% of the observations move home either within or between municipalities, whereas 4.6\% move to another municipality. A bit more move job region, namely 5.4\%. As will be shown below many regions are characterized by a large ownership share. On average across the country 53.0\% live in a home owned either by them or by their spouse. Many people also stay quite long in each home, on average close to 11 years, though there is a standard deviation of 6 years. This indicates that moving costs are present, otherwise you would probably expect people to move home more often.  
+
+\renewcommand{\arraystretch}{1}
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Summary statistics}
+%\begin{tabular} {@{} l r r r @{}} \\ 
+\begin{tabular}{l*{3}{D{.}{.}{-2}}}
+\toprule
+    &\multicolumn{1}{c}{N}&\multicolumn{1}{c}{Mean}&\multicolumn{1}{c}{S.d.}\\
+%\textbf{ } & \textbf{N} & \textbf{Mean} & \textbf{S.d.} \\
+\midrule
+      Age  & 77,173,859 & 40.772 & 13.051 \\
+   $\mathbb{I}{(couple)}$  & 77,173,859 & 0.614 & 0.487 \\
+      Gender  & 77,173,859 & 0.505 & 0.500 \\
+    \# kids  & 77,173,859 & 1.656 & 0.941 \\
+  Unskilled  & 72,725,771 & 0.301 & 0.459 \\
+  Vocational/high school  & 72,725,771 & 0.440 & 0.496 \\
+  Short-cycle  & 72,725,771 & 0.035 & 0.184 \\
+  Medium-cycle  & 72,725,771 & 0.125 & 0.331 \\
+  Long-cycle  & 72,725,771 & 0.054 & 0.226 \\
+  Educ. in progress  & 72,725,771 & 0.045 & 0.206 \\
+ Annual indiv. inc. (DKK)  & 59,703,234 & 308,555.259 & 170,941.224 \\
+  Rolling avg. hh inc. (DKK)  & 49,476,362 & 566,916.581 & 465,120.703 \\
+  Annual ind. wage inc. (DKK)  & 51,833,088 & 283,507.059 & 158,909.843 \\
+  Unemployment \%  & 68,792,917 & 5.219 & 16.459 \\
+   $\mathbb{I}{(Big city home)}$  & 77,173,811 & 0.261 & 0.439 \\
+  $\mathbb{I}{(Big city work)}$  & 44,339,443 & 0.160 & 0.438 \\
+   $\mathbb{I}{(Big city home DST)}$  & 77,173,859 & 0.315 & 0.465 \\
+   $\mathbb{I}{(Big city work DST)}$  & 77,173,859 & 0.200 & 0.400 \\
+  Work distance (km)  & 22,167,929 & 16.588 & 30.702 \\
+  Travel time min. (2002)  & 44,177,747 & 20.035 & 25.375 \\
+  travel time min. (2010)  & 44,177,747 & 20.155 & 25.568 \\
+  $\mathbb{I}{(Move home)}$  & 77,173,859 & 0.069 & 0.254 \\
+  Move home dist. (km)  & 73,466,467 & 11.456 & 24.470 \\
+  $\mathbb{I}{(Move home region)}$  & 77,173,859 & 0.046 & 0.210 \\
+  $\mathbb{I}{(Move job region)}$  & 77,173,859 & 0.055 & 0.228 \\
+  $lag(\mathbb{I}{(owner)})$  & 77,173,859 & 0.530 & 0.499 \\
+  Years in home  & 77,173,859 & 10.678 & 6.074 \\
+\bottomrule
+\multicolumn{4}{@{}l}{\footnotesize{\emph{Source:} Own calculations on administrative data from Statistics Denmark}} \\
+\multicolumn{4}{@{}l}{\footnotesize{\emph{Note:}  Min, max and percentiles not allowed to be published according to DST's confidentiality rules.}}
+\end{tabular}
+\label{tabl:sumstats} 
+\end{table}
+
+\section{Residential location decisions}
+Denmark is divided into 98 municipalities as of January 1st 2007. Before then there were 271 municipalities. With the municipality reform in 2007 (Strukturreformen) many of these were merged into bigger ones on recommendation of a commission hired by the government. There was a goal of getting municipalities of preferably 30,000 inhabitants and no less than 20,000\footnote{See \url{www.kl.dk/English/Local-Government-Reform/} for more details. In the following I only consider municipalities according to the 2007 definition, also for figures concerning years before 2007.}, but many ended up being even larger. In that sense the population sizes of the municipalities do not vary much across the country, cf. \autoref{fig:appop}. Looking instead at population density as in \autoref{fig:popdens}, the pattern is more diverse. There is a very high density of up to approx 12,000 inhabitants per sq km in the capital area just around Copenhagen in the north-eastern part of Denmark in 2016. When moving more north to North Zealand we are still among the most densely populated areas of up to 845 inhabitants per sq km, but still way less than in Copenhagen and its nearest surroundings. The same holds for other big cities as Odense and Aarhus, but also Fredericia which is not one of the major Danish cities. Many municipalities in Jutland, especially the (north-)western and southern parts, are very depopulated. On Zealand, this is only the case for Lolland. The map thus shows that people tend to cluster in certain areas and hence seemingly are willing to give up space to live in the Copenhagen area. Understanding why certain areas are more popular is hard just from a descriptive viewpoint, but the structural model can help with that. 
+
+\begin{figure}
+\centering
+\begin{minipage}{0.55\textwidth}
+\includegraphics[width=\linewidth, trim=2 20 2 20,clip]{Population_desnity_wlabel.jpg} 
+{\tiny \emph{Note:} The categories have been defined to cover 7 intervals of similar size. \\ \emph{Source:} OIMs Kommunale Nøgletal. \par}
+\end{minipage}
+\caption{Population density (inhab/sq km) January 1st 2016 by municipality}
+\label{fig:popdens}
+\end{figure}
+
+Considering instead the population growth in municipalities from 1993-2016 as depicted in \autoref{fig:poppct}, it is clear that not only the very biggest and dense areas have experienced positive growth rates. The main part of Zealand have had a population growth of at least 5\%, Albertslund and Brøndby excluded. Copenhagen and Vallensbæk municipalities have seen very high growth rates of 20-28\%. However, it is interesting to note that municipalities such as Køge, Ringsted and Holbæk which all lie relatively far from the capital center have also experienced growth rates of more than 13\% since 1993. In particular for Køge, which has a direct S-train connection to Copenhagen, the existence of the S-rail network may be of huge importance. This is something the model of the paper will be able to shed light on. The Triangle Area has been an established business region since the 1960s and more formalized since 1994. It consists of the 7 municipalities Billund, Fredericia, Haderslev, Kolding, Middelfart, Vejen and Vejle in Eastern Jutland and Western Funen. As is evident from the map, many of the municipalities belonging to this region have seen some of the highest growth rates between 13-20\% in the period. As with the very central part of Copenhagen, Aarhus and the districts surrounding it: Favrskov, Skodsborg and Horsens have grown markedly by up to 28\%. On the other hand, the most northern areas of Jutland as well as Western and Southern Jutland have been undergoing a period of depopulation or only limited population growth. Tønder, Mors and Lemvig stand out as particularly hard hit by negative growth. Across the entire Denmark, though, Lolland and the islands Læsø and Ærø are the municipalities that have been exposed to the most negative growth rates of 18-26\%. These are municipalities with very low population density, but it has gone worse since 1993 according to the figures. 
+
+\begin{figure}
+\centering
+\begin{minipage}{0.55\textwidth}
+\includegraphics[width=\linewidth, trim=2 20 2 20,clip]{pop_mun_pctgrowth_1993_2016.jpg} 
+{\tiny Note: The categories have been defined to cover 7 intervals of similar size. \\ Source: OIMs Kommunale Nøgletal. \par}
+\end{minipage}
+\caption{Population growth by municipality 1993-2016}
+\label{fig:poppct}
+\end{figure}
+
+\autoref{fig:higheduc} displays the share of highly educated people among the 25-64 year-olds in each municipality in 2015. While some municipalities have more than 50\% highly educated, others have no more than 14\%. The areas with very large fractions of people with further education are Copenhagen and the municipalities north of Copenhagen. There are several educational institutions offering further education located in Copenhagen, including University of Copenhagen and Copenhagen Business School, among others, which might be a natural explanation for the high shares here. Also in Roskilde there is a university, which may be a reason why so many highly educated people live here and in the neighboring municipality Lejre. However, this is not the case in North Zealand, but still highly educated people seem to cluster here. The municipalities around and including Aarhus, which has Aarhus University, have 27-52\% of their 25-64 year-old inhabitants with high education. The same holds for Aalborg, where again Aalborg University is, though the share is not more than 35\%. Odense is another university town and also has many academics. However, all these college towns are also in general big cities where many jobs are located. It is therefore hard to tell from pure descriptive evidence what the reasons for these observed location patterns are. Svendborg, for instance, in the southern part of Funen does not have a university but still a rather high share of highly educated people living here. One reason for this may be the fact that since 2009 there has been a highway going from Svendborg to Odense, hence making the commute to Odense fast, where there may be more academic jobs available. Building this highway was decided in 1999 and it was finished in 2009\footnote{Some parts of the highway was opened already in 2006, cf. \url{http://vejdirektoratet.dk/DA/viden_og_data/statens-veje/vejenes_historie/Sider/Svendborgmotorvejen.aspx}.}. In the data it will be difficult to detect from purely descriptive analysis whether the opening of the highway was making more people commute to and from Odense and whether Svendborg as a residential location became more popular, as one cannot isolate the effect from building the highway from other conditions, such as the macro state, that influence people's commute decisions. However, it is very useful to use this reform of the commuting time as a counterfactual that can be simulated from the model to see if it can match the patterns in commuting and location choices.
+ Those municipalities with low shares of well-educated citizens are also some of those characterized by low population densities and low population growth such as Lolland, Tønder and other West and North Jutland areas. Whether being able to increase the share of highly educated seems to be associated with higher population growth, but it is not completely clear from these figures. If looking instead at the share of unskilled citizens, i.e. those who have elementary school as their highest education, the picture seems to be reversed, cf. \autoref{fig:unskilled}. 
+
+ Those municipalities with high shares of unskilled workers compared to the average municipality are also characterized by the lowest share of unskilled people. Of course, given a high share of high-skilled citizens, there is also much less room for having a high share of unskilled. However, since the highest observed share of high-skilled inhabitants is 52\% and approx 32\% for unskilled, it is not given ex ante that being characterized by a high share of well-educated people is highly correlated with having a very low share of unskilled ones. For the municipalities in question this indicates a large degree of sorting - not perfect, but quite perfect. For other municipalities, the picture is much less clear. Herning in the central part of Jutland is one example of an area where there is a mid-level share of both highly and low educated citizens. These figures do not explain why some locations are characterized by being much closer to perfect sorting in terms of education than others, but the model can help with this. 
+
+\begin{figure}{}
+\centering
+\begin{minipage}{0.55\textwidth}
+\includegraphics[width=\linewidth, trim=2 20 2 20,clip]{share_skilled.jpg} 
+{\tiny \emph{Note:} educational attainment is defined as the highest obtained education. Highly educated means having a professional bachelor's degree, medium-cycle or long-cycle higher education corresponding to bachelor's and master's degrees or higher. \\ \emph{Source:} OIMs Kommunale Nøgletal. \par}
+\end{minipage}
+\caption{Share of highly educated among 25-64 y/o 2015 by municipality.}
+\label{fig:higheduc}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\begin{minipage}{0.55\textwidth}
+\includegraphics[width=\linewidth, trim=2 20 2 20,clip]{share_unskilled.jpg} 
+{\tiny \emph{Note:} educational attainment is defined as the highest obtained education. Unskilled means having a elementary school as the highest completed education. \\ \emph{Source:} OIMs Kommunale Nøgletal.\par}
+\end{minipage}
+\caption{Share of unskilled among 25-64 y/o 2015 by municipality}
+\label{fig:unskilled}
+\end{figure}
+
+\section{Commuting patterns}
+Moving on to commuting patterns, \autoref{fig:comwork} shows the average commute distance within municipalities in 2008 and 2014. The distances are measured as the shortest distance by road between home and work address. This also means that only people whose work addresses are known are included, see the discussion in \autoref{sec:data}. An advantage though is that the actual work distances for those people are used. 2008 and 2014 are just examples of two specific points in time, of course, but they give an idea about the variation in commute distances across the country. Since this figure shows commute distance by work region it means it measures the distance for people who work in that region. Overall, the average commute distance varies from 10 km (one way) to 30 km. Focusing on 2014, we see that the municipality Ikast-Brande in Central Jutland, Allerød, Ballerup, Albertslund, Høje Taastrup and Vallensbæk are those work regions where workers commute the longest on average. This is consistent with there being job opportunities or that it is easy to commute to here but that it is not a very attractive place to live since workers tend to commute 26-30 km on average instead of living there. Nevertheless, again the separate channels cannot be identified from these figures along. In the Copenhagen area there is a shorter commute, on average 18-22 km. South of Copenhagen there are a number of regions where the workers commute to here from 24-26 km on average. These include Ringsted, Køge, Roskilde and Faxe. Otherwise Zealand is mainly characterized by work regions with an average commute of 14-18 km. The same holds for a large part of Jutland, except the Triangle Region in the south-western part and Esbjerg, where the workers commute 22-26 km on average to get to work here. On Funen this only holds for people working in Middelfart. Here, one might expect that people also commute from Kolding and Fredericia, crossing the sea. Compared to 2008 the pattern has changed a bit with the main conclusion being that more workers commute longer distances in 2014 than in 2008, Odense and Svendborg included. The macro conditions were quite different in 2008 and 2014, after all. In 2008 the financial crisis was underway and things seemed to get worse, while in 2014 the economy had started to recover. This may affect people's commute decisions and job prospects in general as workplaces close down and new ones open, something that the structural model will cast more light on. The figure thus indicates that the conditions under which people decide on their optimal work and home locations change. This is one example of an incentive for individuals to optimize dynamically. 
+Some municipalities cover a bigger geographical area, obviously. Commuting 15 km therefore does not necessarily correspond to commuting across municipality borders. \autoref{fig:comhome} shows average commute distances too, but by home municipality. When comparing to \autoref{fig:comwork}, we see that the Copenhagen area has people living here who do not commute very long. However, as a work region the area has a higher average commute, meaning it must attract people from other locations. The figures therefore indicate that many people commute towards the Copenhagen area and that those people living there also work close-by. In general though, it is not the case that those regions where workers commute long to get to work there are also regions where the residents commute short distances. Sorø in West Zealand is an example. Here both workers and residents commute rather long. For some people a location thus seems to be attractive for work reasons, whereas for others it is due to the living conditions. This highlights the need for modeling the choice of residential and work locations as two separate decisions instead of imposing the work location to be identical to the home location. 
+
+\begin{figure}
+\centering
+\begin{minipage}{0.85\textwidth}
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=0 0 0 0,clip]{avgcommute_2008.png}
+  \caption{\footnotesize{2008}}
+  \label{fig:sub1}
+\end{subfigure}%commute_out_2013
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=0 0 0 0,clip]{avgcommute_2014.png}
+  \caption{\footnotesize{2014}}
+  \label{fig:sub2}
+\end{subfigure}
+{\tiny \emph{Note:} Commute distance measured as shortest road distance between home and work addresses. \\ \emph{Source:} Statistics Denmark.\par}
+\end{minipage}
+\caption{Average commute distance in km by work region.}
+\label{fig:comwork}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{minipage}{0.85\textwidth}
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=0 0 0 0,clip]{avgcommute_2008fromhome.png}
+  \caption{\footnotesize{2008}}
+  \label{fig:sub1}
+\end{subfigure}%commute_out_2013
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=0 0 0 0,clip]{avgcommute_2014fromhome.png}
+  \caption{\footnotesize{2014}}
+  \label{fig:sub2}
+\end{subfigure}
+{\tiny \emph{Note:} Commute distance measured as shortest road distance between home and work addresses. \\ \emph{Source:} Statistics Denmark.\par}
+\end{minipage}
+\caption{Average commute distance in km by home region.}
+\label{fig:comhome}
+\end{figure}
+
+\autoref{fig:traveltimes} plots the fraction of travel times in minutes for the years 1992-2011 using the 2002 transit network in the computations. Moreover, the individuals included in the graph are only those who are in a ``permanent'' period. Such a period is defined as those where the indicator for moving home region and the one for moving job region is the same\footnote{Here the dummy for moving work municipality is defined to be 1 if the individual works in two different municipalities in succeeding years and none of these are missing, i.e. that the individual is not unemployed as his main job in either of the years.}. I.e. both home and job movers are included as well as stayers in both regards. This is to ensure that people who happen to move either job or home in year $t$ and do not move home or job until e.g. year $t+1$ do not bias the numbers. If someone moves home in $t$ and job in $t+1$ the travel time in $t$ is not really representative for the situation he is in most of the time. This person hence will not be included in year $t$ and $t+1$ but will be part of the figure in $t+2$ if he stays in the home and job regions. This should control for the fact that some people do move jobs before moving home, but do move home in the following year or vice versa. The figure shows that there is a high fraction commuting around 10 minutes. Many people hence do not need to travel very long to get to work. As seen from the previous figures, people living in Copenhagen generally have short commute distances. Copenhagen and Frederiksberg municipalities make up around 12 pct. of the entire population in Denmark alone and including those living around Copenhagen with low commute distance\footnote{Tårnby, Rødovre, Glostrup, Albertslund, Høje Taastrup, Hvidovre, Brøndby, Vallensbæk, Gentofte, Gladsaxe, Herlev, Ballerup and Lyngby Taarbæk municipalities.} the share reaches 23 pct. Given the fact that the public transportation system covers this area with both quite fast buses and S-trains, it is not very surprising that the commute times are also low. Consequently, people living in these municipalities contribute to bringing down the average commute time. In general, the main part of the data is concentrated on the interval 5-40 minutes of travel time. However, there is still a significant amount of people having travel times of 200 minutes or more. Those who are observed to have very long travel times are mainly represented by people living in Copenhagen and working in either Aarhus or Aalborg, or the other way around. This is not surprising since these constitute the biggest cities of Denmark, but those permanently being in this home-job situation probably do not commute on a daily basis. 
+
+Another interesting aspect is to explore how commuting time changes when people move either job, home or both. To do this I consider a subset of the permanent periods in $t$ from \autoref{fig:traveltimes}, namely those where one of the following holds: move job at $t$ and move home at $t$, move job at $t-1$ and not move home at $t-1$ or move home at $t-1$ and not move job at $t-1$. This allows me to see how travel time is affected when it is supposed to have changed due to either a home or job move. As an example, if someone moves job and home in $t$ there is scope for travel time to have changed. For this person I compute the difference in travel time in year $t$ compared to the last permanent period. The same is done for the other cases, so for an individual who moved job in $t-1$ but stayed in his home last period, i.e. was in a non-permanent period, I compute the travel time difference between year $t$ (a permanent period) and the last known permanent period before $t-1$. The result appears in \autoref{fig:traveltimes_dif}. As seen from the graph there are instances where people both increase and decrease their travel times. Of course there are people who change job or home again after the first permanent period following a non-permanent period such that permanent periods are not really permanent, but this is only the case for 1.07\% of the population so I ignore this issue. There is a large fraction around 0 to -10 minutes change in travel time, and in general people's commute times do not seem to change very much after having moved jobs or homes. Nevertheless, there are more people represented by the negative part of the travel time differences meaning there are more individuals who experience a faster commute after having moved than they did before.
+%One might also conjecture that such a long travel time only reflects only a short-lived situation. To look into this issue, I make the same graph, but where people who moved home location or job location (where locations refer to municipalities) in either year $t-1,t$ or $t+1$ have been removed. This should control for the fact that some people do move jobs before moving home, but do move home in the following year and vice versa. The result is shown in \autoref{}. \autoref{fig:traveltimes_difjoblagmove} conditions on moving to another municipality in year $t$, not moving work municipality in year $t$ and $t+1$, but doing so in $t-1$\footnote{Here the dummy for moving work municipality is defined to be 1 if the individual works in two different municipalities in succeeding years and none of these are missing, i.e. that the individual is not unemployed as his main job in either of the years.}. This is to get an idea how people who decided to take a job in another region \textit{and} to move home shortly after move. As the figure shows there is mostly probability mass on the left side i 0 meaning that commute times fell, and for many it dropped quite dramatically with more than 1.5 hours. Quite many people were thus willing to take a job far from their home at the time but decided to pay the moving costs and move home afterwards too.
+
+\begin{figure}
+\centering
+\begin{minipage}{0.55\textwidth}
+\includegraphics[width=\linewidth, ,clip]{traveltime_allyears_2002def_trunc200_permfrac.png} 
+{\tiny \emph{Note:}: Travel times calculated using the 2002 definition. Truncated at 200 minutes, which concerns 0.8 pct. of the observations. \\ \emph{Source:}: Own calculations based on administrative data from Statistics Denmark and data from LTM.\par}
+\end{minipage}
+\caption{Distribution of travel times 1992-2011}
+\label{fig:traveltimes}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{minipage}{0.55\textwidth}
+\includegraphics[width=\linewidth, ,clip]{traveltime_allyears_2002def_trunc200_permdif_frac.png} 
+{\tiny \emph{Note:}: Travel times calculated using the 2002 definition. Truncated at 200 minutes, which concerns 0.8 pct. of the observations. \\ \emph{Source:}: Own calculations based on administrative data from Statistics Denmark and data from LTM.\par}
+\end{minipage}
+\caption{Distribution of change in travel times 1992-2011}
+\label{fig:traveltimes_dif}
+\end{figure}
+
+%\begin{figure}
+%\centering
+%\begin{minipage}{0.55\textwidth}
+%\includegraphics[width=\linewidth, ,clip]{traveltime_allyears_2002def_trunc200_nomovers.png} 
+%{\tiny Note: Travel times calculated using the 2002 definition. Truncated at 200 minutes, which concerns 0.8 pct. of the observations. No movers means observations where either home or job municipality changed in t, t-1 or t+1 are included.  \\ Source: Own calculations based on administrative data from Statistics Denmark and data from LTM.\par} 
+%\end{minipage}
+%\caption{\footnotesize{Distribution of travel times 1992-2011, no movers}}
+%\label{fig:traveltimes_nomoves}
+%\end{figure}
+
+%\begin{figure}
+%\centering
+%\begin{minipage}{0.55\textwidth}
+%\includegraphics[width=\linewidth, ,clip]{traveltimedif_allyear_movers_nojobmovenowlead_jobmovelag_trunc250.png} 
+%{\tiny Note: Travel times calculated using the 2002 definition. Truncated at 250 minutes, which concerns 0.2 pct. of the observations. Conditional on moving home region at $t$, moving job region at $t-1$ and not moving job region at $t,t+1.$ \\ Source: Own calculations based on administrative data from Statistics Denmark and data from LTM.\par}
+%\end{minipage}
+%\caption{\footnotesize{Difference in travel times 1992-2011 when moving home at $t$, moving job at $t-1$}}
+%\label{fig:traveltimes_difjoblagmove}
+%\end{figure}
+
+\section{Home owners vs renters}
+One thing is where to live and work, another is what type of home to choose. As already emphasized this is not something I distinguish between in the model of this thesis, but it is still valuable to know about the descriptive evidence. Starting with freeholds, it is clear from \autoref{fig:freehold} there is a quite high share of inhabitants in each municipality who live in owner-occupied dwellings\footnote{Persons living in freeholds are defined as those who live in homes they own themselves.}. Thus, in all municipalities the share is at least 22\% but for the majority it is 62-82\%. In Copenhagen and Høje Taastrup, however, the shares are very low between 22 and 32\% and in general the municipalities surrounding Copenhagen are characterized by less freeholds than the rest of the country. Looking at \autoref{fig:rent} we see that at least Copenhagen municipality itself has a very high share of renters\footnote{Renters defined as people living for hire in homes owned by private persons incl. I/S, A/S, ApS, companies, public authority, but excluding those living in social housing or cooperative dwellings.} compared to the rest of Denmark, excluding Aarhus. Both of these regions have between 30.5-36\% renters, whereas the remainder of the country primary has 14-19.5\%. Around Aalborg and a bit south of Aalborg, the share is a bit higher of 19.5-25\% though. The same holds for Southern Zealand. For social housing there is more variation ranging from 0 to 60\% of all dwellings as seen from \autoref{fig:social}. It is mainly in or around the big cities that this type of housing is used for more than 20\% of the citizens. Herlev, Ballerup, Albertslund, Rødovre and Brøndby just around Copenhagen has a particularly high share of social housing. Finally, cooperative dwellings is a distinct Copenhagen phenomenon, cf. \autoref{fig:coop}, where the share is as high as 33\%. In the rest of the country it is 0\% or just above that. Since cooperative dwellings are very much like freeholds except that the cost structure of buying and living in the apartment is a bit different, this is also one explanation that Copenhagen's share of freeholds is so remarkably low. 
+
+\begin{figure}
+\centering
+\begin{minipage}{0.85\textwidth}
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=0 0 0 0,clip]{freeholds_2016.png}
+  \caption{\footnotesize{Freehold}}
+  \label{fig:freehold}
+\end{subfigure}%commute_out_2013
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=0 0 0 0,clip]{rent_2016.png}
+  \caption{\footnotesize{Rent}}
+  \label{fig:rent}
+\end{subfigure}
+{\tiny \emph{Source:} Statistics Denmark.\par}
+\end{minipage}
+\caption{Share of persons living in either freehold or rented housing 2016}
+\label{fig:freerent}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\begin{minipage}{0.85\textwidth}
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=0 0 0 0,clip]{social_2016.png}
+  \caption{\footnotesize{Social}}
+  \label{fig:social}
+\end{subfigure}%commute_out_2013
+\begin{subfigure}{.50\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, trim=0 0 0 0,clip]{coop_2016.png}
+  \caption{\footnotesize{Cooperative}}
+  \label{fig:coop}
+\end{subfigure}
+{\tiny \emph{Source:} Statistics Denmark.\par}
+\end{minipage}
+\caption{Share of persons living in either social or cooperative housing 2016}
+\label{fig:socialcoop}
+\end{figure}
+
+\section{Housing prices}
+Having got an idea about the ownership patterns across the country, \autoref{fig:pricesdk} takes another perspective on the housing market, namely how real sales prices of apartments and houses have developed since 1992 to 2015. The geographical level is provinces of Denmark to not make the graph too confusing. Generally, when looking at both graphs, it is clear there has been an upward trend in the price per sq m during the period. For apartments in Copenhagen city and its surroundings prices have thus increased by approx 245\% and 120\%, respectively. Also, apartments sold in Eastern Jutland have increased by almost 130\%. House prices in Copenhagen surroundings have risen even more than the apartments, whereas the opposite is the case for Copenhagen city. The same tendency has been seen in Eastern Jutland, where house prices have increased by approx 100\% in 2015 compared to 1992. Apartment prices at Bornholm\footnote{Data for Bornholm not available until 1996, so the growth rates are calculated from 1996-2015.} started out at a relatively low level but have risen by 220\% since 1996. For the rest of the country, the picture is different. For apartments prices have risen but at a lower rate of 70-110\% for Western and Southern Jutland and about 40\% for Western and Southern Zealand. This is in the same range as Funen and Northern Jutland which have seen increases of about 50\%, thus much less than the leading regions. Apartments in Northern and Eastern Zealand have increased about 100\% though. When turning to the housing market there are differences again compared to Copenhagen city and surroundings. Several provinces have had rather moderate price increases of around 40-60\%, and Bornholm stands out with an increase of only 13\%. Eastern Jutland and Zealand as well as Northern Zealand are the regions that are closer to keeping up with the Copenhagen regions, though the price increases are only half of those observed in Copenhagen, namely close to 100\%. Across the country there are hence huge price differences level-wise but also in terms of the relative development. Whereas the prices were \textit{much} more homogeneous across the different provinces in the beginning of the 1990s this has changed dramatically over the years. Between the two endpoints of the time window the trend was upward-sloping for all locations until the financial crisis started around 2006-2007 where especially apartments and houses in the Copenhagen area as well as the northern and eastern parts of Zealand were severely hit by a price drop. Those regions whose prices had not increased by as much as the leading ones, had more of a stagnation than an actual huge fall in prices during the crisis years. After the crisis the gap between Copenhagen and the rest of the country expanded for both apartments and houses. The figure highly motivates looking into what drives this diverse evolution of prices. The model of the current paper will give one view on this, namely by exploring how equilibrium prices respond to changes in demand for housing in different regions and how this demand is formed.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.90\textwidth, trim=2 2 2 2,clip]{Salesprice_apartments_houses_realdkk.png} 
+\caption{Sales price per $\text{m}^2$ in provinces of Denmark, 1992-2015}
+\label{fig:pricesdk}
+\end{figure}
+
+\section{Moving patterns}
+To get an idea about what the moving patterns are in terms of moving from and to non-big cities and big cities, \autoref{tab:moves_to_from} shows how the share of those who moved in year $t$ is distributed over four categories. It is clear that there is a majority moving from a non-city municipality to another non-city municipality. Looking at those who shift between big city status, there is a majority, 24\% compared to 20\%, of people moving from non-city to cities than the other way around. Only 8.5\% of movers move from one big city region to another. It is important to keep in mind that there are more people living in what has been defined as non-big city areas, so all else equal there would be a higher chance that someone living in a rural area would move. However, conditioning on moving \textit{and} last year's big city status, we see that 1/3 of all movers from rural areas are going to cities, thus changing city status, while it is 70\% of movers from big cities who change city status and move to a more rural location. This is consistent with several stories. One is that living in a big city is in general something that is driven more by temporary conditions, e.g. for studying purposes, while life in the not quite as urbanized regions become optimal when one reaches a more stable situation for one's life. This would imply that it is more probable to move to another rural area when moving from a rural area since that is what one likes more permanently. However, as the table shows there are more moves made from non-city to city areas than the other way around (24\% vs 20\% of all moves). This means that the population share living in more urban areas has increased compared to the share in other regions over the period.
+
+\begin{table}[htbp]\centering 
+\caption{Moving patterns: big city vs non-big city (1992-2011)}
+\begin{tabular} {@{} l  r @{}}
+ \toprule
+ From-to   &  \%\\
+\hline
+Non-city - City  & 24.05\\
+Non-city - Non-city&    47.30\\
+City - Non-city&    20.13\\
+City - City&    8.52\\
+\hline\hline
+Total&   100.00\\
+\bottomrule 
+\multicolumn{2}{@{}l}{\footnotesize{\emph{Source:} Own calculations on administrative data from Statistics Denmark}}\\
+\multicolumn{2}{@{}l}{\footnotesize{\emph{Note:}  Numbers are conditional on moving home region in year $t$.}}
+\end{tabular}
+\label{tab:moves_to_from} 
+\end{table}
+
+Still conditioning on moving in period $t$, \autoref{tab:move_home_job} shows whether movers tended to stay or move job in $t$, $t-1$ and $t+1$. Here, the dummies for moving jobs in either period are 0 if one switches to or from unemployment. The table is supposed to give a preliminary overview of what the raw data says about this joint work and home location decision. We see that the majority, 56.9\% of all home movers (among those who moved region) did not change job region within the period window. However, there were still a significant fraction of 20.2\% who moved job region in $t-1$. 8.5\% got a job in another region in the same year as they moved residence, while 4.9\% did so in the year after. Very few changed job in all 3 periods, which is also ex ante considered a rather unlikely situation since there are costs associated with searching for a job. Nevertheless, around 8.3\% did move job region in two of the three periods. Conditioning instead on moving job region in year $t$ and exploring how people moved home region in the years around this, the pattern is different, cf. \autoref{tab:movejobhome}. Here it is more than 71\% who do not move home region. Nevertheless, a total of 23.3\% move home region in either $t-1$, $t$ or $t+1$, while 3.4\% have several home moves within the three-year period. The fact that job region moves to lesser extents are associated with moving to another home region is consistent with job moves being easier to make in terms of utility efforts. For instance, one does not have to deal with getting loans from the bank or a mortgage provider which will often be the case when someone moves home. It should be noted though that home region moves are not only moves made for home owners but for everyone who changes home address to another municipality. In addition, one should also keep in mind that I only observe the dates of execution, i.e. at what points in time the individual formally moved home and job. I do not observe if the individual first decided that he wanted a job in another region, started looking for one and then decided he also wanted to move residence if he got a job. Or if he chose to move to another municipality and consequently decided to look for a job there too, but just had to start the new job before he could move into his new home. Hence, I cannot draw clear conclusions about causality here. If a particularly good job match is available one might be willing to take the job knowing he would have to commute very long for some time until the right house match comes up as well - or vice versa, given he had decided he wanted to move after all. In any case, one thing that can be concluded from these two tables is that it is hard to tell whether people move job or home first and therefore difficult to credibly assume that one can condition on either choice when modeling the other. 
+
+\begin{table}[htbp]\centering 
+\caption{Job region moves conditional on home region move in $t$ (1992-2011)}
+\begin{tabular} {@{} l r r @{}} 
+\toprule
+& Freq. & \% \\
+\hline
+Move job t, stay job t-1, stay job t+1&293,482&      8.5\\
+Stay job t, move job t-1, stay job t+1&695,445&     20.2\\
+Stay job t, stay job t-1, move job t+1&169,445&      4.9\\
+Move job t, move job t-1, stay job t+1&103,755&      3.0\\
+Move job t, stay job t-1, move job t+1& 88,708&      2.6\\
+Stay job t, move job t-1, move job t+1& 93,311&      2.7\\
+Move job t, move job t-1, move job t+1& 40,163&      1.2\\
+Stay job t, stay job t-1, stay job t+1&1,957,226&     56.9\\
+\hline\hline
+Total&3,441,535&    100.0\\
+\bottomrule
+\multicolumn{3}{@{}l}{\footnotesize{\emph{Source:} Own calculations on administrative data from Statistics Denmark} }
+\end{tabular}
+\label{tab:move_home_job} 
+\end{table}
+
+
+\begin{table}[htbp]\centering 
+\caption{Home region moves conditional on job region move in $t$ (1992-2011)\label{tab:movejobhome}}
+\begin{tabular} {@{} l r r @{}}  \toprule
+& Freq. & \% \\
+\hline
+Move home t, stay home t-1, stay home t+1&376,459&      8.9\\
+Stay home t, move home t-1, stay home t+1&245,902&      5.8\\
+Stay home t, stay home t-1, move home t+1&364,216&      8.6\\
+Move home t, move home t-1, stay home t+1& 65,134&      1.5\\
+Move home t, stay home t-1, move home t+1& 70,072&      1.6\\
+Stay home t, move home t-1, move home t+1& 67,830&      1.6\\
+Move home t, move home t-1, move home t+1& 14,443&      0.3\\
+Stay home t, stay home t-1, stay home t+1&3,046,231&     71.7\\
+\hline\hline
+Total&4,250,287&    100.0\\
+\bottomrule
+\multicolumn{3}{@{}l}{\footnotesize{\emph{Source:} Own calculations on administrative data from Statistics Denmark} }
+\end{tabular}
+\end{table}
+
+While it seems urbanization has increased due to moving patterns between more rural and less rural areas, the distance moved, however, is not long for many of those moving home region. This can be seen from \autoref{fig:movedist} that plots the density of km moved when moving home region. The distance measure used is the shortest distance by car (2002 definition) between two zones from LTM and then averaged within municipality pairs, where each zone pair is weighted by the number of trips predicted by LTM just as when computing travel time between municipalities. 
+
+\begin{figure}
+\centering
+\begin{minipage}{0.55\textwidth}
+\includegraphics[width=\linewidth, trim=2 20 2 20,clip]{dist_movehome_fractrunc2002_movers.png} 
+{\tiny \emph{Note:} Truncated at 400 km, concerns 1.6\% of the observations. \emph{Source:} Own calculations on administrative data from Statistics Denmark\par}
+\end{minipage}
+\caption{Moving distance when moving home region (km)}
+\label{fig:movedist}
+\end{figure}
+
+%describe regression run - refer to coef table in appendix
+%explain why incl lags
+%explain how marginal effects are calculated
+%interpret marginal effects
+%for both singles and couples
+
+Using the data summarized in \autoref{tabl:sumstats}, I run a Logit regression of the indicator of moving home region in a given year on a bunch of controls to get an insight into what the data tells me seems to be correlated with the moving decision. I only use household representatives in this model to avoid that couples count as two moves if the household moves. I do not claim causality here since I do not control for things such as unobserved moving types for instance, that is something I leave for the structural model to handle. However, it is still useful to consider the regression results. As an attempt to avoid too serious bad controls and reverse causality, I do not include an indicator for moving job region in the regression since as I argued above, it is hard to tell whether the choice of moving home vs job comes first. Also, I use lagged travel times and ownership status so they are more likely to reflect the state upon which the individual decided whether moving was a good option. I do not control for the number of years stayed in one's home since this is clearly endogenous to moving. Notice that the regressions are made separately for couples and singles. This is because a tentative investigation of the data showed that there were quite different results depending on marital status. 
+
+Coefficient estimates from a pooled regression appear in \autoref{tab:apregcoef} together with the coefficient estimates for couples and singles separately. This also highlights the need to think seriously about how to handle couple status in the theoretical model, something that I save for future work. With the above caveats in mind, I interpret the results by computing average marginal effects. Since I include two continuous controls, namely log of rolling average household income\footnote{I use this measure instead of log of household income since as shown in \autoref{tab:apregcoef}, the coefficients are negative. I find it hard to interpret and therefore use the rolling average calculated around +/- 1 year of the observation to better make sure that I capture more permanent income differences across people.} and age, I evaluate these at the mean values in the sample when computing marginal effects for these. The mean of the log average income variable is 13.2 DKK for couples and 12.7 for singles while the corresponding measures for age are 42.8 years for couples and 38.7 for singles. When calculating marginal effects for all other included variables, the observed values are used for each person in the sample\footnote{I only regress on a 10\% subsample of the data and only evaluate marginal effects for persons in the subsample.}. As an example, to compute the marginal\footnote{For dummy variables it is the all else equal effect (change in correlation coefficient) of changing the dummy from 0 to 1 and thus not an actual marginal effect.} effect of owning one's house in the previous period, the predicted probability of moving home region is calculated given the actual data for a given individual. Afterwards, the predicted probability is calculated using the counterfactual value of the lag ownership dummy. The marginal effect for that person is calculated as the difference in predicted probabilities when the dummy is 1 and 0. To get the average marginal effect, the average is taken over all individuals. When looking at marginal effects in this way I am treating everyone as if they owned their home and afterwards as if they did not, keeping everything else constant. I find this more promising than computing marginal effects at the mean of all variables, since that implies evaluating the effects of a very hypothetical person probably never observed in the data. The reason I am imposing the income and age to take mean values when computing marginal effects for these two variables is that they are continuous why I cannot use the discrete changes to calculate the marginal effects. 
+
+Moving on to interpreting the average marginal effects displayed in \autoref{tab:marg} I start by focusing on column 1 for couples. The table tells us that, among the couples, a higher rolling average household income is associated with a higher probability of moving. This is consistent with the hypothesis that moving costs play a role and that some people cannot afford moving. Regarding education people with a vocational or high school degree tend to be 0.2\% points more likely to move compared to unskilled people who are the reference group. The same holds for those with a short- and medium-cycle education where there is approx 0.6\% points and 1.0\% points higher correlation with moving region on average, respectively. Especially the highly educated have a higher propensity to move; the moving probability increases by almost 2\% points when having a long-cycle education compared to not having that (if interpreting in a causal sense). Given the mean age of 42.8 years, there is a lower probability of moving when turning 1 year older. This is not surprising since people are likely to have settled down with family at that time and thus have made the decision on the optimal location earlier in life. However, for people earlier in life the coefficient is probably different, cf. \autoref{apfig:moveage}  which shows unconditional moving probabilities by age. Now turning to the ownership status in the previous period, the results show that if an individual (or his spouse) owned his home last period, the probability of moving is 3.2\% points lower. This is a quite high number given that the average moving probability in the sample is below 5\%. Additionally, the more kids one has, the less likely he is to move (the coefficients for each kid category are indeed significantly different). Interestingly, couples have a much higher probability, 10.4\% points of moving, all else equal, if they lived in a big city last year. Consistent with this, they are also more likely to move if, conditional on the other covariates, they lived in a non-big city. This is an indication that couples prefer to live outside of big cities. The effect that the interplay between labor market and residential locations has on moving decisions is here considered in terms of how the commute time in the last period correlates with the propensity to move home region in the current period. Overall, we see that the longer the commute, the higher the probability of moving. Here travel times are summarized in 10 minutes intervals and the effect is not completely linear. Hence, the effect is increasing from 15-55 minutes whereupon it alternates between more of less small increases and reductions. One interpretation which is consistent with the modeling framework presented in \autoref{sec:model} is that people dislike commuting and therefore move to improve on this. However, this regression does not say anything about how job moves are related to the presented covariates and the residential moving behaviour and again one should therefore not claim causality. It thus might be that people moved home in $t$ because they moved job in $t-1$ which caused the commute distance to be unusually high in the preceding period and therefore causing the positive relationship between travel times and moving. The exploration of home and job moving behaviour above underlined that there are no clear patterns to rely on. 
+
+Next, focus on column 2 for singles. Here, the effect of log rolling average household income is also positive and seems to play a higher role for the moving decision than for couples. This could indicate that singles tend to be more credit constrained than couples do. Just as for cohabiting people, single-person households are more likely to move the higher the education compared to unskilled people. Contrary to couples, this also holds for people still working on their education; there is thus a positive correlation between studying and moving. Singles who are studying are thus more likely to move. Age still has a negative effect on the moving propensity and so does being a home owner in the previous period. Compared to couples, the magnitude is approx 1 pct. point lower though. Looking at the effect of having 1 kid, there is a difference between the couple and single average marginal effects. Singles tend to be more less likely to move when having kids than couples do. This might reflect that when someone is single but has a child, she wants to stay relatively close to the other parent, but that the two parents likely do not coordinate on the moving decisions to the same degree as when they were living together; they are no longer as altruistic towards each other. However, they are altruistic towards their children and therefore take into account that moving means moving the child further away from its other parent. Interestingly, singles who lived in a big city last year are less likely to move this year - the opposite effect compared to that for couples. Also, singles tend to be more likely to have moved when they live in a big city contrary to couples. From a family economics viewpoint this could be explained by the fact that the marriage market is more dense in big cities why singles cluster here to benefit from the more diverse set of partner alternatives. Lastly, just as for couples the effect that travel time in the previous period has on the moving behaviour is positive and generally singles tend to respond more to commute distances than couples do. For instance, those who have a commute distance of 65-74 minutes last year tend to be 3.4\% point more likely to move. 
+
+Having interpreted the regression results it is clear that many factors play a role when deciding whether to move. This preliminary analysis could not look more into where people actually decided to live, only whether they wanted to move. To get a more nuanced picture of the location decisions, and especially the interplay with the work location decisions, the structural model will prove useful. 
+
+\renewcommand{\arraystretch}{0.5}
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Average marginal effects on moving probability\label{tab:marg}}
+\begin{tabular}{l*{2}{D{.}{.}{-1}}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}\\
+                    &\multicolumn{1}{c}{Couples}&\multicolumn{1}{c}{Singles}\\
+\midrule
+$\log$(rolling avg. real hh inc.)&     0.00110\sym{***}  &      0.0198\sym{***}\\
+                    &      (0.000)        &     (0.001)       \\
+\textit{Educ., ref.: unskilled} \\
+\MyIndent Vocational or high school&     0.00221\sym{***} &     0.00438\sym{***}\\
+                    &      (0.000)       &     (0.000)          \\
+
+\MyIndent  Short-cycle tertiary&     0.00553\sym{***} &     0.00843\sym{***}\\
+                    &      (0.001)      &      (0.001)             \\
+
+\MyIndent  Medium-cycle tertiary&     0.00985\sym{***} &      0.0121\sym{***}\\
+                    &      (0.000)      &     (0.001)      \\
+
+\MyIndent  Long-cycle tertiary and research&      0.0195\sym{***} &      0.0246\sym{***}\\
+                    &      (0.001)          &     (0.001)  \\
+
+\MyIndent  Educ. in progress   &    -0.00127      &      0.0220\sym{***}    \\
+                    &      (0.001)     &     (0.002)       \\
+
+Age                 &    -0.00166\sym{***} &    -0.00248\sym{***}\\
+                    &      (0.000)     &   (0.000)      \\
+
+$lag(\mathbb{I}{(downer)})$        &     -0.0317\sym{***} &     -0.0213\sym{***}\\
+                    &      (0.000)    &    (0.000)        \\
+\textit{\# kids, ref.: 0} \\
+
+\MyIndent 1                   &    -0.00762\sym{***}  &     -0.0149\sym{***}\\
+                    &      (0.000)  &    (0.001)        \\
+
+\MyIndent 2                   &     -0.0163\sym{***}  &     -0.0203\sym{***}\\
+                    &      (0.000)     &    (0.001)     \\
+
+\MyIndent 3+                  &     -0.0172\sym{***}  &     -0.0185\sym{***}\\
+                    &      (0.000)      &    (0.002)     \\
+
+$lag(\mathbb{I}{(bigcity)})$       &       0.104\sym{***} &     -0.0861\sym{***}\\
+                    &      (0.004)     &    (0.002)        \\
+
+$\mathbb{I}{(bigcity)}$      &     -0.0496\sym{***} &       0.129\sym{***}\\
+                    &      (0.001)      &     (0.004)     \\
+\textit{Travel time, ref.: 0-10 min.} \\
+
+\MyIndent 15-24               &      0.0168\sym{***} &      0.0202\sym{***}\\
+                    &      (0.000)  &     (0.001)        \\
+
+\MyIndent 25-34               &      0.0176\sym{***}  &      0.0205\sym{***}\\
+                    &      (0.000)  &     (0.001)         \\
+
+\MyIndent 35-44               &      0.0221\sym{***} &      0.0269\sym{***}\\
+                    &      (0.000)  &     (0.001)       \\
+
+\MyIndent 45-54               &      0.0287\sym{***} &      0.0306\sym{***}\\
+                    &      (0.001)    &     (0.002)       \\
+
+\MyIndent 55-64               &      0.0266\sym{***} &      0.0330\sym{***}\\
+                    &      (0.001)    &     (0.002)        \\
+
+\MyIndent 65-74               &      0.0289\sym{***} &      0.0339\sym{***}\\
+                    &      (0.002)  &     (0.002)           \\
+
+\MyIndent 75-84               &      0.0266\sym{***} &      0.0377\sym{***}\\
+                    &      (0.002) &     (0.003)        \\
+
+\MyIndent 85-94               &      0.0358\sym{***} &      0.0428\sym{***}\\
+                    &      (0.003)      &     (0.004)    \\
+
+\MyIndent 95+                 &      0.0260\sym{***} & 0.0328\sym{***}\\
+                    &      (0.001)       &     (0.001)     \\
+\hline
+\midrule
+Year FE & Yes  & Yes \\
+N                   &     1,304,496      &      886,655          \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize \emph{Note:} Standard errors in parentheses computed by the Delta method.}\\
+\multicolumn{3}{l}{\footnotesize Only household representatives used in estimation.}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+\end{table}
+
+
+
+
+
